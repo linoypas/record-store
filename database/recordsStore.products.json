@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "66ca16c1baf8e69aecb16928"
+  },
+  "catagory": "pop",
+  "year": "2022",
+  "name": "Harry's House",
+  "price": "120",
+  "description": "description",
+  "preview_img": "image",
+  "artist": "Harry Styles"
+},
+{
+  "_id": {
+    "$oid": "66ca2935baf8e69aecb16930"
+  },
+  "catagory": "pop",
+  "year": "2019",
+  "name": "Fine Line",
+  "price": "100",
+  "description": "description",
+  "preview_img": "image",
+  "artist": "Harry Styles"
+},
+{
+  "_id": {
+    "$oid": "66ca2ed6baf8e69aecb16931"
+  },
+  "catagory": "pop",
+  "year": "2014",
+  "name": "1989",
+  "price": "150",
+  "description": "description",
+  "preview_img": "image",
+  "artist": "Taylor Swift"
+}]

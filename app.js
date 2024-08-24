@@ -1,0 +1,26 @@
+const express = require('express');
+const env = require('dotenv').config();
+const mongoose = require("mongoose");
+
+mongoose.connect(process.env.DB_CONNECTION_STRING, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
+
+const app = express();
+app.use('/public', express.static('public'));
+app.set("view engine", "ejs");
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use('/', require('./routes/product'));
+
+app.listen(process.env.PORT, (error) =>{
+    if(!error)
+        console.log("Server is Successfully Running, and App is listening on port "+ process.env.PORT)
+    else
+        console.log("Error occurred, server can't start", error);
+    }
+);
+
+module.exports = app;
