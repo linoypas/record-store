@@ -1,5 +1,5 @@
-// const { getAllProducts } = require('../controllers/product');
 const product = require('../models/Product');
+const mongoose = require("mongoose");
 
 async function getAllProducts() {
     try {
@@ -14,8 +14,11 @@ async function getAllProducts() {
 }
 
 async function getProductById(id){
+    if (!mongoose.isValidObjectId(id)){
+        return null;
+    }
     try {
-        const returnedProduct = await product.findById(id);
+        const returnedProduct = await product.findById(id.trim());
         if(!returnedProduct) {
           return null;
         }
