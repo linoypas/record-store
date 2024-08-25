@@ -8,8 +8,10 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {
 });
 
 const app = express();
-app.use('/public', express.static('public'));
 app.set("view engine", "ejs");
+app.use(express.json())
+app.use('/public', express.static('public'));
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
