@@ -3,9 +3,9 @@
     "$oid": "66ca16c1baf8e69aecb16928"
   },
   "catagory": "pop",
-  "year": "2022",
+  "year": 2022,
   "name": "Harry's House",
-  "price": "120",
+  "price": 120,
   "description": "description",
   "preview_img": "image",
   "artist": "Harry Styles"
@@ -15,9 +15,9 @@
     "$oid": "66ca2935baf8e69aecb16930"
   },
   "catagory": "pop",
-  "year": "2019",
+  "year": 2019,
   "name": "Fine Line",
-  "price": "100",
+  "price": 100,
   "description": "description",
   "preview_img": "image",
   "artist": "Harry Styles"
@@ -27,10 +27,34 @@
     "$oid": "66ca2ed6baf8e69aecb16931"
   },
   "catagory": "pop",
-  "year": "2014",
+  "year": 2014,
   "name": "1989",
-  "price": "150",
+  "price": 150,
   "description": "description",
   "preview_img": "image",
   "artist": "Taylor Swift"
+},
+{
+  "_id": {
+    "$oid": "66caf865e779228b07aeeb34"
+  },
+  "catagory": "pop",
+  "year": 2000,
+  "name": "Parachutes",
+  "price": 120,
+  "description": "description",
+  "preview_img": "image",
+  "artist": "Coldplay"
+},
+{
+  "_id": {
+    "$oid": "66caf93ce779228b07aeeb35"
+  },
+  "catagory": "pop",
+  "year": 2022,
+  "name": "Twelve Carat Toothache",
+  "price": 80,
+  "description": "description",
+  "preview_img": "image",
+  "artist": "Post Malone"
 }]
