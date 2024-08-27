@@ -1,12 +1,5 @@
 const productService = require("../services/product");
 
-async function getAllProducts(req, res) {
-    const products = await productService.getAllProducts();
-    if(!products){
-        return res.status(404).json({errors: ['not found']})
-    }
-    res.json(products);
-}
 
 async function showAllProducts(req, res) {
     const products = await productService.getAllProducts();
@@ -72,7 +65,6 @@ async function deleteProduct(req,res){
 
 module.exports = {
     showAllProducts,
-    getAllProducts,
     getProductById,
     showProductById,
     createProduct,

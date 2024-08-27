@@ -21,16 +21,17 @@
   width: 150px;
 }  
 
-.product-image {
+.product .image{
   padding: 0;
   height: 150px;
   width: 150px;
   background-color: cornflowerblue;
 }
 
-.card-text {
+.product p {
   font-size: smaller;
   font-family: Arial, sans-serif;
   margin: 1px;
   text-align: center;
 }
+
