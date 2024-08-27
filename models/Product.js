@@ -7,7 +7,7 @@ const Product = new mongoose.Schema({
     required: true,
   },
   year: {
-    type: String,
+    type: Number,
     required: true,
   },
   artist: {
@@ -26,14 +26,10 @@ const Product = new mongoose.Schema({
     type: String,
     required: true,
   },
-  preview_img: {
+  image: {
     type: String,
     required: true,
-  },
-  hover_img: {
-    type: String,
-    required: true,
-  },
+  }
 
 });
 

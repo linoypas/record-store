@@ -3,14 +3,11 @@
 <link rel="stylesheet" href="../public/css/product.css" type="text/css">
 <body>
     <div id="products">
-    <%for (var i = 0; i < products.length; i++) {%>
-        <div class="product" id=<%=products[i].id%>>
-        <p class="card-text"><%=products[i].name%></p>
-        <p class="card-text"><%=products[i].year%></p>
-        <p class="card-text"><%=products[i].artist%></p>
-        <p class="card-text"><%=products[i].price%>₪</p>
+        <div class="product" id=<%=product.id%>>
+            <div class="product-image"></div>
+            <p class="card-text"><%=product.artist%>- <%=product.name%></p>
+            <p class="card-text"><%=product.price%>₪</p>
         </div>     
-  <%}%>  
     </div>
 </body>
 </html>
