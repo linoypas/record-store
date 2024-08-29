@@ -1,4 +1,18 @@
-function Sort(orderBy){
+let removedDefaultSelect = false;
+
+function changeSortBy(option){
+    sort(option.value);
+    deleteDefaultSelect(option);
+}
+
+function deleteDefaultSelect(option){
+    if (!removedDefaultSelect){
+        $(option).find('option').get(0).remove(); 
+        removedDefaultSelect = true;
+    }
+}
+
+function sort(orderBy){
     if(orderBy === "default")
         showAllProducts();
     if (orderBy == "date")
