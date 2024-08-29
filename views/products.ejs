@@ -1,30 +1,45 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<link rel="stylesheet" href="../public/css/product.css" type="text/css">
+<link rel="stylesheet" href="../public/css/products.css" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
+
 <body>
-    <div id="sort-by">
-        <select name="orderby" id="sort-by" onchange="Sort(this.value)">
-          <option value="default">Default</option>
-          <option value="date">Newest</option>
-          <option value="price-low-to-high">Price: low to high</option>
-          <option value="price-high-to-low">Price: high to low</option>
-        </select>
-    </div>
-
-    <div id="products">
-        <%for (var i = 0; i < products.length; i++) {%>
-            <div class="product">
-                <div class="image"></div>
-                    <p class="artist"><%=products[i].artist%></p>
-                    <p class="name"><%=products[i].name%></p>
-                <p class="price"><%=products[i].price%>₪</p>
-            </div>     
-        <%}%>  
+    <%- include("./header"); -%>
+    <main>
+        <div id="select">
+            <select name="orderby" id="sort" onchange="changeSortBy(this)">סינון לפי:
+              <option value="default">מיין לפי</option>
+              <option value="date">חדש ביותר</option>
+              <option value="price-low-to-high">מחיר, מהנמוך לגבוה</option>
+              <option value="price-high-to-low">מחיר, מהגבוה לנמוך</option>
+            </select>
+            <div>
+                <label for="genre">סינון ז'אנר:</label>
+                <select name="genre" id="cars">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </div>
         </div>
-
+    
+        <div id="products">
+            <%for (let i = 0; i < products.length; i++) {%>
+                <div class="product" onclick="showProduct(this)" id=<%=products[i].id%>>
+                    <div class="img-wrapper">
+                        <img class="image" src="../public/images/record-logo.jpg"></img>
+                    </div>
+                        <p class="artist"><%=products[i].artist%></p>
+                        <p class="name"><%=products[i].name%></p>
+                    <p class="price"><%=products[i].price%>₪</p>
+                </div>     
+            <%}%>  
+            </div>
+    </main>
+    <%- include("./footer"); -%>
 </body>
 <script src="../public/scripts/sortProducts.js"></script>
-
+<script src="../public/scripts/products.js"></script>
 </html>

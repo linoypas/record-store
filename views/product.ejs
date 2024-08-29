@@ -2,12 +2,30 @@
 <html lang="en-US">
 <link rel="stylesheet" href="../public/css/product.css" type="text/css">
 <body>
-    <div id="products">
-        <div class="product" id=<%=product.id%>>
-            <div class="product-image"></div>
-            <p class="card-text"><%=product.artist%>- <%=product.name%></p>
-            <p class="card-text"><%=product.price%>₪</p>
-        </div>     
-    </div>
+    <%- include("./header"); -%>
+    <main>
+        <div id="info-section">
+            <div id="info">
+                <p class="artist"><%=product.artist%></p>
+                <p class="name"><%=product.name%></p>
+                <p class="name">שנת הוצאה:<%=product.year%></p>
+            </div>
+            <div id="add-to-cart">
+                <input type="number" id="quantity" min="1" max="10" placeholder="1" oninput="validity.valid||(value='');">
+                <button>הוספה לסל</button>
+            </div>
+
+        </div>
+        <img id="image" src="../public/images/record-logo.jpg"></img>
+    </main>
+    <section>
+        <hr><p class="trackList">Tracklist:</p><hr>
+        <ol class="trackList">
+            <% for (let i = 0; i < product.description.length ; i++) { %>
+                <li> <%= product.description[i] %> </li>
+            <% } %>
+        </ol>
+    </section>
+    <%- include("./footer"); -%>
 </body>
 </html>
