@@ -2,7 +2,7 @@
   "_id": {
     "$oid": "66ca16c1baf8e69aecb16928"
   },
-  "catagory": "pop",
+  "genre": "Pop",
   "year": 2022,
   "name": "Harry's House",
   "price": 120,
@@ -28,7 +28,7 @@
   "_id": {
     "$oid": "66ca2935baf8e69aecb16930"
   },
-  "catagory": "pop",
+  "genre": "Pop",
   "year": 2019,
   "name": "Fine Line",
   "price": 100,
@@ -40,7 +40,7 @@
   "_id": {
     "$oid": "66ca2ed6baf8e69aecb16931"
   },
-  "catagory": "pop",
+  "catagory": "Pop",
   "year": 2014,
   "name": "1989",
   "price": 150,
@@ -52,7 +52,7 @@
   "_id": {
     "$oid": "66caf865e779228b07aeeb34"
   },
-  "catagory": "pop",
+  "genre": "Pop",
   "year": 2000,
   "name": "Parachutes",
   "price": 120,
@@ -64,7 +64,7 @@
   "_id": {
     "$oid": "66caf93ce779228b07aeeb35"
   },
-  "catagory": "Hip Hop",
+  "genre": "Hip Hop",
   "year": 2022,
   "name": "Twelve Carat Toothache",
   "price": 80,
@@ -76,7 +76,7 @@
   "_id": {
     "$oid": "66d08c6dc6f0197788bcaedb"
   },
-  "catagory": "Hip Hop",
+  "genre": "Hip Hop",
   "year": 2023,
   "name": "Honestly, Nevermind",
   "price": 110,
@@ -88,7 +88,7 @@
   "_id": {
     "$oid": "66d08cbec6f0197788bcaedc"
   },
-  "catagory": "Hip Hop",
+  "genre": "Hip Hop",
   "year": 2018,
   "name": "Scorpion",
   "price": 110,

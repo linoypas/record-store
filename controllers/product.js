@@ -3,10 +3,11 @@ const productService = require("../services/product");
 
 async function showAllProducts(req, res) {
     const products = await productService.getAllProducts();
+    const genres = await productService.getListOfGenres();
     if(!products){
         return res.status(404).json({errors: ['not found']})
     }
-    res.render('../views/products', {products:products});
+    res.render('../views/products', {products:products, genres:genres});
 
 }
 

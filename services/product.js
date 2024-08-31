@@ -29,6 +29,10 @@ async function getProductById(id){
     }
 }
 
+async function getListOfGenres() {
+    return product.schema.path('genre').options.enum;
+}
+
 async function createProduct(catagory, year, artist, name, price, description, image ) {
     const product = new Product({
         catagory: catagory,
@@ -79,5 +83,6 @@ module.exports = {
     getProductById,
     createProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getListOfGenres
 };

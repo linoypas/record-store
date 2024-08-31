@@ -2,8 +2,9 @@ const mongoose = require("mongoose");
 
 const Product = new mongoose.Schema({
   _id: { type: mongoose.ObjectId, auto: true },
-  catagory: {
+  genre: {
     type: String,
+    enum: ['Pop', 'Rock', 'Hip Hop', 'ישראליים'],
     required: true,
   },
   year: {
