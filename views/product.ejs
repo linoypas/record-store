@@ -21,8 +21,8 @@
     <section>
         <hr><p class="trackList">Tracklist:</p><hr>
         <ol class="trackList">
-            <% for (let i = 0; i < product.description.length ; i++) { %>
-                <li> <%= product.description[i] %> </li>
+            <% for (let i = 0; i < product.trackList.length ; i++) { %>
+                <li><%= product.trackList[i] %> </li>
             <% } %>
         </ol>
     </section>

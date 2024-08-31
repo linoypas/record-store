@@ -23,7 +23,7 @@ const Product = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  description: {
+  trackList: {
     type: [String],
     required: true,
   },

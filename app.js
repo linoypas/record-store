@@ -16,7 +16,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', require('./routes/product'));
-app.use('/', require('./routes/sortProducts'));
+app.use('/', require('./routes/sortAndFilterProducts'));
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)

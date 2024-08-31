@@ -16,7 +16,7 @@
             </select>
             <div>
                 <label for="genre">סינון ז'אנר:</label>
-                <select name="genre" id="genre" onchange="changeGenre(this.value)">
+                <select name="genre" id="genre" onchange="changeGenre(this)">
                     <option value="all">כל הז'אנרים</option>
                     <%for (let i = 0; i < genres.length; i++) {%>
                     <option value="<%=genres[i]%>"><%=genres[i]%></option>
@@ -36,6 +36,16 @@
                     <p class="price"><%=products[i].price%>₪</p>
                 </div>     
             <%}%>  
+            <script type="test/html" id="productTemplate">
+                    <div class="product" onclick="showProduct(this)" id={_id}>
+                        <div class="img-wrapper">
+                            <img class="image" src="../public/images/record-logo.jpg"></img>
+                        </div>
+                            <p class="artist">{artist}</p>
+                            <p class="name">{name}</p>
+                        <p class="price">{price}₪</p>
+                    </div> 
+            </script>  
             </div>
     </main>
     <%- include("./footer"); -%>

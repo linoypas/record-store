@@ -1,15 +1,28 @@
-const product = require('../models/Product');
+const product = require('../models/Records');
+const sortProducts = require('./sortProducts')
 const mongoose = require("mongoose");
 
-async function getAllProducts() {
-    try {
-        const returnedProducts = await product.find({});
-        if(!returnedProducts) {
-          return null;
-        }
-        return returnedProducts;
-    } catch (error) {
-        return null;
+async function getProducts(params) {
+    let queryParams = {};
+    if(params.collection == "new"){
+        const lastYear = new Date().getFullYear() - 1;
+        queryParams["year"] = {$gte:lastYear};
+    }
+    if (params.genre != "all")
+        queryParams["genre"] = params.genre;
+    
+    console.log(queryParams);
+    if(params.sortBy == ""){
+        return sortProducts.sortbyDefault(queryParams);
+    } else{
+        if(params.sortBy == 'default')
+            return sortProducts.sortbyDefault(queryParams); 
+        if(params.sortBy == 'newest')
+            return sortProducts.sortByYear(queryParams);
+        if(params.sortBy == 'priceAscending')
+            return sortProducts.sortByPriceLowToHigh(queryParams);
+        if(params.sortBy == 'priceDescending')
+            return sortProducts.sortByPriceHighToLow(queryParams);
     }
 }
 
@@ -79,10 +92,10 @@ async function deleteProduct(id){
 }
 
 module.exports = {
-    getAllProducts,
+    getProducts,
     getProductById,
     createProduct,
     deleteProduct,
     updateProduct,
-    getListOfGenres
+    getListOfGenres,
 };

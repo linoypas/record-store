@@ -1,23 +1,60 @@
-const productService = require('./product');
-const product = require('../models/Product');
+const product = require('../models/Records');
 
-async function sortByYear() {
-    const returnedProducts = await product.find({}).sort([['year', -1]]);
-    return returnedProducts;
+async function sortbyDefault(queryParams) {
+    try {
+        const returnedProducts = await product.find(queryParams);
+        if(!returnedProducts) {
+          return null;
+        }
+        return returnedProducts;
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
 }
 
-async function sortByPriceLowToHigh() {
-    const returnedProducts = await product.find({}).sort([['price', 1]]);
-    return returnedProducts;
+async function sortByYear(queryParams) {
+    try {
+        const returnedProducts = await product.find(queryParams).sort([['year', -1]]);
+        if(!returnedProducts) {
+          return null;
+        }
+        return returnedProducts;
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
 }
 
-async function sortByPriceHighToLow() {
-    const returnedProducts = await product.find({}).sort([['price', -1]]);
-    return returnedProducts;
+async function sortByPriceLowToHigh(queryParams) {
+    try {
+        const returnedProducts = await product.find(queryParams).sort([['price', 1]]);
+        if(!returnedProducts) {
+          return null;
+        }
+        return returnedProducts;
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
+}
+
+async function sortByPriceHighToLow(queryParams) {
+    try {
+        const returnedProducts = await product.find(queryParams).sort([['price', -1]]);
+        if(!returnedProducts) {
+          return null;
+        }
+        return returnedProducts;
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
 }
 
 module.exports = {
-    sortByYear, 
-    sortByPriceLowToHigh, 
-    sortByPriceHighToLow
+    sortbyDefault,
+    sortByYear,
+    sortByPriceLowToHigh,
+    sortByPriceHighToLow,
 };

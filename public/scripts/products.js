@@ -3,3 +3,5 @@ function showProduct(product) {
     const id = product.getAttribute("id");
     window.location.href = "/product?id=" + id;
 }
+
+

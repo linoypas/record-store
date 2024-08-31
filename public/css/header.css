@@ -58,6 +58,7 @@ header{
 
 a:hover, .dropdown:hover .dropbtn{
     color:hsla(0,0%,40%,.85) ;
+    cursor: pointer;
 }
   
 .dropdown-content {
