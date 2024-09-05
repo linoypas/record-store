@@ -4,12 +4,15 @@ const productController = require('../controllers/product');
 const router = expres.Router();
 
 
+router.post('/products/add_product',productController.createProduct);
+router.get('/products/add_product', productController.addProductPage);
+
 router.get('/products',productController.showProducts);
 router.get('/products/:collection',productController.showProducts);
-
 router.get('/product', productController.showProductById);
 
-router.post('/product',productController.createProduct);
+
+
 router.patch('/product', productController.createProduct)
 router.delete('/product', productController.deleteProduct)
 

@@ -1,4 +1,4 @@
-const product = require('../models/Records');
+const product = require('../models/product');
 
 async function sortbyDefault(queryParams) {
     try {

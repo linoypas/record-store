@@ -19,9 +19,9 @@ body{
 main{
   min-height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 80%;
   margin: auto;
 }
@@ -77,9 +77,13 @@ main{
 
 #select {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
-  width: 60%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 10px;
+  width: 20%;
+}
+
+#select * {
+  margin-bottom: 10px;
 }

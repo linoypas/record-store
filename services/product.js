@@ -1,5 +1,5 @@
-const product = require('../models/Records');
 const sortProducts = require('./sortProducts')
+const Product = require('../models/product');
 const mongoose = require("mongoose");
 
 async function getProducts(params) {
@@ -11,7 +11,6 @@ async function getProducts(params) {
     if (params.genre != "all")
         queryParams["genre"] = params.genre;
     
-    console.log(queryParams);
     if(params.sortBy == ""){
         return sortProducts.sortbyDefault(queryParams);
     } else{
@@ -31,7 +30,7 @@ async function getProductById(id){
         return null;
     }
     try {
-        const returnedProduct = await product.findById(id.trim());
+        const returnedProduct = await Product.findById(id.trim());
         if(!returnedProduct) {
           return null;
         }
@@ -43,49 +42,53 @@ async function getProductById(id){
 }
 
 async function getListOfGenres() {
-    return product.schema.path('genre').options.enum;
+    return Product.schema.path('genre').options.enum;
 }
 
-async function createProduct(catagory, year, artist, name, price, description, image ) {
-    const product = new Product({
-        catagory: catagory,
+async function createProduct(genre, year, artist, name, price, trackList, image ) {
+    const newProduct = new Product({
+        genre: genre,
         year: year,
         artist: artist,
         name: name,
         price: price,
-        description: description,
+        trackList: trackList,
         image: image
     });
 
-    await product.save();
-    return product;
+    try{
+        await newProduct.save();
+        return true;
+    } catch{
+        return false;
+    }
 }
 
 async function updateProduct(id, catagory, year, artist, name, price, description, image ) {
-    const product = await product.findById(id);
-    if(!product)
+    const Product = await Product.findById(id);
+    if(!Product)
         return null;
 
-    product.catagory = catagory;
-    product.year = year;
-    product.artist = artist;
-    product.name = name;
-    product.price = price;
-    product.description = description;
-    product.image = image;
+    Product.catagory = catagory;
+    Product.year = year;
+    Product.artist = artist;
+    Product.name = name;
+    Product.price = price;
+    Product.description = description;
+    Product.image = image;
 
-    await product.save();
-    return product;
+    await Product.save();
+    return Product;
 }
 
 async function deleteProduct(id){
     try {
-        const product = await product.findById(id);
-        if(!product) {
+        const Product = await Product.findById(id);
+        if(!Product) {
           return null;
         }
-        await product.remove();    
-        return product;
+        await Product.remove();    
+        return Product;
     } catch (error) {
         return null;
     }   
