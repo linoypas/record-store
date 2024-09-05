@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<link rel="stylesheet" href="../public/css/products.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script rel="javascript" type="text/javascript" href="js/jquery-1.11.3.min.js"></script>
-
+<head>
+    <link rel="stylesheet" href="../public/css/products.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <body>
     <%- include("./header"); -%>
     <main>
         <div id="select">
+            <label for="orderby">פילטר</label>
             <select name="orderby" id="sort" onchange="changeSortBy(this)">סינון לפי:
               <option value="default">מיין לפי</option>
               <option value="date">חדש ביותר</option>
               <option value="price-low-to-high">מחיר, מהנמוך לגבוה</option>
               <option value="price-high-to-low">מחיר, מהגבוה לנמוך</option>
             </select>
-            <div>
-                <label for="genre">סינון ז'אנר:</label>
-                <select name="genre" id="cars">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                <select name="genre" id="genre" onchange="changeGenre(this)">
+                    <option value="all">כל הז'אנרים</option>
+                    <%for (let i = 0; i < genres.length; i++) {%>
+                    <option value="<%=genres[i]%>"><%=genres[i]%></option>
+                    <%}%>
                 </select>
-            </div>
         </div>
     
         <div id="products">
             <%for (let i = 0; i < products.length; i++) {%>
-                <div class="product" onclick="showProduct(this)" id=<%=products[i].id%>>
+                <div class="product" id=<%=products[i].id%>>
+
                     <div class="img-wrapper">
+                        <div id="update-product-container">
+                            <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i].id%>></button>
+                            <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i].id%>></button>
+                        </div>
                         <img class="image" src="../public/images/record-logo.jpg"></img>
                     </div>
                         <p class="artist"><%=products[i].artist%></p>
@@ -36,6 +40,21 @@
                     <p class="price"><%=products[i].price%>₪</p>
                 </div>     
             <%}%>  
+            <script type="test/html" id="productTemplate">
+                    <div class="product" id={_id}>
+       
+                        <div class="img-wrapper">
+                            <div id="update-product-container">
+                                <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
+                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
+                            </div>
+                            <img class="image" src="../public/images/record-logo.jpg"></img>
+                        </div>
+                            <p class="artist">{artist}</p>
+                            <p class="name">{name}</p>
+                        <p class="price">{price}₪</p>
+                    </div> 
+            </script>  
             </div>
     </main>
     <%- include("./footer"); -%>
