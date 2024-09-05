@@ -75,7 +75,7 @@ async function createProduct(req,res) {
                 req.body.artist,
                 req.body.name,
                 req.body.price,
-                req.body.trackList, ///////////// להוסיף גם עליו בדיקה
+                req.body.trackList, 
                 req.body.image);
             
             if(product)
@@ -101,10 +101,13 @@ async function updateProduct(req,res) {
 
 async function deleteProduct(req,res){
     const product = await productService.deleteProduct(req.params.id);
-    if(!product){
-        return res.status(404).json({errors: ['not found']})
+    console.log('efe' + product)
+    if(product){
+        res.status(200).send('המוצר נמחק בהצלחה');
+    } else{
+        res.status(500).send("חלה שגיאה בעת מחיקת המוצר");
     }
-    res.send();
+       
 }
 
 

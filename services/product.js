@@ -30,6 +30,7 @@ async function getProductById(id){
         return null;
     }
     try {
+        console.log(id);
         const returnedProduct = await Product.findById(id.trim());
         if(!returnedProduct) {
           return null;
@@ -65,7 +66,7 @@ async function createProduct(genre, year, artist, name, price, trackList, image 
 }
 
 async function updateProduct(id, catagory, year, artist, name, price, description, image ) {
-    const Product = await Product.findById(id);
+    const Product = await Product.findById(id.trim());
     if(!Product)
         return null;
 
@@ -82,16 +83,12 @@ async function updateProduct(id, catagory, year, artist, name, price, descriptio
 }
 
 async function deleteProduct(id){
-    try {
-        const Product = await Product.findById(id);
-        if(!Product) {
-          return null;
-        }
-        await Product.remove();    
-        return Product;
-    } catch (error) {
-        return null;
-    }   
+    try{
+        await Product.findByIdAndDelete(id.trim());
+        return true;
+    } catch{
+        return false;
+    }
 }
 
 module.exports = {

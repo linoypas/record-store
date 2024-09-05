@@ -26,8 +26,13 @@
     
         <div id="products">
             <%for (let i = 0; i < products.length; i++) {%>
-                <div class="product" onclick="showProduct(this)" id=<%=products[i].id%>>
+                <div class="product" id=<%=products[i].id%>>
+
                     <div class="img-wrapper">
+                        <div id="update-product-container">
+                            <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i].id%>></button>
+                            <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i].id%>></button>
+                        </div>
                         <img class="image" src="../public/images/record-logo.jpg"></img>
                     </div>
                         <p class="artist"><%=products[i].artist%></p>
@@ -36,12 +41,13 @@
                 </div>     
             <%}%>  
             <script type="test/html" id="productTemplate">
-                    <div class="product" onclick="showProduct(this)" id={_id}>
-                        <div>
-                            <button class="update-product,fa fa-trash" id="delete-product"  aria-hidden="true"></button>
-                            <button class="update-product" id="edit-product"></button>
-                        </div>
+                    <div class="product" id={_id}>
+       
                         <div class="img-wrapper">
+                            <div id="update-product-container">
+                                <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
+                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
+                            </div>
                             <img class="image" src="../public/images/record-logo.jpg"></img>
                         </div>
                             <p class="artist">{artist}</p>
