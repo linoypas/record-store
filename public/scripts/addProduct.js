@@ -1,5 +1,5 @@
 
-const addedSongs = ['שירים שהתווספו:'];
+let addedSongs = ['שירים שהתווספו:'];
 
 $("#addSongBtn").on( "click", function(event) {
     addSong(event);
@@ -34,79 +34,77 @@ $(document).ready(function(){
 });
 
 
-$(document).ready(function(){
-    $("#submit").click(function () {
-          $('#form-container').validate({ 
-            ignore: '',
-            rules: {
-                name:{
-                    required: true
-                },
-                price: {
-                    required: true,
-                    number: true
-                },
-                artist:{
-                    required: true
-                },
-                year:{
-                    number: true,
-                    min: 1860,
-                    required: true
-                },
-                trackList: {
-                    listOfSongsNotEmpty: true,
-                },
-                image: {
-                    required: true
-                }
-            },
-            messages: {
-                name:{
-                    required: "Name is required"  
-                },
-                price: {
-                    required: "Price is required",
-                    number: "Price should be a number"
-                },
-                artist:{
-                    required: "Artist is required"
-                },
-                year:{
-                    number: "Year should be a number",
-                    min: "Year should be greater than 1860",
-                    required: "Year is required"
-                },
-                trackList: {
-                    listOfSongsNotEmpty: "Track list cannot be empty"
-                },
-                image: {
-                    required: "Image is required"
-                }
-            },
-            submitHandler: function(a, e) {
-                e.preventDefault();
-                const formData = $("#form-container").serialize();
-                const URL = $("#form-container").attr("action");
-                $.ajax({
-                  url: URL,
-                  type: "POST",
-                  data: formData,
-                //   processData: false,
-                })
-                .done(function(data, textStatus, jqXHR) {
-                    alert(data);
-                })
-                .fail(function(jqXHR, textStatus, errorThrown) {
-                    alert(jqXHR.responseText);
-                })
-                .always(function(data, textStatus, jqXHR) {
-                    $('#form-container').each(function(){
-                        this.reset();
-                    });
-                    addedSongs = [];
-                })
-            }
-        });
-   });
+
+$("#form-container").validate({ 
+    ignore: '',
+    rules: {
+        name:{
+            required: true
+        },
+        price: {
+            required: true,
+            number: true
+        },
+        artist:{
+            required: true
+        },
+        year:{
+            number: true,
+            min: 1860,
+            required: true
+        },
+        trackList: {
+            listOfSongsNotEmpty: true,
+        },
+        image: {
+            required: true
+        }
+    },
+    messages: {
+        name:{
+            required: "Name is required"  
+        },
+        price: {
+            required: "Price is required",
+            number: "Price should be a number"
+        },
+        artist:{
+            required: "Artist is required"
+        },
+        year:{
+            number: "Year should be a number",
+            min: "Year should be greater than 1860",
+            required: "Year is required"
+        },
+        trackList: {
+            listOfSongsNotEmpty: "Track list cannot be empty"
+        },
+        image: {
+            required: "Image is required"
+        }
+    },
+    submitHandler: function(a, e) {
+        e.preventDefault();
+        const formData = $("#form-container").serialize();
+        const URL = $("#form-container").attr("action");
+        $.ajax({
+          url: URL,
+          type: "POST",
+          data: formData,
+          processData: false,
+        })
+        .done(function(data, textStatus, jqXHR) {
+            alert(data);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+        })
+        .always(function(data, textStatus, jqXHR) {
+            addedSongs = ['שירים שהתווספו:'];
+            $('#songs').html('');
+            $('#form-container').each(function(){
+                this.reset();
+            });
+        })
+    }
 }); 

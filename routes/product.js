@@ -11,7 +11,7 @@ router.get('/products',productController.showProducts);
 router.get('/products/:collection',productController.showProducts);
 router.get('/product', productController.showProductById);
 
-router.patch('/product', productController.createProduct)
+// router.patch('/product', productController.createProduct)
 router.delete('/product/:id', productController.deleteProduct)
 
 module.exports = router;

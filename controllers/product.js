@@ -78,10 +78,15 @@ async function createProduct(req,res) {
                 req.body.trackList, 
                 req.body.image);
             
-            if(product)
-                res.status(200).send('המוצר התווסף בהצלחה')
-            else
-                res.status(500).send("חלה שגיאה בעת יצירת המוצר")        
+            if(product){
+                console.log('done')
+                res.status(200).send('המוצר התווסף בהצלחה');
+
+            }  
+            else {
+                console.log('fail')
+                res.status(500).send("חלה שגיאה בעת יצירת המוצר");
+            }      
         }
 
 }
@@ -101,7 +106,6 @@ async function updateProduct(req,res) {
 
 async function deleteProduct(req,res){
     const product = await productService.deleteProduct(req.params.id);
-    console.log('efe' + product)
     if(product){
         res.status(200).send('המוצר נמחק בהצלחה');
     } else{
