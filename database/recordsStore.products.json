@@ -6,21 +6,7 @@
   "year": 2022,
   "name": "Harry's House",
   "price": 120,
-  "trackList": [
-    "Music for a Sushi Restaurant",
-    "Late Night Talking",
-    "Grapejuice",
-    "As It Was",
-    "Daylight",
-    "Little Freak",
-    "Matilda",
-    "Cinema",
-    "Daydreaming",
-    "Keep Driving",
-    "Satellite",
-    "Boyfriends",
-    "Love of My Life"
-  ],
+  "description": "description",
   "preview_img": "image",
   "artist": "Harry Styles"
 },
@@ -32,7 +18,7 @@
   "year": 2019,
   "name": "Fine Line",
   "price": 100,
-  "trackList": "תקליט הסולו השני של הארי סטיילס, לשעבר חבר להקת וואן דיירקשן",
+  "description": "תקליט הסולו השני של הארי סטיילס, לשעבר חבר להקת וואן דיירקשן",
   "preview_img": "image",
   "artist": "Harry Styles"
 },
@@ -44,7 +30,7 @@
   "year": 2014,
   "name": "1989",
   "price": 150,
-  "trackList": "description",
+  "description": "description",
   "preview_img": "image",
   "artist": "Taylor Swift"
 },
@@ -56,7 +42,7 @@
   "year": 2000,
   "name": "Parachutes",
   "price": 120,
-  "trackList": "description",
+  "description": "description",
   "preview_img": "image",
   "artist": "Coldplay"
 },
@@ -68,7 +54,7 @@
   "year": 2022,
   "name": "Twelve Carat Toothache",
   "price": 80,
-  "trackList": "description",
+  "description": "description",
   "preview_img": "image",
   "artist": "Post Malone"
 },
@@ -80,7 +66,7 @@
   "year": 2023,
   "name": "Honestly, Nevermind",
   "price": 110,
-  "trackList": "description",
+  "description": "description",
   "preview_img": "image",
   "artist": "Drake"
 },
@@ -92,7 +78,7 @@
   "year": 2018,
   "name": "Scorpion",
   "price": 110,
-  "trackList": "description",
+  "description": "description",
   "preview_img": "image",
   "artist": "Drake"
 },
@@ -104,7 +90,7 @@
   "year": 2024,
   "name": "Short N’ Sweet",
   "price": 140,
-  "trackList": "description",
+  "description": "description",
   "preview_img": "image",
   "artist": "Sabrina Carpenter"
 }]

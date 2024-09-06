@@ -4,7 +4,6 @@
         <link rel="stylesheet" href="../public/css/products.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
-
         <link rel="stylesheet" href="../public/css/addProductPage.css" type="text/css">
     </head>
 
@@ -12,7 +11,7 @@
 
     <%- include("./header"); -%>
 
-        <div id="form-popup">
+        <div id="form-wrap">
             <form id="form-container" action="/products/add_product" method="post">
                 <h1>הוספת מוצר</h1>
                 <label for="name"><b>שם המוצר</b></label><br>
@@ -34,12 +33,8 @@
                     <%}%>
                 </select><br>
 
-                <label for="addSongs"><b>שמות השירים באלבום</b></label><br>
-                <input type="text" placeholder="הוסף שיר לאלבום" id="addSongs" name="addSongs" >
-                <input type="hidden" id="trackList" name="trackList" /><br>
-                <input id="addSongBtn" type="button" value="הוסף"><br>
-                
-                <div id="songs"></div>
+                <label for="description"><b>תיאור</b></label><br>
+                <textarea type="text" id="description" name="description"></textarea><br>
 
                 <label for="image"><b>תמונה</b></label><br>
                 <input type="text" placeholder="url" name="image" id="image" ><br>
@@ -52,5 +47,4 @@
 
 </body>
 <script src="../public/scripts/addProduct.js"></script>
-
 </html>

@@ -1,40 +1,4 @@
 
-let addedSongs = ['שירים שהתווספו:'];
-
-$("#addSongBtn").on( "click", function(event) {
-    addSong(event);
-  });
-
-function addSong(event) {
-  event.preventDefault();
-  const song = document.getElementById('addSongs');
-  const songName = song.value;
-  song.value = '';
-  if(songName.trim().length){
-    addedSongs.push(songName);
-    $('#songs').html(addedSongs.join('<br>'));
-    $('#trackList').val(addedSongs.slice(1));
-  }
-}
-
-$('#addSongBtn').on('click', function() {
-    $("#form-container").valid();
-});
-
-$(document).ready(function(){
-    $.validator.addMethod(
-        "listOfSongsNotEmpty", 
-        function() {
-            if(addedSongs.length <= 1)
-                return false;
-            return true;
-        },
-        "Track list cannot be empty"
-    );
-});
-
-
-
 $("#form-container").validate({ 
     ignore: '',
     rules: {
@@ -53,8 +17,8 @@ $("#form-container").validate({
             min: 1860,
             required: true
         },
-        trackList: {
-            listOfSongsNotEmpty: true,
+        description: {
+            required: true,
         },
         image: {
             required: true
@@ -76,8 +40,8 @@ $("#form-container").validate({
             min: "Year should be greater than 1860",
             required: "Year is required"
         },
-        trackList: {
-            listOfSongsNotEmpty: "Track list cannot be empty"
+        description: {
+            required: "Description is required"
         },
         image: {
             required: "Image is required"
@@ -86,6 +50,7 @@ $("#form-container").validate({
     submitHandler: function(a, e) {
         e.preventDefault();
         const formData = $("#form-container").serialize();
+        console.log(formData);
         const URL = $("#form-container").attr("action");
         $.ajax({
           url: URL,
@@ -100,8 +65,6 @@ $("#form-container").validate({
             alert(jqXHR.responseText);
         })
         .always(function(data, textStatus, jqXHR) {
-            addedSongs = ['שירים שהתווספו:'];
-            $('#songs').html('');
             $('#form-container').each(function(){
                 this.reset();
             });

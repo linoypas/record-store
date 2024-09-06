@@ -18,3 +18,19 @@ $(document).on('click', '#delete-product', function(event) {
         alert(jqXHR.responseText);
     })
 });
+
+
+$(document).on('click', '#edit-product', function(event) {
+    event.stopPropagation();
+    const id = $(this).attr('product-id')
+    $.ajax({
+        type: "GET",
+        url: '/product/' + id,
+    }).done(function(data, textStatus, jqXHR) {
+        $(`#${id}`).remove();
+        alert(data);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        alert(jqXHR.responseText);
+    })
+    $('#form-popup').css({"display": "block"});
+});

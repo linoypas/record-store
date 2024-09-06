@@ -2,6 +2,7 @@
 <html lang="en-US">
 <head>
     <link rel="stylesheet" href="../public/css/products.css" type="text/css">
+    <link rel="stylesheet" href="../public/css/editProduct.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -57,8 +58,39 @@
             </script>  
             </div>
     </main>
+    <div id="form-popup">
+        <form id="form-container" action="/products/edit_product" method="post">
+            <h1>עדכון מוצר</h1>
+            <label for="name"><b>שם המוצר</b></label><br>
+            <input type="text" name="name" id="name"><br>
+
+            <label for="price"><b>מחיר</b></label><br>
+            <input type="number" name="price" id="price"><br>
+
+            <label for="artist"><b>שם אמן</b></label><br>
+            <input type="text" name="artist" id="artist"><br>
+
+            <label for="year"><b>שנת הוצאה</b></label><br>
+            <input type="number" name="year" id="year" ><br>
+
+            <label for="genre"><b>ז'אנר</b></label><br>
+            <select name="genre" id="genre">
+                <%for (let i = 0; i < genres.length; i++) {%>
+                <option value="<%=genres[i]%>"><%=genres[i]%></option>
+                <%}%>
+            </select><br>
+
+            <label for="description"><b>תיאור</b></label><br>
+            <textarea type="text" id="description" name="description"></textarea><br>
+
+            <label for="image"><b>תמונה</b></label><br>
+            <input type="text" placeholder="url" name="image" id="image" ><br>
+
+            <input type='submit' value='אישור' id="submit">
+        </form>
+    </div>
     <%- include("./footer"); -%>
 </body>
 <script src="../public/scripts/sortProducts.js"></script>
-<script src="../public/scripts/products.js"></script>
+<script src="../public/scripts/product.js"></script>
 </html>
