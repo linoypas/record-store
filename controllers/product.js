@@ -65,7 +65,7 @@ async function addProductPage(req, res) {
 
 async function createProduct(req,res) {
     if( req.body.genre == null || req.body.year == null || req.body.artist == null || req.body.artist == null || req.body.name == null
-        || req.body.price == null || req.body.trackList == '' || req.body.image == null) {
+        || req.body.price == null || req.body.description == null || req.body.image == null) {
             res.status(400).send("חלק מהשדות ריקים, נסה שוב")
 
         } else{
@@ -75,13 +75,12 @@ async function createProduct(req,res) {
                 req.body.artist,
                 req.body.name,
                 req.body.price,
-                req.body.trackList, 
+                req.body.description, 
                 req.body.image);
             
             if(product){
                 console.log('done')
                 res.status(200).send('המוצר התווסף בהצלחה');
-
             }  
             else {
                 console.log('fail')

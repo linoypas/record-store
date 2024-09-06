@@ -23,9 +23,9 @@ const Product = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  trackList: {
-    type: [String],
-    required: false,
+  description: {
+    type: String,
+    required: true,
   },
   image: {
     type: String,

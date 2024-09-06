@@ -46,21 +46,22 @@ async function getListOfGenres() {
     return Product.schema.path('genre').options.enum;
 }
 
-async function createProduct(genre, year, artist, name, price, trackList, image ) {
+async function createProduct(genre, year, artist, name, price, description, image ) {
     const newProduct = new Product({
         genre: genre,
         year: year,
         artist: artist,
         name: name,
         price: price,
-        trackList: trackList,
+        description: description,
         image: image
     });
 
     try{
         await newProduct.save();
         return true;
-    } catch{
+    } catch(err){
+        console.log(err);
         return false;
     }
 }
