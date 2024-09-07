@@ -2,6 +2,7 @@ const productService = require("../services/product");
 
 
 function checkParams(req){
+
     params = {}
     // handle collection
     if(req.params.collection != null)
@@ -30,6 +31,7 @@ async function getAllProducts(req, res) {
 }
 
 async function showProducts(req, res) {
+    console.log(checkParams(req));
     const products = await productService.getProducts(checkParams(req));
     const genres = await productService.getListOfGenres();
     if(!products || !genres){
