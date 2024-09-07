@@ -79,11 +79,11 @@ async function createProduct(req,res) {
                 req.body.image);
             
             if(product){
-                console.log('done')
+                console.log('done: create product')
                 res.status(200).send('המוצר התווסף בהצלחה');
             }  
             else {
-                console.log('fail')
+                console.log('fail: create product')
                 res.status(500).send("חלה שגיאה בעת יצירת המוצר");
             }      
         }
@@ -92,6 +92,7 @@ async function createProduct(req,res) {
 
 async function updateProduct(req,res) {
     const product = await productService.updateProduct(
+        req.params.id,
         req.body.catagory,
         req.body.year,
         req.body.artist,
@@ -100,19 +101,25 @@ async function updateProduct(req,res) {
         req.body.description,
         req.body.image);
 
+    if(!product){
+        console.log('fail: create product')
+        res.status(500).send("חלה שגיאה בעת עדכון המוצר");
+    }
+    console.log('done: update product');
     res.json(product);
 }
 
 async function deleteProduct(req,res){
     const product = await productService.deleteProduct(req.params.id);
     if(product){
+        console.log('done: delete product')
         res.status(200).send('המוצר נמחק בהצלחה');
     } else{
+        console.log('fail: delete product')
         res.status(500).send("חלה שגיאה בעת מחיקת המוצר");
     }
        
 }
-
 
 module.exports = {
     showProducts,

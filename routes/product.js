@@ -11,6 +11,7 @@ router.get('/products',productController.showProducts);
 router.get('/products/:collection',productController.showProducts);
 router.get('/product', productController.showProductById);
 
+router.get('/product/:id', productController.getProductById);
 router.put('/product/:id', productController.updateProduct)
 router.delete('/product/:id', productController.deleteProduct)
 

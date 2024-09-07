@@ -7,7 +7,7 @@
   "name": "Harry's House",
   "price": 120,
   "description": "description",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Harry Styles"
 },
 {
@@ -19,7 +19,7 @@
   "name": "Fine Line",
   "price": 100,
   "description": "תקליט הסולו השני של הארי סטיילס, לשעבר חבר להקת וואן דיירקשן",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Harry Styles"
 },
 {
@@ -31,7 +31,7 @@
   "name": "1989",
   "price": 150,
   "description": "description",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Taylor Swift"
 },
 {
@@ -43,7 +43,7 @@
   "name": "Parachutes",
   "price": 120,
   "description": "description",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Coldplay"
 },
 {
@@ -55,7 +55,7 @@
   "name": "Twelve Carat Toothache",
   "price": 80,
   "description": "description",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Post Malone"
 },
 {
@@ -67,7 +67,7 @@
   "name": "Honestly, Nevermind",
   "price": 110,
   "description": "description",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Drake"
 },
 {
@@ -79,7 +79,7 @@
   "name": "Scorpion",
   "price": 110,
   "description": "description",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Drake"
 },
 {
@@ -91,6 +91,6 @@
   "name": "Short N’ Sweet",
   "price": 140,
   "description": "description",
-  "preview_img": "image",
+  "image": "image",
   "artist": "Sabrina Carpenter"
 }]
