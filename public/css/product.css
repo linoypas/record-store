@@ -33,14 +33,10 @@ main{
   height: 100%;
 }
 
-p, ol, li{
+p, li, h1, div{
   direction: rtl;
 }
 
-.trackList {
-  margin-right: 450px;
-}
-
-ol{
-  padding: 0;
+.description{
+  white-space: pre-line;
 }

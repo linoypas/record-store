@@ -1,15 +1,28 @@
-const product = require('../models/Product');
+const sortProducts = require('./sortProducts')
+const Product = require('../models/product');
 const mongoose = require("mongoose");
+const product = require('../models/product');
 
-async function getAllProducts() {
-    try {
-        const returnedProducts = await product.find({});
-        if(!returnedProducts) {
-          return null;
-        }
-        return returnedProducts;
-    } catch (error) {
-        return null;
+async function getProducts(params) {
+    let queryParams = {};
+    if(params.collection == "new"){
+        const lastYear = new Date().getFullYear() - 1;
+        queryParams["year"] = {$gte:lastYear};
+    }
+    if (params.genre != "all")
+        queryParams["genre"] = params.genre;
+    
+    if(params.sortBy == ""){
+        return sortProducts.sortbyDefault(queryParams);
+    } else{
+        if(params.sortBy == 'default')
+            return sortProducts.sortbyDefault(queryParams); 
+        if(params.sortBy == 'newest')
+            return sortProducts.sortByYear(queryParams);
+        if(params.sortBy == 'priceAscending')
+            return sortProducts.sortByPriceLowToHigh(queryParams);
+        if(params.sortBy == 'priceDescending')
+            return sortProducts.sortByPriceHighToLow(queryParams);
     }
 }
 
@@ -18,7 +31,8 @@ async function getProductById(id){
         return null;
     }
     try {
-        const returnedProduct = await product.findById(id.trim());
+        console.log(id);
+        const returnedProduct = await Product.findById(id.trim());
         if(!returnedProduct) {
           return null;
         }
@@ -29,9 +43,13 @@ async function getProductById(id){
     }
 }
 
-async function createProduct(catagory, year, artist, name, price, description, image ) {
-    const product = new Product({
-        catagory: catagory,
+async function getListOfGenres() {
+    return Product.schema.path('genre').options.enum;
+}
+
+async function createProduct(genre, year, artist, name, price, description, image ) {
+    const newProduct = new Product({
+        genre: genre,
         year: year,
         artist: artist,
         name: name,
@@ -40,44 +58,51 @@ async function createProduct(catagory, year, artist, name, price, description, i
         image: image
     });
 
-    await product.save();
-    return product;
+    try{
+        await newProduct.save();
+        return true;
+    } catch(err){
+        console.log(err);
+        return false;
+    }
 }
 
 async function updateProduct(id, catagory, year, artist, name, price, description, image ) {
-    const product = await product.findById(id);
-    if(!product)
+    const updatedProduct = await Product.findById(id.trim());
+    if(!updatedProduct)
         return null;
 
-    product.catagory = catagory;
-    product.year = year;
-    product.artist = artist;
-    product.name = name;
-    product.price = price;
-    product.description = description;
-    product.image = image;
+    updatedProduct.catagory = catagory;
+    updatedProduct.year = year;
+    updatedProduct.artist = artist;
+    updatedProduct.name = name;
+    updatedProduct.price = price;
+    updatedProduct.description = description;
+    updatedProduct.image = image;
 
-    await product.save();
-    return product;
+    try{
+        await updatedProduct.save();
+        return updatedProduct;
+    } catch(err){
+        console.log(err);
+        return null;
+    }
 }
 
 async function deleteProduct(id){
-    try {
-        const product = await product.findById(id);
-        if(!product) {
-          return null;
-        }
-        await product.remove();    
-        return product;
-    } catch (error) {
-        return null;
-    }   
+    try{
+        await Product.findByIdAndDelete(id.trim());
+        return true;
+    } catch{
+        return false;
+    }
 }
 
 module.exports = {
-    getAllProducts,
+    getProducts,
     getProductById,
     createProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getListOfGenres,
 };

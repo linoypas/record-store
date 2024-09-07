@@ -14,18 +14,15 @@
                 <input type="number" id="quantity" min="1" max="10" placeholder="1" oninput="validity.valid||(value='');">
                 <button>הוספה לסל</button>
             </div>
+            <section>
+                <hr><p>תיאור:</p><hr>
+                <p class="description"><%=product.description%></p>
+            </section>
 
         </div>
         <img id="image" src="../public/images/record-logo.jpg"></img>
     </main>
-    <section>
-        <hr><p class="trackList">Tracklist:</p><hr>
-        <ol class="trackList">
-            <% for (let i = 0; i < product.description.length ; i++) { %>
-                <li> <%= product.description[i] %> </li>
-            <% } %>
-        </ol>
-    </section>
     <%- include("./footer"); -%>
 </body>
+<script src="../public/scripts/product.js"></script>
 </html>

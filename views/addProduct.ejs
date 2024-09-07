@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../public/css/products.css" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+        <link rel="stylesheet" href="../public/css/addProductPage.css" type="text/css">
+    </head>
+
+<body>
+
+    <%- include("./header"); -%>
+
+        <div id="form-wrap">
+            <form id="form-container" action="/products/add_product" method="post">
+                <h1>הוספת מוצר</h1>
+                <label for="name"><b>שם המוצר</b></label><br>
+                <input type="text" name="name" id="name"><br>
+
+                <label for="price"><b>מחיר</b></label><br>
+                <input type="number" name="price" id="price"><br>
+
+                <label for="artist"><b>שם אמן</b></label><br>
+                <input type="text" name="artist" id="artist"><br>
+
+                <label for="year"><b>שנת הוצאה</b></label><br>
+                <input type="number" name="year" id="year" ><br>
+
+                <label for="genre"><b>ז'אנר</b></label><br>
+                <select name="genre" id="genre">
+                    <%for (let i = 0; i < genres.length; i++) {%>
+                    <option value="<%=genres[i]%>"><%=genres[i]%></option>
+                    <%}%>
+                </select><br>
+
+                <label for="description"><b>תיאור</b></label><br>
+                <textarea type="text" id="description" name="description"></textarea><br>
+
+                <label for="image"><b>תמונה</b></label><br>
+                <input type="text" placeholder="url" name="image" id="image" ><br>
+
+                <input type='submit' value='אישור' id="submit">
+            </form>
+        </div>
+        <%- include("./footer"); -%>
+
+</body>
+<script src="../public/scripts/addProduct.js"></script>
+</html>
