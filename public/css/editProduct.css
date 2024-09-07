@@ -7,20 +7,46 @@
     border: 3px solid #f1f1f1;
     z-index: 9;
     height: 100%;
+    overflow: scroll;
   }
   
-  /* Add styles to the form container */
   #form-container {
-    min-width: 300px;
+    min-width: 400px;
     padding: 10px;
     background-color: white;
+    padding-bottom: 50px;
+    
   }
   
-  /* Full-width input fields */
-  #form-container input, #form-container textarea {
-    width: 100%;
+  #form-container input, #form-container textarea, #form-container select{
+    width: 90%;
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
     background: #f1f1f1;
   }
+
+  #form-container textarea{
+    height: 100px;
+  }
+
+#exit-update-form {
+    border: 0;
+    background-color: transparent;
+    padding: 0.2em 0.3em;
+    margin: 2px;
+    cursor: pointer;
+}
+
+#exit-update-form:hover{
+    color: green;
+}
+
+#update-form-title{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+

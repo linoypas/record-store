@@ -1,6 +1,7 @@
 const sortProducts = require('./sortProducts')
 const Product = require('../models/product');
 const mongoose = require("mongoose");
+const product = require('../models/product');
 
 async function getProducts(params) {
     let queryParams = {};
@@ -67,20 +68,25 @@ async function createProduct(genre, year, artist, name, price, description, imag
 }
 
 async function updateProduct(id, catagory, year, artist, name, price, description, image ) {
-    const Product = await Product.findById(id.trim());
-    if(!Product)
+    const updatedProduct = await Product.findById(id.trim());
+    if(!updatedProduct)
         return null;
 
-    Product.catagory = catagory;
-    Product.year = year;
-    Product.artist = artist;
-    Product.name = name;
-    Product.price = price;
-    Product.description = description;
-    Product.image = image;
+    updatedProduct.catagory = catagory;
+    updatedProduct.year = year;
+    updatedProduct.artist = artist;
+    updatedProduct.name = name;
+    updatedProduct.price = price;
+    updatedProduct.description = description;
+    updatedProduct.image = image;
 
-    await Product.save();
-    return Product;
+    try{
+        await updatedProduct.save();
+        return updatedProduct;
+    } catch(err){
+        console.log(err);
+        return null;
+    }
 }
 
 async function deleteProduct(id){
