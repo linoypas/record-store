@@ -2,16 +2,34 @@ let removedDefaultSelect = false;
 
 let genre = 'all';
 let orderBy = 'default';
+let showOnlyinStock = false;
 
 function changeGenre(option){
     genre = option.value;
-    console.log(genre);
     showProducts();
 }
 
 function changeSortBy(option){
     sort(option.value);
     deleteDefaultSelect(option);
+}
+
+
+$("#inStock").on('change', function() {
+    if ($(this).is(':checked')) {
+      $(this).attr('value', 'true');
+    } else {
+      $(this).attr('value', 'false');
+    }
+  });
+
+function changeShowOnlyinStock(){
+    if ($("#inStock").is(':checked')) {
+        showOnlyinStock = true;
+      } else {
+        showOnlyinStock = false;
+      }
+    showProducts();
 }
 
 function deleteDefaultSelect(option){
@@ -41,6 +59,7 @@ function showProducts(){
         url: '/products/' +(location.pathname.substring(location.pathname.lastIndexOf('/') + 1)) + `/${orderBy}`,
         data: { 
             genre: genre,
+            showOnlyinStock: showOnlyinStock,
         },
     }).done(function(res){
         updateProducts(res)

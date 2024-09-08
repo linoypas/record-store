@@ -11,6 +11,10 @@ header{
     
 }
 
+a{
+    font-size: 16px;
+}
+
 #left-nav{
     display: flex;
     flex-direction: row;
@@ -32,8 +36,9 @@ header{
     z-index: 2;
 }
 
-.btn:hover{
+.header-btn:hover{
     color: orange;
+    cursor: pointer;
 }
   
 
@@ -47,8 +52,8 @@ header{
     display: inline-block;
 }
   
-.dropdown .dropbtn , .btn{
-    font-size: 16px;  
+.dropdown .dropbtn , .header-btn{
+    font-size: 20px;  
     border: none;
     outline: none;
     color: white;
@@ -58,7 +63,7 @@ header{
     z-index: 2;
 }
 
-a:hover, .dropdown:hover .dropbtn{
+.dropdown-content a:hover, .dropdown:hover .dropbtn{
     color:hsla(0,0%,40%,.85) ;
     cursor: pointer;
 }

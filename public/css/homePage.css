@@ -16,6 +16,7 @@ html body{
     position: relative;
     padding-bottom: 150px;
   }
+
   main{
     min-height: 100%;
     width: 100%;
@@ -54,8 +55,6 @@ html body{
     padding-bottom: 50px;
     background-position: 50% 50%;
   }
-
-
 
   #store-about p{
     margin: 10px;

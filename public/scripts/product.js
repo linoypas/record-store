@@ -1,5 +1,4 @@
 
-
 $(document).on('click', '.product', function(event) {
     event.stopPropagation();
     const id = $(this).attr('id');
@@ -35,12 +34,23 @@ $(document).on('click', '#edit-product', function(event) {
     
 });
 
+$("#form-inStock").on('change', function() {
+    if ($(this).is(':checked')) {
+      $(this).attr('value', 'true');
+    } else {
+      $(this).attr('value', 'false');
+    }
+  });
+  
+
 function showForm(res){
     for(const key in res){
         $(`input[name=${key}]`).val(res[key]);
     }
     $('#description').html(res['description'])
     $('#form-container').attr('product-id', res['_id']);
+    if($("#form-inStock").val() == 'true')
+        $("#form-inStock").prop("checked", true);
     $('#form-popup').css({"display": "block"});
     $('<div/>',{ id:"overlay"}).appendTo("body");
 }
@@ -125,4 +135,5 @@ $("#form-container").validate({
         })
     }
 }); 
+
 

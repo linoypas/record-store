@@ -11,6 +11,8 @@ async function getProducts(params) {
     }
     if (params.genre != "all")
         queryParams["genre"] = params.genre;
+    if(params.inStock != null)
+        queryParams["inStock"] = params.inStock;
     
     if(params.sortBy == ""){
         return sortProducts.sortbyDefault(queryParams);
@@ -47,7 +49,8 @@ async function getListOfGenres() {
     return Product.schema.path('genre').options.enum;
 }
 
-async function createProduct(genre, year, artist, name, price, description, image ) {
+async function createProduct(genre, year, artist, name, price, description, image, inStock) {
+    console.log(inStock);
     const newProduct = new Product({
         genre: genre,
         year: year,
@@ -55,7 +58,8 @@ async function createProduct(genre, year, artist, name, price, description, imag
         name: name,
         price: price,
         description: description,
-        image: image
+        image: image,
+        inStock: inStock
     });
 
     try{
@@ -67,7 +71,7 @@ async function createProduct(genre, year, artist, name, price, description, imag
     }
 }
 
-async function updateProduct(id, catagory, year, artist, name, price, description, image ) {
+async function updateProduct(id, catagory, year, artist, name, price, description, image, inStock ) {
     const updatedProduct = await Product.findById(id.trim());
     if(!updatedProduct)
         return null;
@@ -79,6 +83,7 @@ async function updateProduct(id, catagory, year, artist, name, price, descriptio
     updatedProduct.price = price;
     updatedProduct.description = description;
     updatedProduct.image = image;
+    updatedProduct.inStock = inStock;
 
     try{
         await updatedProduct.save();

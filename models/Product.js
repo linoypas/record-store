@@ -30,6 +30,10 @@ const Product = new mongoose.Schema({
   image: {
     type: String,
     required: true,
+  },
+  inStock: {
+    type: Boolean,
+    required: true
   }
 });
 

@@ -8,7 +8,8 @@
   "price": 120,
   "description": "description",
   "image": "image",
-  "artist": "Harry Styles"
+  "artist": "Harry Styles",
+  "inStock": true
 },
 {
   "_id": {
@@ -20,7 +21,8 @@
   "price": 100,
   "description": "תקליט הסולו השני של הארי סטיילס, לשעבר חבר להקת וואן דיירקשן",
   "image": "image",
-  "artist": "Harry Styles"
+  "artist": "Harry Styles",
+  "inStock": true
 },
 {
   "_id": {
@@ -32,7 +34,8 @@
   "price": 150,
   "description": "description",
   "image": "image",
-  "artist": "Taylor Swift"
+  "artist": "Taylor Swift",
+  "inStock": true
 },
 {
   "_id": {
@@ -44,7 +47,8 @@
   "price": 120,
   "description": "description",
   "image": "image",
-  "artist": "Coldplay"
+  "artist": "Coldplay",
+  "inStock": true
 },
 {
   "_id": {
@@ -56,7 +60,8 @@
   "price": 80,
   "description": "description",
   "image": "image",
-  "artist": "Post Malone"
+  "artist": "Post Malone",
+  "inStock": false
 },
 {
   "_id": {
@@ -68,7 +73,8 @@
   "price": 110,
   "description": "description",
   "image": "image",
-  "artist": "Drake"
+  "artist": "Drake",
+  "inStock": true
 },
 {
   "_id": {
@@ -80,7 +86,8 @@
   "price": 110,
   "description": "description",
   "image": "image",
-  "artist": "Drake"
+  "artist": "Drake",
+  "inStock": true
 },
 {
   "_id": {
@@ -92,5 +99,6 @@
   "price": 140,
   "description": "description",
   "image": "image",
-  "artist": "Sabrina Carpenter"
+  "artist": "Sabrina Carpenter",
+  "inStock": false
 }]

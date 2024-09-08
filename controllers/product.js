@@ -2,7 +2,6 @@ const productService = require("../services/product");
 
 
 function checkParams(req){
-
     params = {}
     // handle collection
     if(req.params.collection != null)
@@ -19,10 +18,15 @@ function checkParams(req){
         params['genre'] = req.query.genre;
     else
         params['genre'] = 'all';
+    //handle in stock
+    if(req.query.showOnlyinStock != null && req.query.showOnlyinStock == 'true')
+        params['inStock'] = true;
+
     return params;
 }
 
 async function getAllProducts(req, res) {
+    console.log(checkParams(req));
     const products = await productService.getProducts(checkParams(req));
     if(!products){
         return res.status(404).json({errors: ['not found']})
@@ -71,6 +75,8 @@ async function createProduct(req,res) {
             res.status(400).send("חלק מהשדות ריקים, נסה שוב")
 
         } else{
+            if(req.body.inStock == null)
+                req.body.inStock = false
             const product = await productService.createProduct(
                 req.body.genre,
                 req.body.year,
@@ -78,7 +84,9 @@ async function createProduct(req,res) {
                 req.body.name,
                 req.body.price,
                 req.body.description, 
-                req.body.image);
+                req.body.image,
+                req.body.inStock
+            );
             
             if(product){
                 console.log('done: create product')
@@ -93,6 +101,8 @@ async function createProduct(req,res) {
 }
 
 async function updateProduct(req,res) {
+    if(req.body.inStock == null)
+        req.body.inStock = false
     const product = await productService.updateProduct(
         req.params.id,
         req.body.catagory,
@@ -101,7 +111,8 @@ async function updateProduct(req,res) {
         req.body.name,
         req.body.price,
         req.body.description,
-        req.body.image);
+        req.body.image,
+        req.body.inStock);
 
     if(!product){
         console.log('fail: create product')
