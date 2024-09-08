@@ -1,5 +1,4 @@
 
-
 $(document).on('click', '.product', function(event) {
     event.stopPropagation();
     const id = $(this).attr('id');
@@ -126,3 +125,5 @@ $("#form-container").validate({
     }
 }); 
 
+
+  

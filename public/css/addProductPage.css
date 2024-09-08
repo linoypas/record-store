@@ -14,22 +14,19 @@
   width: 30%;
 }  
 
-.submit-button {
-  color: black;
-  background-color: #efeae6;
-  padding: 5px;
-  width: 100px;
-  margin: 5px;
-  border-color: gray;
-  border-radius: 5px;
-  text-shadow: 0.5px 0.5px gray;
+#in-stock-checkbox{
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start ;
+  align-items: flex-start;
 }
 
-h1, input, select {
+
+#form-container h1, #form-container input, #form-container textarea, #form-container select {
   margin-bottom: 10px;
 }
 
-input, textarea{
+#form-container input[type=text], input[type=number], #form-container textarea{
   width: 99%;
 }
 
