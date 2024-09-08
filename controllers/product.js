@@ -101,6 +101,8 @@ async function createProduct(req,res) {
 }
 
 async function updateProduct(req,res) {
+    if(req.body.inStock == null)
+        req.body.inStock = false
     const product = await productService.updateProduct(
         req.params.id,
         req.body.catagory,
@@ -109,7 +111,8 @@ async function updateProduct(req,res) {
         req.body.name,
         req.body.price,
         req.body.description,
-        req.body.image);
+        req.body.image,
+        req.body.inStock);
 
     if(!product){
         console.log('fail: create product')

@@ -71,7 +71,7 @@ async function createProduct(genre, year, artist, name, price, description, imag
     }
 }
 
-async function updateProduct(id, catagory, year, artist, name, price, description, image ) {
+async function updateProduct(id, catagory, year, artist, name, price, description, image, inStock ) {
     const updatedProduct = await Product.findById(id.trim());
     if(!updatedProduct)
         return null;
@@ -83,6 +83,7 @@ async function updateProduct(id, catagory, year, artist, name, price, descriptio
     updatedProduct.price = price;
     updatedProduct.description = description;
     updatedProduct.image = image;
+    updatedProduct.inStock = inStock;
 
     try{
         await updatedProduct.save();
