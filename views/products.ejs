@@ -23,7 +23,7 @@
                 <%}%>
             </select><br><hr>
             <div id="rangeValue">מחיר מקסימלי:</div>
-            <input type="range" min="0" max="100" value="100" oninput="rangeValue.innerText = 'מחיר מקסימלי: ' + this.value + '₪'"><br><hr>
+            <input type="range" id="maxPriceRange" min="0" max=<%=maxPriceProduct%> value=<%=maxPriceProduct%>><br><hr>
             <input type="checkbox" id="inStock" name="inStock" value="false"  onchange="changeShowOnlyinStock(this)">
             <label for="inStock">הצג רק מוצרים במלאי</label><br>
         </div>

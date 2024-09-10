@@ -21,7 +21,9 @@ function checkParams(req){
     //handle in stock
     if(req.query.showOnlyinStock != null && req.query.showOnlyinStock == 'true')
         params['inStock'] = true;
-
+    //handle max Price 
+    if(req.query.maxPrice !=null )
+        params['maxPrice'] = req.query.maxPrice;
     return params;
 }
 
@@ -38,10 +40,11 @@ async function showProducts(req, res) {
     console.log(checkParams(req));
     const products = await productService.getProducts(checkParams(req));
     const genres = await productService.getListOfGenres();
+    const maxPriceProduct = await productService.getMaxPriceProduct();
     if(!products || !genres){
         return res.status(404).json({errors: ['not found']})
     }
-    res.render('../views/products', {products:products, genres:genres});
+    res.render('../views/products', {products:products, genres:genres, maxPriceProduct:maxPriceProduct});
 }
 
 
