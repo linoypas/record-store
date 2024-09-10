@@ -11,8 +11,12 @@ async function getProducts(params) {
     }
     if (params.genre != "all")
         queryParams["genre"] = params.genre;
+
     if(params.inStock != null)
         queryParams["inStock"] = params.inStock;
+
+    if(params.maxPrice !=null)
+        queryParams['price'] = { $lte: params.maxPrice };
     
     if(params.sortBy == ""){
         return sortProducts.sortbyDefault(queryParams);
@@ -48,6 +52,15 @@ async function getProductById(id){
 async function getListOfGenres() {
     return Product.schema.path('genre').options.enum;
 }
+
+async function getMaxPriceProduct(){
+    try{
+        const maxPriceProduct = await product.find({}).sort({price : -1}).limit(1);
+        return maxPriceProduct[0]['price'];
+    } catch{
+        return false;
+    }
+};
 
 async function createProduct(genre, year, artist, name, price, description, image, inStock) {
     console.log(inStock);
@@ -110,4 +123,5 @@ module.exports = {
     deleteProduct,
     updateProduct,
     getListOfGenres,
+    getMaxPriceProduct,
 };

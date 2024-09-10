@@ -3,6 +3,7 @@ let removedDefaultSelect = false;
 let genre = 'all';
 let orderBy = 'default';
 let showOnlyinStock = false;
+let maxPrice = $('#maxPriceRange').attr('value');
 
 function changeGenre(option){
     genre = option.value;
@@ -13,6 +14,13 @@ function changeSortBy(option){
     sort(option.value);
     deleteDefaultSelect(option);
 }
+
+$('#maxPriceRange').on('input', function(){
+    maxPrice = this.value;
+    $('#rangeValue').text('מחיר מקסימלי: ' + this.value + '₪');
+    $(this).attr('value', this.value)
+    sort()
+});
 
 
 $("#inStock").on('change', function() {
@@ -60,6 +68,7 @@ function showProducts(){
         data: { 
             genre: genre,
             showOnlyinStock: showOnlyinStock,
+            maxPrice: maxPrice,
         },
     }).done(function(res){
         updateProducts(res)
