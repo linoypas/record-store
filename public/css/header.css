@@ -57,6 +57,8 @@ header{
     text-align:right;
     background-color: black;
     z-index: 2;
+    text-decoration: none;
+
 }
 
 a:hover, .dropdown:hover .dropbtn{

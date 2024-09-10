@@ -1,9 +1,8 @@
-
 [{
-    "_id": {
-      "$oid": "e4b8b5b5-b8e5-4a26-86c1-3c3c4d7e1a43"
-    },
-    "username": "admin",
-    "password": "Aa123456",
-    "permission": "admin"
-  }]
+  "_id": {
+    "$oid": "66ca16c1baf8e69aecb16928"
+  },
+  "username": "admin",
+  "password": "Aa123456",
+  "permission": "admin"
+}]

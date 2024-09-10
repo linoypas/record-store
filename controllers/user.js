@@ -1,10 +1,7 @@
 const userService = require("../services/user");
 
-function checkParams(req){
-}
-
 async function listUsers(req, res) {
-    const users = await userService.getUsers(checkParams(req));
+    const users = await userService.getUsers();
     if(!users){
         return res.status(404).json({errors: ['not found']})
     }
@@ -17,45 +14,6 @@ async function getUser(req,res){
         return res.status(404).json({errors: ['not found']})
     }
     res.json(user);
-}
-async function searchUser(req,res){
-    if(req.body.username == null || req.body.password == null) {
-        res.status(400).send("חלק מהשדות ריקים, נסה שוב")
-
-    } else {
-        const user = await userService.searchUser(
-            req.body.username,
-            req.body.password);
-            if(user){
-                console.log('done: login succesed')
-                res.status(200).send('ההזדהות הושלמה ');
-            }  
-            else {
-                console.log('fail: user or password not correct')
-                res.status(500).send("חלה שגיאה בעת הזדהות היוזר");
-            } 
-        }
-    }
-
-async function addUser(req,res) {
-    if(req.body.username == null || req.body.password == null || req.body.phonenumber == null || req.body.address == null) {
-            res.status(400).send("חלק מהשדות ריקים, נסה שוב")
-
-        } else{
-            const user = await userService.createUser(
-                req.body.username,
-                req.body.password);
-            
-            if(user){
-                console.log('done: create user')
-                res.status(200).send('היוזר התווסף בהצלחה');
-            }  
-            else {
-                console.log('fail: create product')
-                res.status(500).send("חלה שגיאה בעת יצירת המוצר");
-            }      
-        }
-
 }
 
 async function updateUser(req,res) {
@@ -89,9 +47,7 @@ async function deleteUser(req,res){
 
 module.exports = {
     getUser,
-    addUser,
     deleteUser,
     updateUser,
     listUsers,
-    searchUser
 }
