@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/', require('./routes/homePage'));
 app.use('/', require('./routes/product'));
 app.use('/', require('./routes/sortAndFilterProducts'));
+app.use('/', require('./routes/graphs'))
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)
