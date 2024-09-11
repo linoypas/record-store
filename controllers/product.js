@@ -32,6 +32,7 @@ async function getAllProducts(req, res) {
 async function showProducts(req, res) {
     const products = await productService.getProducts(checkParams(req));
     const genres = await productService.getListOfGenres();
+    // const username = req.session.username || 'guest';
     if(!products || !genres){
         return res.status(404).json({errors: ['not found']})
     }

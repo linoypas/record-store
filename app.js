@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+
 const env = require('dotenv').config();
 const mongoose = require("mongoose");
 
@@ -21,6 +23,13 @@ app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
 app.use('/', require('./routes/users'));
 
+app.use(session({
+secret: 'your-secret-key', // Use a strong secret key in production
+resave: false,
+saveUninitialized: true
+}));
+
+app.use(express.urlencoded({ extended: true }));
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)

@@ -8,6 +8,9 @@ async function login(req, res) {
   
     const result = await loginService.login(username, password)
     if (result != null) {
+      if (!username) {
+        return res.status(400).send('Username is required');
+    }
       req.session.username = username
       res.redirect('/')
     }
@@ -19,14 +22,15 @@ function registerForm(req,res){
     res.render('../views/register',{});
 }
 async function register(req, res) {
-  if(!req.body.username || !req.body.password || !req.body.phonenumber || !req.body.address){
+  const { username, password, phonenumber, address, isAdmin } = req.body
+
+  if(!username || !password || !phonenumber || !address){
       res.status(400).send("חלק מהשדות ריקים, נסה שוב")
   }
   else{
-    const { username, password, phonenumber, address, isAdmin } = req.body
     const result = await loginService.register(username, password, phonenumber, address, isAdmin)
     if (result != null) {
-      req.session.username = username
+     // req.session.username = username
       res.redirect('/login')
     }
     else{

@@ -39,6 +39,8 @@ async function register(username, password, phonenumber, address, isAdmin) {
     });
 
     await newuser.save()
+    return user != null
+
 }
 
 module.exports = { login, register }
