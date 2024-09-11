@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="../public/css/products.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
-        <link rel="stylesheet" href="../public/css/addProductPage.css" type="text/css">
+        <link rel="stylesheet" href="../public/css/login.css" type="text/css">
     </head>
 
-    <body>
-        <div class="signup-form">
-            <form action="/login" method="post">
-                <h1>התחבר/י</h1>
-                <input type="username" name="username" placeholder="Username"><br>
-                <input type="password" name="password" placeholder="Password"><br>
-                <input type="submit" class="btn btn-light" style="border: 2px solid black;margin-top:10px"
-                    value="התחבר/י">
-            </form>
-            <a href="/register">אם אין לך כבר משתמש באתר</a>
-        </div>
+<body>
+    <%- include("./header",{showAdminDiv: false, showRecordDiv: false, showSideDiv: false}); -%>
 
-        <div id="footer"></div>
-
-        <script src="../public/scripts/load_footer_header.js"></script>
-
+    <div class="signin-form">
+        <form action="/login" method="post">
+            <h1>התחברות</h1>
+            <input class="form" type="username" name="username" placeholder="Username"><br>
+            <input class="form" type="password" name="password" placeholder="Password"><br>
+            <input type="submit" value="כניסה">
+        </form>
+        <a href="/register">אם עדיין אין לך משתמש באתר</a>
+    </div>
+    <%- include("./footer"); -%>
 </body>
-</body>
-<script src="../public/scripts/addProduct.js"></script>
 </html>

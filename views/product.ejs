@@ -2,8 +2,11 @@
 <html lang="en-US">
 <link rel="stylesheet" href="../public/css/product.css" type="text/css">
 <body>
-    <%- include("./header"); -%>
+    <%- include("./header",{showAdminDiv: true, showRecordDiv: true,showSideDiv: true}); -%>
     <main>
+        <div class="img">
+            <img id="image" src="<%=product.image%>"></img>
+        </div>
         <div id="info-section">
             <div id="info">
                 <p class="artist"><%=product.artist%></p>
@@ -20,7 +23,8 @@
             </section>
 
         </div>
-        <img id="image" src="../public/images/record-logo.jpg"></img>
+        
+        <!-- <img id="image" src="../public/images/record-logo.jpg"></img> -->
     </main>
     <%- include("./footer"); -%>
 </body>

@@ -5,40 +5,28 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
-        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>Sign Up</title>    
     <link rel="stylesheet" href="../public/css/register.css" type="text/css">
-    <link rel="stylesheet" href="../public/css/homepage.css" type="text/css">
-    <link rel="stylesheet" href="../public/css/footer_header.css">
-    <script src="../public/scripts/load_footer_header.js"></script>
 
 </head>
 
 <body>
-    <form action="/register" method="post">
+    <%- include("./header",{showAdminDiv: false, showRecordDiv: false, showSideDiv: false}); -%>
 
-            <div class="signup-form" dir="rtl">
-                <form action="/register" method="post">
-                    <h1>טופס הרשמה</h1>
-                    <p>בבקשה תמלא/י את המידע הבא כדי ליצור משתמש באתר</p>
+    <div class="register-form">
+        <form  action="/register" method="post">
+            <h1> הרשמה</h1>
+            <input type="username" name="username" placeholder="שם משתמש">
+            <input type="password" name="password" placeholder="סיסמה">
+            <input type="address" name="address" placeholder="כתובת">
+            <input type="number" name="phonenumber" placeholder="טלפון">
+            <input type="submit" value="להרשמה">
+        </form>
+        יש לך כבר משתמש באתר? <a href="/login">התחבר/י</a>
 
-                    <input type="username" name="username" placeholder="שם משתמש">
-                    <input type="password" name="password" placeholder="סיסמה">
-                    <input type="address" name="address" placeholder="כתובת">
-                    <input type="number" name="phonenumber" placeholder="טלפון">
-                    <input type="submit" class="btn btn-light" style="border: 2px solid black;margin-top:10px"
-                        value="להרשמה">
-                </form>
-            </div>
+    </div>
 
-            יש לך כבר משתמש באתר? <a href="/login">התחבר/י</a>
-
-            <div id="footer"></div>
+    <%- include("./footer"); -%>
 
 </body>
 

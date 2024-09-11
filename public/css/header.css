@@ -8,10 +8,11 @@ header{
     justify-content: space-between;
     align-items: center;
     direction: rtl;
-    margin-bottom: 20px;
     
 }
-
+main{
+    margin-top: 20px;
+}
 #left-nav{
     display: flex;
     flex-direction: row;

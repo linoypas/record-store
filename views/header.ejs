@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="../public/css/header.css" type="text/css">
 <script src="../public/scripts/header.js"></script>
 <header>
+  
   <nav id="options-nav">
       <image id="logo" src="../public/images/logo.jpg"></image>
       <div class="dropdown">
@@ -12,6 +13,8 @@
             <a href="#">סניפים</a>
           </div>
         </div> 
+        <% if (showRecordDiv) { %>
+
         <div class="dropdown">
           <button class="dropbtn">תקליטים </button>
           <div class="dropdown-content">
@@ -19,6 +22,10 @@
             <a href="/products/new" >תקליטים חדשים</a>
           </div>
         </div> 
+        <% } %>
+
+        <% if (showAdminDiv) { %>
+
         <div class="dropdown">
           <button class="dropbtn">פעולות מנהל</button>
           <div class="dropdown-content">
@@ -29,10 +36,16 @@
               <a href="#">פרסם בפייסבוק</a>
             </div>
         </div>
+        <% } %>
 
   </nav>
+
+  <% if (showSideDiv) { %>
   <nav id="left-nav">
     <a class="btn" href="/login">התחברות</a>
     <a class="btn">עגלת קניות</a>
   </nav>
+  <% } %>
+  <a class="btn" href="/"><img id="logo" src="../public/images/house-logo.jpg"></a>
+
 </header>
