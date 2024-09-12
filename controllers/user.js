@@ -7,7 +7,6 @@ async function listUsers(req, res) {
     }
     res.json(users);
 }
-
 async function getUser(req,res){
     const user = await userService.getUser(req.params.id);
     if(!user) {

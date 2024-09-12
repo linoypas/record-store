@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <%- include("./header",{showAdminDiv: false, showRecordDiv: false, showSideDiv: false}); -%>
+    <%- include("./header",{showRecordDiv: false}); -%>
 
     <div class="info">
         <div id="title">
-            <p>- Welcome to the BEST Record Store In The World -</p>
+            <p>Welcome <%= username %>,</p>
+            <p>to The BEST Records Store</p>
         </div>
 
         <div class="login">
-            <a class="btn-login" href="/login">login</a>
-            <a class="btn-login" href="/products"> as a guest</a>
+            <a class="btn-login" href="/products"> shop</a>
         </div>
     </div>
     <%- include("./footer"); -%>

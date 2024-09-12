@@ -27,7 +27,9 @@ margin-bottom: 0px;
 }
 #title{
     display: flex;
+    direction: ltr;
     font-weight: bold;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 20px;

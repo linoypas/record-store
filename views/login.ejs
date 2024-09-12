@@ -7,16 +7,15 @@
     </head>
 
 <body>
-    <%- include("./header",{showAdminDiv: false, showRecordDiv: false, showSideDiv: false}); -%>
-
-    <div class="signin-form">
+    <%- include("./header",{showRecordDiv: false}); -%>
+        <div class="signin-form">
         <form action="/login" method="post">
             <h1>התחברות</h1>
             <input class="form" type="username" name="username" placeholder="Username"><br>
             <input class="form" type="password" name="password" placeholder="Password"><br>
             <input type="submit" value="כניסה">
         </form>
-        <a href="/register">אם עדיין אין לך משתמש באתר</a>
+        <a href="/register">אם עדיין אין לך משתמש באתר?</a>
     </div>
     <%- include("./footer"); -%>
 </body>

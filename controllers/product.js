@@ -32,11 +32,14 @@ async function getAllProducts(req, res) {
 async function showProducts(req, res) {
     const products = await productService.getProducts(checkParams(req));
     const genres = await productService.getListOfGenres();
+    const username = req.session.username || 'Guest';
+    const isAdmin = req.session.isAdmin || false;
+
     // const username = req.session.username || 'guest';
     if(!products || !genres){
         return res.status(404).json({errors: ['not found']})
     }
-    res.render('../views/products', {products:products, genres:genres});
+    res.render('../views/products', {products:products, genres:genres, username,isAdmin});
 }
 
 
@@ -50,18 +53,22 @@ async function getProductById(req,res){
 
 async function showProductById(req,res){
     const product = await productService.getProductById(req.query.id);
+    const username = req.session.username || 'Guest';
+    const isAdmin = req.session.isAdmin || false;
     if(!product){
         return res.status(404).json({errors: ['not found']})
     }
-    await res.render('../views/product', {product});
+    await res.render('../views/product', {product,username,isAdmin});
 }
 
 async function addProductPage(req, res) {
     const genres = await productService.getListOfGenres();
+    const username = req.session.username || 'Guest';
+    const permission = req.session.isAdmin|| false;
     if(!genres){
         return res.status(404).json({errors: ['not found']})
     }
-    res.render('../views/addProduct.ejs', {genres:genres});
+    res.render('../views/addProduct.ejs', {genres:genres,username,isAdmin});
 }
 
 async function createProduct(req,res) {

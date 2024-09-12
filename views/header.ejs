@@ -24,8 +24,7 @@
         </div> 
         <% } %>
 
-        <% if (showAdminDiv) { %>
-
+        <% if (isAdmin) { %>
         <div class="dropdown">
           <button class="dropbtn">פעולות מנהל</button>
           <div class="dropdown-content">
@@ -40,12 +39,15 @@
 
   </nav>
 
-  <% if (showSideDiv) { %>
   <nav id="left-nav">
-    <a class="btn" href="/login">התחברות</a>
-    <a class="btn">עגלת קניות</a>
+    <% if (username == 'Guest'){ %>
+      <a class="btn" href="/login">התחברות</a>
+    <% } %>
+    <% if (username != 'Guest'){ %>
+      <a class="btn" href="/logout">התנתקות</a>
+      <a class="btn">עגלת קניות</a>
+    <% } %>
+    <a class="btn" href="/"><img id="logo" src="../public/images/house-logo.jpg"></a>
   </nav>
-  <% } %>
-  <a class="btn" href="/"><img id="logo" src="../public/images/house-logo.jpg"></a>
 
 </header>

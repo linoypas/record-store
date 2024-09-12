@@ -1,7 +1,7 @@
 function gethomepage(req, res) {
-    // try {const username = req.session.username ;}
-    // catch{const username = 'guest';}    
-    res.render('../views/homePage',{});
+    const username = req.session.username || 'Guest';
+    const isAdmin = req.session.isAdmin || false;
+    res.render('../views/homePage',{username,isAdmin});
 }
 
 module.exports = {

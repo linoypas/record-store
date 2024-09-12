@@ -14,6 +14,13 @@ app.set("view engine", "ejs");
 app.use(express.json())
 app.use('/public', express.static('public'));
 
+app.use(session({
+    secret: 'your-secret-key', // Replace with your secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -22,14 +29,6 @@ app.use('/', require('./routes/product'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
 app.use('/', require('./routes/users'));
-
-app.use(session({
-secret: 'your-secret-key', // Use a strong secret key in production
-resave: false,
-saveUninitialized: true
-}));
-
-app.use(express.urlencoded({ extended: true }));
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)
