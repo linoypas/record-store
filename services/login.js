@@ -5,7 +5,7 @@ const alert = require("alert");
 
 async function login(username, password) {
     if(!username|| !password){
-        //alert("Please insert username and password")
+        alert("Please insert username and password")
         console.log("Please insert username and password")
         return null
     }
@@ -14,7 +14,7 @@ async function login(username, password) {
         const isValid = await bcrypt.compare(password, user.password)
 
         if (!isValid) {
-          //alert("Incorrect user or password")
+          alert("Incorrect user or password")
           console.log("Incorrect user or password")
             return null
         }
