@@ -17,3 +17,8 @@ function updateProducts(res){
         document.getElementById('products').innerHTML +=product;
     }
 }
+
+$('#logo').click(function(){
+    console.log("hi")
+    window.location.href = "/";
+});

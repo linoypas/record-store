@@ -1,8 +1,8 @@
-const product = require('../models/product');
+const Product = require('../models/product');
 
 async function sortbyDefault(queryParams) {
     try {
-        const returnedProducts = await product.find(queryParams);
+        const returnedProducts = await Product.find(queryParams);
         if(!returnedProducts) {
           return null;
         }
@@ -15,7 +15,7 @@ async function sortbyDefault(queryParams) {
 
 async function sortByYear(queryParams) {
     try {
-        const returnedProducts = await product.find(queryParams).sort([['year', -1]]);
+        const returnedProducts = await Product.find(queryParams).sort([['year', -1]]);
         if(!returnedProducts) {
           return null;
         }
@@ -28,7 +28,7 @@ async function sortByYear(queryParams) {
 
 async function sortByPriceLowToHigh(queryParams) {
     try {
-        const returnedProducts = await product.find(queryParams).sort([['price', 1]]);
+        const returnedProducts = await Product.find(queryParams).sort([['price', 1]]);
         if(!returnedProducts) {
           return null;
         }
@@ -41,7 +41,7 @@ async function sortByPriceLowToHigh(queryParams) {
 
 async function sortByPriceHighToLow(queryParams) {
     try {
-        const returnedProducts = await product.find(queryParams).sort([['price', -1]]);
+        const returnedProducts = await Product.find(queryParams).sort([['price', -1]]);
         if(!returnedProducts) {
           return null;
         }

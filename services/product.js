@@ -1,7 +1,6 @@
 const sortProducts = require('./sortProducts')
 const Product = require('../models/product');
 const mongoose = require("mongoose");
-const product = require('../models/product');
 
 async function getProducts(params) {
     let queryParams = {};
@@ -55,7 +54,8 @@ async function getListOfGenres() {
 
 async function getMaxPriceProduct(){
     try{
-        const maxPriceProduct = await product.find({}).sort({price : -1}).limit(1);
+        const maxPriceProduct = await Product.find({}).sort({price : -1}).limit(1);
+        console.log(maxPriceProduct);
         return maxPriceProduct[0]['price'];
     } catch{
         return false;

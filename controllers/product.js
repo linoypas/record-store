@@ -41,6 +41,7 @@ async function showProducts(req, res) {
     const products = await productService.getProducts(checkParams(req));
     const genres = await productService.getListOfGenres();
     const maxPriceProduct = await productService.getMaxPriceProduct();
+    console.log(maxPriceProduct);
     if(!products || !genres){
         return res.status(404).json({errors: ['not found']})
     }
