@@ -22,7 +22,10 @@
             </section>
 
         </div>
-        <img id="image" src="../public/images/record-logo.jpg"></img>
+        <div id="image-wrapper">
+            <img id="image" src="data:<%=product.image.contentType%>;base64,<%=product.image.data%>" >
+
+        </div>
     </main>
     <%- include("./footer"); -%>
 </body>

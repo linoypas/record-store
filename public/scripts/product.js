@@ -49,6 +49,8 @@ function showForm(res){
     }
     $('#description').html(res['description'])
     $('#form-container').attr('product-id', res['_id']);
+    $('image').attr('data', res['data']);
+    $('image').attr('contentType', res['contentType']);
     if($("#form-inStock").val() == 'true')
         $("#form-inStock").prop("checked", true);
     $('#form-popup').css({"display": "block"});
@@ -82,9 +84,6 @@ $("#form-container").validate({
         description: {
             required: true,
         },
-        image: {
-            required: true
-        }
     },
     messages: {
         name:{
@@ -105,20 +104,18 @@ $("#form-container").validate({
         description: {
             required: "Description is required"
         },
-        image: {
-            required: "Image is required"
-        }
     },
     submitHandler: function(a, e) {
         e.preventDefault();
-        const formData = $("#form-container").serialize();
-        console.log(formData);
+        const formData = new FormData(a);
+        console.log(...formData);
         const URL = $("#form-container").attr("action")+ $("#form-container").attr("product-id");
-        console.log(URL)
         $.ajax({
           url: URL,
           type: "PUT",
           data: formData,
+          processData: false,
+          contentType: false,
         })
         .done(function() {
             window.location.href = '/products/all'

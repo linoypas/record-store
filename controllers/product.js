@@ -33,7 +33,23 @@ async function getAllProducts(req, res) {
     if(!products){
         return res.status(404).json({errors: ['not found']})
     }
-    res.json(products);
+
+    
+    const productsList = products.map(product => ({
+        _id: product._id,
+        genre: product.genre,
+        year: product.year,
+        artist: product.artist,
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        inStock: product.inStock,
+        imageData: product.image.data.toString('base64'), 
+        imageContentType: product.image.contentType,
+
+      }));
+
+      res.json(productsList);
 }
 
 async function showProducts(req, res) {
@@ -41,11 +57,26 @@ async function showProducts(req, res) {
     const products = await productService.getProducts(checkParams(req));
     const genres = await productService.getListOfGenres();
     const maxPriceProduct = await productService.getMaxPriceProduct();
-    console.log(maxPriceProduct);
     if(!products || !genres){
         return res.status(404).json({errors: ['not found']})
     }
-    res.render('../views/products', {products:products, genres:genres, maxPriceProduct:maxPriceProduct});
+
+    const productsList = products.map(product => ({
+        _id: product._id,
+        genre: product.genre,
+        year: product.year,
+        artist: product.artist,
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        inStock: product.inStock,
+        image: {
+          data: product.image.data.toString('base64'), 
+          contentType: product.image.contentType
+        }
+      }));
+
+    res.render('../views/products', {products:productsList, genres:genres, maxPriceProduct:maxPriceProduct});
 }
 
 
@@ -53,8 +84,22 @@ async function getProductById(req,res){
     const product = await productService.getProductById(req.params.id);
     if(!product) {
         return res.status(404).json({errors: ['not found']})
-    }
-    res.json(product);
+    } 
+    
+    const productData  = {
+        _id: product._id,
+        genre: product.genre,
+        year: product.year,
+        artist: product.artist,
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        inStock: product.inStock,
+        imageData: product.image.data.toString('base64'), 
+        imageContentType: product.image.contentType
+    };
+
+    res.json(productData);
 }
 
 async function showProductById(req,res){
@@ -62,7 +107,23 @@ async function showProductById(req,res){
     if(!product){
         return res.status(404).json({errors: ['not found']})
     }
-    await res.render('../views/product', {product});
+
+    const productData  = {
+        _id: product._id,
+        genre: product.genre,
+        year: product.year,
+        artist: product.artist,
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        inStock: product.inStock,
+        image: {
+          data: product.image.data.toString('base64'), 
+          contentType: product.image.contentType
+        }
+    };
+    
+    await res.render('../views/product', {product: productData});
 }
 
 async function addProductPage(req, res) {
@@ -75,12 +136,13 @@ async function addProductPage(req, res) {
 
 async function createProduct(req,res) {
     if( req.body.genre == null || req.body.year == null || req.body.artist == null || req.body.artist == null || req.body.name == null
-        || req.body.price == null || req.body.description == null || req.body.image == null) {
+        || req.body.price == null || req.body.description == null || req.file == null) {
             res.status(400).send("חלק מהשדות ריקים, נסה שוב")
 
         } else{
             if(req.body.inStock == null)
                 req.body.inStock = false
+
             const product = await productService.createProduct(
                 req.body.genre,
                 req.body.year,
@@ -88,7 +150,7 @@ async function createProduct(req,res) {
                 req.body.name,
                 req.body.price,
                 req.body.description, 
-                req.body.image,
+                req.file,
                 req.body.inStock
             );
             
@@ -107,6 +169,14 @@ async function createProduct(req,res) {
 async function updateProduct(req,res) {
     if(req.body.inStock == null)
         req.body.inStock = false
+
+    let file;
+    if(req.file == null){
+        const getProduct = await productService.getProductById(req.params.id);
+        file = {buffer: getProduct.image.data, mimetype:  getProduct.image.contentType};
+    }else{
+        file = req.file;
+    }
     const product = await productService.updateProduct(
         req.params.id,
         req.body.catagory,
@@ -115,7 +185,7 @@ async function updateProduct(req,res) {
         req.body.name,
         req.body.price,
         req.body.description,
-        req.body.image,
+        file,
         req.body.inStock);
 
     if(!product){

@@ -49,14 +49,14 @@ $("#form-container").validate({
     },
     submitHandler: function(a, e) {
         e.preventDefault();
-        const formData = $("#form-container").serialize();
-        console.log(formData);
+        const formData = new FormData(a);
         const URL = $("#form-container").attr("action");
         $.ajax({
           url: URL,
           type: "POST",
           data: formData,
           processData: false,
+          contentType: false,
         })
         .done(function(data, textStatus, jqXHR) {
             alert(data);

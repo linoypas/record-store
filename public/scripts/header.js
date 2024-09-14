@@ -18,7 +18,7 @@ function updateProducts(res){
     }
 }
 
-$('#logo').click(function(){
-    console.log("hi")
+
+$(document).on("click", "#logo", function() {
     window.location.href = "/";
-});
+  });

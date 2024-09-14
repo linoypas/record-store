@@ -2,6 +2,7 @@ const sortProducts = require('./sortProducts')
 const Product = require('../models/product');
 const mongoose = require("mongoose");
 
+
 async function getProducts(params) {
     let queryParams = {};
     if(params.collection == "new"){
@@ -55,7 +56,6 @@ async function getListOfGenres() {
 async function getMaxPriceProduct(){
     try{
         const maxPriceProduct = await Product.find({}).sort({price : -1}).limit(1);
-        console.log(maxPriceProduct);
         return maxPriceProduct[0]['price'];
     } catch{
         return false;
@@ -63,7 +63,6 @@ async function getMaxPriceProduct(){
 };
 
 async function createProduct(genre, year, artist, name, price, description, image, inStock) {
-    console.log(inStock);
     const newProduct = new Product({
         genre: genre,
         year: year,
@@ -71,7 +70,10 @@ async function createProduct(genre, year, artist, name, price, description, imag
         name: name,
         price: price,
         description: description,
-        image: image,
+        image: {
+            data: image.buffer,
+            contentType: image.mimetype
+          },
         inStock: inStock
     });
 
@@ -89,13 +91,23 @@ async function updateProduct(id, catagory, year, artist, name, price, descriptio
     if(!updatedProduct)
         return null;
 
+    console.log(id);
+    console.log(catagory)
+    console.log(year)
+    console.log(artist)
+    console.log(name)
+    console.log(price)
+    console.log(description)
+    console.log(image)
+
     updatedProduct.catagory = catagory;
     updatedProduct.year = year;
     updatedProduct.artist = artist;
     updatedProduct.name = name;
     updatedProduct.price = price;
     updatedProduct.description = description;
-    updatedProduct.image = image;
+    updatedProduct.image.data = image.buffer;
+    updatedProduct.image.contentType = image.mimetype;
     updatedProduct.inStock = inStock;
 
     try{

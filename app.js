@@ -19,6 +19,7 @@ app.use('/', require('./routes/homePage'));
 app.use('/', require('./routes/product'));
 app.use('/', require('./routes/sortAndFilterProducts'));
 app.use('/', require('./routes/graphs'))
+app.use('/', require('./routes/initDb'))
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)
