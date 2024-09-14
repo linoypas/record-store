@@ -32,6 +32,17 @@ async function updateProductCollection(req,res){
         
         imagePath = path.join(__dirname, '../database/images/scorpion-drake.jpg');
         await productService.createProduct("Hip Hop",2018,"Drake","Scorpion",130,"תכניסו כאן תיאור",{buffer: fs.readFileSync(imagePath),mimetype: path.extname(imagePath).slice(1)},false);
+        
+        imagePath = path.join(__dirname, '../database/images/Train_–_Greatest_Hits.png');
+        await productService.createProduct("Rock",2018,"Train","Greatest Hits",130,"תכניסו כאן תיאור",{buffer: fs.readFileSync(imagePath),mimetype: path.extname(imagePath).slice(1)},false);
+        
+        imagePath = path.join(__dirname, '../database/images/one-more-time-blink182.jpg');
+        await productService.createProduct("Rock",2023,"Blink 182","One More Time... part 2",130,"תכניסו כאן תיאור",{buffer: fs.readFileSync(imagePath),mimetype: path.extname(imagePath).slice(1)},false);
+        
+        imagePath = path.join(__dirname, '../database/images/shalom-hanoch-mehakim-lamechiah.jpg');
+        await productService.createProduct("ישראליים",1985 ,"שלום חנוך","מחכים למשיח",135,"תכניסו כאן תיאור",{buffer: fs.readFileSync(imagePath),mimetype: path.extname(imagePath).slice(1)},false);
+        
+        
         res.status(200).render('../views/homePage')
     } catch (error) {
     res.status(500).json({ message: error.message });
