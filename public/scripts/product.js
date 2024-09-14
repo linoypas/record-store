@@ -62,6 +62,10 @@ $("#exit-update-form").on('click', function(event){
     $("#overlay").remove();
 });
 
+$("#image").on('change', function(event){
+    $(this).css({"color": "black"});
+});
+
 
 $("#form-container").validate({ 
     ignore: '',
@@ -108,7 +112,6 @@ $("#form-container").validate({
     submitHandler: function(a, e) {
         e.preventDefault();
         const formData = new FormData(a);
-        console.log(...formData);
         const URL = $("#form-container").attr("action")+ $("#form-container").attr("product-id");
         $.ajax({
           url: URL,
@@ -121,7 +124,6 @@ $("#form-container").validate({
             window.location.href = '/products/all'
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log('fail')
             alert(jqXHR.responseText);
         })
         .always(function(data, textStatus, jqXHR) {

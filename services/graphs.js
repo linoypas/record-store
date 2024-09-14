@@ -16,22 +16,14 @@ async function genresGraph(){
 
 
 async function getNumOfProductsInGenre(genre) {
-    try{
-        numberOfProducts = await Product.find({genre: genre});
-        
-        return numberOfProducts.length;
-    } catch{
-        return false;
-    } 
+    numberOfProducts = await Product.find({genre: genre});
+    return numberOfProducts.length;
+
 }
 
 async function pricesGraph(){
-    try{
-        allProductsPrices = await Product.find({}).select('price -_id');
-        return allProductsPrices;
-    } catch{
-        return false;
-    } 
+    allProductsPrices = await Product.find({}).select('price -_id');
+    return allProductsPrices;
 }
 
 module.exports = {

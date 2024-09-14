@@ -8,7 +8,7 @@ $(document).ready(function() {
         drawPieChart(res)
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert(jqXHR.responseText);
+        console.log(jqXHR.responseText);
     })
     
 });
@@ -20,9 +20,8 @@ $(document).ready(function() {
         url: '/statistics/pricesGraph',
     }).done(function(res){
         drawHistogram(res)
-
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert(jqXHR.responseText);
+        console.log(jqXHR.responseText);
     })
     
 });

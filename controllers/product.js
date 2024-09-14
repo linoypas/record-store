@@ -28,110 +28,110 @@ function checkParams(req){
 }
 
 async function getAllProducts(req, res) {
-    console.log(checkParams(req));
-    const products = await productService.getProducts(checkParams(req));
-    if(!products){
-        return res.status(404).json({errors: ['not found']})
-    }
 
+    try {
+        const products = await productService.getProducts(checkParams(req));
+
+        const productsList = products.map(product => ({
+            _id: product._id,
+            genre: product.genre,
+            year: product.year,
+            artist: product.artist,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            inStock: product.inStock,
+            imageData: product.image.data.toString('base64'), 
+            imageContentType: product.image.contentType,
     
-    const productsList = products.map(product => ({
-        _id: product._id,
-        genre: product.genre,
-        year: product.year,
-        artist: product.artist,
-        name: product.name,
-        price: product.price,
-        description: product.description,
-        inStock: product.inStock,
-        imageData: product.image.data.toString('base64'), 
-        imageContentType: product.image.contentType,
-
-      }));
-
-      res.json(productsList);
+          }));
+        res.json(productsList);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
 }
 
 async function showProducts(req, res) {
-    console.log(checkParams(req));
-    const products = await productService.getProducts(checkParams(req));
-    const genres = await productService.getListOfGenres();
-    const maxPriceProduct = await productService.getMaxPriceProduct();
-    if(!products || !genres){
-        return res.status(404).json({errors: ['not found']})
-    }
-
-    const productsList = products.map(product => ({
-        _id: product._id,
-        genre: product.genre,
-        year: product.year,
-        artist: product.artist,
-        name: product.name,
-        price: product.price,
-        description: product.description,
-        inStock: product.inStock,
-        image: {
-          data: product.image.data.toString('base64'), 
-          contentType: product.image.contentType
-        }
-      }));
-
-    res.render('../views/products', {products:productsList, genres:genres, maxPriceProduct:maxPriceProduct});
+    try {
+        const products = await productService.getProducts(checkParams(req));
+        const genres = await productService.getListOfGenres();
+        const maxPriceProduct = await productService.getMaxPriceProduct();
+        const productsList = products.map(product => ({
+            _id: product._id,
+            genre: product.genre,
+            year: product.year,
+            artist: product.artist,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            inStock: product.inStock,
+            image: {
+              data: product.image.data.toString('base64'), 
+              contentType: product.image.contentType
+            }
+          }));
+          res.render('../views/products', {products:productsList, genres:genres, maxPriceProduct:maxPriceProduct});
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
 }
 
 
 async function getProductById(req,res){
-    const product = await productService.getProductById(req.params.id);
-    if(!product) {
-        return res.status(404).json({errors: ['not found']})
-    } 
-    
-    const productData  = {
-        _id: product._id,
-        genre: product.genre,
-        year: product.year,
-        artist: product.artist,
-        name: product.name,
-        price: product.price,
-        description: product.description,
-        inStock: product.inStock,
-        imageData: product.image.data.toString('base64'), 
-        imageContentType: product.image.contentType
-    };
 
-    res.json(productData);
+    try {
+        const product = await productService.getProductById(req.params.id);
+        const productData  = {
+            _id: product._id,
+            genre: product.genre,
+            year: product.year,
+            artist: product.artist,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            inStock: product.inStock,
+            imageData: product.image.data.toString('base64'), 
+            imageContentType: product.image.contentType
+        };
+    
+        res.json(productData);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
 }
 
 async function showProductById(req,res){
-    const product = await productService.getProductById(req.query.id);
-    if(!product){
-        return res.status(404).json({errors: ['not found']})
-    }
+    try {
+        const product = await productService.getProductById(req.query.id);
 
-    const productData  = {
-        _id: product._id,
-        genre: product.genre,
-        year: product.year,
-        artist: product.artist,
-        name: product.name,
-        price: product.price,
-        description: product.description,
-        inStock: product.inStock,
-        image: {
-          data: product.image.data.toString('base64'), 
-          contentType: product.image.contentType
-        }
-    };
-    
-    await res.render('../views/product', {product: productData});
+        const productData  = {
+            _id: product._id,
+            genre: product.genre,
+            year: product.year,
+            artist: product.artist,
+            name: product.name,
+            price: product.price,
+            description: product.description,
+            inStock: product.inStock,
+            image: {
+              data: product.image.data.toString('base64'), 
+              contentType: product.image.contentType
+            }
+        }; 
+        res.render('../views/product', {product: productData});
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+
 }
 
 async function addProductPage(req, res) {
-    const genres = await productService.getListOfGenres();
-    if(!genres){
-        return res.status(404).json({errors: ['not found']})
+    try {
+        const genres = await productService.getListOfGenres();
+        res.render('../views/addProduct.ejs', {genres:genres});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-    res.render('../views/addProduct.ejs', {genres:genres});
 }
 
 async function createProduct(req,res) {
@@ -142,28 +142,26 @@ async function createProduct(req,res) {
         } else{
             if(req.body.inStock == null)
                 req.body.inStock = false
-
-            const product = await productService.createProduct(
-                req.body.genre,
-                req.body.year,
-                req.body.artist,
-                req.body.name,
-                req.body.price,
-                req.body.description, 
-                req.file,
-                req.body.inStock
-            );
-            
-            if(product){
+            try {
+                const product = await productService.createProduct(
+                    req.body.genre,
+                    req.body.year,
+                    req.body.artist,
+                    req.body.name,
+                    req.body.price,
+                    req.body.description, 
+                    req.file,
+                    req.body.inStock
+                );
                 console.log('done: create product')
                 res.status(200).send('המוצר התווסף בהצלחה');
-            }  
-            else {
+
+            } catch(err){
                 console.log('fail: create product')
                 res.status(500).send("חלה שגיאה בעת יצירת המוצר");
-            }      
-        }
+            }
 
+        }
 }
 
 async function updateProduct(req,res) {
@@ -171,41 +169,40 @@ async function updateProduct(req,res) {
         req.body.inStock = false
 
     let file;
-    if(req.file == null){
-        const getProduct = await productService.getProductById(req.params.id);
-        file = {buffer: getProduct.image.data, mimetype:  getProduct.image.contentType};
-    }else{
-        file = req.file;
-    }
-    const product = await productService.updateProduct(
-        req.params.id,
-        req.body.catagory,
-        req.body.year,
-        req.body.artist,
-        req.body.name,
-        req.body.price,
-        req.body.description,
-        file,
-        req.body.inStock);
+    try{
+        if(req.file == null){
+            const getProduct = await productService.getProductById(req.params.id);
+            file = {buffer: getProduct.image.data, mimetype:  getProduct.image.contentType};
+        }else{
+            file = req.file;
+        }
+        const product = await productService.updateProduct(
+            req.params.id,
+            req.body.catagory,
+            req.body.year,
+            req.body.artist,
+            req.body.name,
+            req.body.price,
+            req.body.description,
+            file,
+            req.body.inStock);
+        res.json(product);
 
-    if(!product){
-        console.log('fail: create product')
-        res.status(500).send("חלה שגיאה בעת עדכון המוצר");
-    }
-    console.log('done: update product');
-    res.json(product);
+        } catch(err){
+            console.log('fail: create product')
+            res.status(500).send("חלה שגיאה בעת עדכון המוצר");
+
+        }
 }
 
 async function deleteProduct(req,res){
-    const product = await productService.deleteProduct(req.params.id);
-    if(product){
-        console.log('done: delete product')
+    try{
+        const product = await productService.deleteProduct(req.params.id);
         res.status(200).send('המוצר נמחק בהצלחה');
-    } else{
-        console.log('fail: delete product')
+
+    } catch(err){
         res.status(500).send("חלה שגיאה בעת מחיקת המוצר");
-    }
-       
+    }       
 }
 
 module.exports = {

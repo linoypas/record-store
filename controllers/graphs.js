@@ -5,24 +5,23 @@ async function showGraphsPage(req, res) {
 }
 
 async function getGenresGraph(req, res) {
-    genresData = await productService.genresGraph();
-    if(genresData){
+    try {
+        const genresData = await productService.genresGraph();
         res.status(200).send(genresData);
-    } else{
-        res.status(400).send("fail");
-    }
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
 }
 
 async function getPricesGraph(req, res) {
-    pricesData = await productService.pricesGraph();
-    if(pricesData){
+    try {
+        const pricesData = await productService.pricesGraph();
         res.status(200).send(pricesData);
-    } else{
-        res.status(400).send("fail");
-    } 
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+
 }
-
-
 
 module.exports = {
     showGraphsPage,
