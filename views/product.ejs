@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <link rel="stylesheet" href="../public/css/product.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
 <body>
     <%- include("./header"); -%>
     <main>
@@ -20,7 +22,10 @@
             </section>
 
         </div>
-        <img id="image" src="../public/images/record-logo.jpg"></img>
+        <div id="image-wrapper">
+            <img id="image" src="data:<%=product.image.contentType%>;base64,<%=product.image.data%>" >
+
+        </div>
     </main>
     <%- include("./footer"); -%>
 </body>

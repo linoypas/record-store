@@ -72,6 +72,8 @@ function showProducts(){
         },
     }).done(function(res){
         updateProducts(res)
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR.responseText);
     });
 }
 

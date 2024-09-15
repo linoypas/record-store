@@ -13,7 +13,7 @@
         <div id="filter-nav">
             <div id="filter-title">
                 <p>פילטר</p>
-                <a href="/products">נקה הכל</a>
+                <a href="">נקה הכל</a>
             </div><hr>
             <label for="genre">זאנר</label><br>
             <select name="genre" id="genre" onchange="changeGenre(this)">
@@ -40,14 +40,15 @@
             </div>
             <div id="products">
                 <%for (let i = 0; i < products.length; i++) {%>
-                    <div class="product" id=<%=products[i].id%>>
+                    <div class="product" id=<%=products[i]._id%>>
     
                         <div class="img-wrapper">
                             <div id="update-product-container">
-                                <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i].id%>></button>
-                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i].id%>></button>
+                                <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i]._id%>></button>
+                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i]._id%>></button>
                             </div>
-                            <img class="image" src="../public/images/record-logo.jpg"></img>
+
+                            <img class="image" src="data:<%=products[i].image.contentType%>;base64,<%=products[i].image.data%>" >
                         </div>
                             <p class="artist"><%=products[i].artist%></p>
                             <p class="name"><%=products[i].name%></p>
@@ -62,7 +63,7 @@
                                     <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
                                     <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
                                 </div>
-                                <img class="image" src="../public/images/record-logo.jpg"></img>
+                                <img class="image" src="data:{imageContentType};base64,{imageData}">
                             </div>
                                 <p class="artist">{artist}</p>
                                 <p class="name">{name}</p>
@@ -103,7 +104,7 @@
             <textarea type="text" id="description" name="description"></textarea><br>
 
             <label for="image"><b>תמונה</b></label><br>
-            <input type="text" name="image" id="image"><br>
+            <input type="file" accept=".png,.jpg,.jpeg,.webp" id="image" name="image" style="color:transparent;"/>
 
             <div id="in-stock-checkbox">
                 <input type="checkbox" id="form-inStock" name="inStock">

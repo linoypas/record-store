@@ -3,7 +3,7 @@ html body{
     width: 100%;
     margin: 0;
     padding: 0;
-    direction: rtl;
+    direction: ltr;
     height: 100%
   }
   
@@ -21,8 +21,14 @@ html body{
     min-height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content:space-around;
+    align-items: center;
+    flex-wrap: wrap;
 
+  }
+
+  .graphContainer p{
+    direction: rtl;
+    font-size: 20px;
   }

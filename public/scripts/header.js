@@ -3,6 +3,8 @@ function getRecords(collection){
         url: `/products/${collection}`,
     }).done(function(res){
         updateProducts(res)
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.log(jqXHR.responseText);
     });
 }
 
@@ -17,3 +19,8 @@ function updateProducts(res){
         document.getElementById('products').innerHTML +=product;
     }
 }
+
+
+$(document).on("click", "#logo", function() {
+    window.location.href = "/";
+  });
