@@ -10,57 +10,71 @@
 <body>
     <%- include("./header"); -%>
     <main>
-        <div id="select">
-            <label for="orderby">פילטר</label>
-            <select name="orderby" id="sort" onchange="changeSortBy(this)">סינון לפי:
-              <option value="default">מיין לפי</option>
-              <option value="date">חדש ביותר</option>
-              <option value="price-low-to-high">מחיר, מהנמוך לגבוה</option>
-              <option value="price-high-to-low">מחיר, מהגבוה לנמוך</option>
-            </select>
-                <select name="genre" id="genre" onchange="changeGenre(this)">
-                    <option value="all">כל הז'אנרים</option>
-                    <%for (let i = 0; i < genres.length; i++) {%>
-                    <option value="<%=genres[i]%>"><%=genres[i]%></option>
-                    <%}%>
-                </select>
+        <div id="filter-nav">
+            <div id="filter-title">
+                <p>פילטר</p>
+                <a href="">נקה הכל</a>
+            </div><hr>
+            <label for="genre">זאנר</label><br>
+            <select name="genre" id="genre" onchange="changeGenre(this)">
+                <option value="all">כל הז'אנרים</option>
+                <%for (let i = 0; i < genres.length; i++) {%>
+                <option value="<%=genres[i]%>"><%=genres[i]%></option>
+                <%}%>
+            </select><br><hr>
+            <div id="rangeValue">מחיר מקסימלי:</div>
+            <input type="range" id="maxPriceRange" min="0" max=<%=maxPriceProduct%> value=<%=maxPriceProduct%>><br><hr>
+            <input type="checkbox" id="inStock" name="inStock" value="false"  onchange="changeShowOnlyinStock(this)">
+            <label for="inStock">הצג רק מוצרים במלאי</label><br>
         </div>
+        
+        <div id="content">
+            <div id="upper-nav">
+                <p>התקליטים שלנו</p>
+                <select name="orderby" id="sort" onchange="changeSortBy(this)">סינון לפי:
+                  <option value="default">מיין לפי</option>
+                  <option value="date">חדש ביותר</option>
+                  <option value="price-low-to-high">מחיר, מהנמוך לגבוה</option>
+                  <option value="price-high-to-low">מחיר, מהגבוה לנמוך</option>
+                </select>
+            </div>
+            <div id="products">
+                <%for (let i = 0; i < products.length; i++) {%>
+                    <div class="product" id=<%=products[i]._id%>>
     
-        <div id="products">
-            <%for (let i = 0; i < products.length; i++) {%>
-                <div class="product" id=<%=products[i].id%>>
-
-                    <div class="img-wrapper">
-                        <div id="update-product-container">
-                            <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i].id%>></button>
-                            <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i].id%>></button>
-                        </div>
-                        <img class="image" src="../public/images/record-logo.jpg"></img>
-                    </div>
-                        <p class="artist"><%=products[i].artist%></p>
-                        <p class="name"><%=products[i].name%></p>
-                    <p class="price"><%=products[i].price%>₪</p>
-                </div>     
-            <%}%>  
-            <script type="test/html" id="productTemplate">
-                    <div class="product" id={_id}>
-       
                         <div class="img-wrapper">
                             <div id="update-product-container">
-                                <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
-                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
+                                <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i]._id%>></button>
+                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i]._id%>></button>
                             </div>
-                            <img class="image" src="../public/images/record-logo.jpg"></img>
+
+                            <img class="image" src="data:<%=products[i].image.contentType%>;base64,<%=products[i].image.data%>" >
                         </div>
-                            <p class="artist">{artist}</p>
-                            <p class="name">{name}</p>
-                        <p class="price">{price}₪</p>
-                    </div> 
-            </script>  
-            </div>
+                            <p class="artist"><%=products[i].artist%></p>
+                            <p class="name"><%=products[i].name%></p>
+                        <p class="price"><%=products[i].price%>₪</p>
+                    </div>     
+                <%}%>  
+                <script type="test/html" id="productTemplate">
+                        <div class="product" id={_id}>
+           
+                            <div class="img-wrapper">
+                                <div id="update-product-container">
+                                    <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
+                                    <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
+                                </div>
+                                <img class="image" src="data:{imageContentType};base64,{imageData}">
+                            </div>
+                                <p class="artist">{artist}</p>
+                                <p class="name">{name}</p>
+                            <p class="price">{price}₪</p>
+                        </div> 
+                </script>  
+                </div>
+        </div>
+        
     </main>
     <div id="form-popup">
-        <!-- <script type="test/html" id="editProductTemplate"> -->
         <form id="form-container" product-id="" action="/product/">
             <div id="update-form-title">
                 <h1>עדכון מוצר</h1>
@@ -90,10 +104,17 @@
             <textarea type="text" id="description" name="description"></textarea><br>
 
             <label for="image"><b>תמונה</b></label><br>
-            <input type="text" name="image" id="image"><br>
+            <input type="file" accept=".png,.jpg,.jpeg,.webp" id="image" name="image" style="color:transparent;"/>
+
+            <div id="in-stock-checkbox">
+                <input type="checkbox" id="form-inStock" name="inStock">
+                <label for="inStock">המוצר במלאי</label>
+            </div>
+            
+
+
             <input type='submit' value='אישור' id="submit">
         </form>
-    <!-- </script> -->
     </div>
     <%- include("./footer"); -%>
 </body>

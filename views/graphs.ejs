@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<link rel="stylesheet" href="../public/css/graphs.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<body>
+    <%- include("./header"); -%>
+    <main>
+
+        <div class="graphContainer">
+            <p>כמות המוצרים לפי ז'אנרים</p>
+            <div id="pieChart"></div> 
+        </div>
+
+        <div class="graphContainer">
+            <p>התפלגות המוצרים לפי מחירים</p>
+            <div id="histogram"></div>
+        </div>
+        
+
+        
+    </main>
+    <%- include("./footer"); -%>
+</body>
+<script src="../public/scripts/graphs.js"></script>
+</html>

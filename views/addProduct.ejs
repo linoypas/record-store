@@ -37,9 +37,16 @@
                 <textarea type="text" id="description" name="description"></textarea><br>
 
                 <label for="image"><b>תמונה</b></label><br>
-                <input type="text" placeholder="url" name="image" id="image" ><br>
+                <input type="file" accept=".png,.jpg,.jpeg,.webp" id="image" name="image" />
+                
+                <div id="in-stock-checkbox">
+                    <input type="checkbox" id="inStock" name="inStock" value="true" checked>
+                    <label for="inStock">המוצר במלאי</label>
+                </div>
 
-                <input type='submit' value='אישור' id="submit">
+                <input type='submit' value='אישור' id="submit-button">
+
+            
             </form>
         </div>
         <%- include("./footer"); -%>
