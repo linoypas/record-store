@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const alert = require("alert");
 
 
+
 async function login(username, password) {
     if(!username|| !password){
         alert("Please insert username and password")
@@ -14,13 +15,13 @@ async function login(username, password) {
         const isValid = await bcrypt.compare(password, user.password)
 
         if (!isValid) {
-          alert("Incorrect user or password")
+          alert('Incorrect user or password')
           console.log("Incorrect user or password")
             return null
         }
     }
     else{
-       // alert("Incorrect user or password")
+        alert("Incorrect user or password")
         console.log("Incorrect user or password")
         return null
     }
@@ -30,8 +31,8 @@ async function login(username, password) {
 async function register(username, password, phonenumber, address, isAdmin) {
     const user = await User.findOne({ username: username });
     if (user) {
-     //   alert("Username already exists. Please try another username.")
-     console.log("Username already exists. Please try another username.")
+        alert("Username already exists. Please try another username.")
+        console.log("Username already exists. Please try another username.")
     }
     else{
         const newuser = new User({

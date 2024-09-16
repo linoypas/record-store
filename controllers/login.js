@@ -1,4 +1,5 @@
 const loginService = require("../services/login");
+const alert = require("alert");
 
 function loginForm(req,res){   
   if(req.session.username){
@@ -41,7 +42,7 @@ async function register(req, res) {
   const { username, password, phonenumber, address, isAdmin } = req.body
 
   if(!username || !password || !phonenumber || !address){
-    // alert("חלק מהשדות ריקים")
+    alert("some fields are empty")
     console.log("חלק מהשדות ריקים")
     res.redirect('/register')
   }

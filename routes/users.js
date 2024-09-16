@@ -4,8 +4,8 @@ const userController = require('../controllers/user');
 const router = expres.Router();
 
 router.get('/users',userController.listUsers);
-router.get('/user/:id', userController.getUser);
-router.put('/user/:id', userController.updateUser)
-router.post('/user/:id', userController.deleteUser)
+router.get('/user/:username', userController.getUser);
+router.put('/user/:username', userController.updateUser)
+router.post('/user/:username', userController.deleteUser)
 
 module.exports = router;

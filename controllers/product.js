@@ -64,7 +64,7 @@ async function showProductById(req,res){
 async function addProductPage(req, res) {
     const genres = await productService.getListOfGenres();
     const username = req.session.username || 'Guest';
-    const permission = req.session.isAdmin|| false;
+    const isAdmin = req.session.isAdmin || false;
     if(!genres){
         return res.status(404).json({errors: ['not found']})
     }

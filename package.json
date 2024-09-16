@@ -15,8 +15,8 @@
     "jquery-validation": "^1.21.0",
     "mongoose": "^8.5.4",
     "nodemon": "^3.1.4",
-    "bcrypt":"",
-    "alert":"",
-    "express-session":""
+    "bcrypt":"^5.1.1",
+    "alert": "^5.1.1",
+    "express-session": "^1.18.0"
   }
 }

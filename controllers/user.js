@@ -8,7 +8,7 @@ async function listUsers(req, res) {
     res.json(users);
 }
 async function getUser(req,res){
-    const user = await userService.getUser(req.params.id);
+    const user = await userService.getUser(req.params.username);
     if(!user) {
         return res.status(404).json({errors: ['not found']})
     }
