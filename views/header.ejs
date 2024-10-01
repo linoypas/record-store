@@ -3,8 +3,9 @@
 <link rel="stylesheet" href="../public/css/header.css" type="text/css">
 <script src="../public/scripts/header.js"></script>
 <header>
+  
   <nav id="options-nav">
-      <image id="logo" src="../public/images/logo.jpg"></image>
+      <a id="logo" href="/"><img id="logo" src="../public/images/logo.jpg"></a>
       <div class="dropdown">
           <button class="dropbtn">עלינו </button>
           <div class="dropdown-content">
@@ -12,6 +13,8 @@
             <a href="#">סניפים</a>
           </div>
         </div> 
+        <% if (showRecordDiv) { %>
+
         <div class="dropdown">
           <button class="dropbtn">תקליטים </button>
           <div class="dropdown-content">
@@ -19,7 +22,9 @@
             <a href="/products/new" >תקליטים חדשים</a>
           </div>
         </div> 
+        <% } %>
 
+        <% if (isAdmin) { %>
         <div class="dropdown">
           <button class="dropbtn">פעולות מנהל</button>
           <div class="dropdown-content">
@@ -30,9 +35,18 @@
               <a href="#">פרסם בפייסבוק</a>
             </div>
         </div>
+        <% } %>
+
   </nav>
+
   <nav id="left-nav">
-    <button class="header-btn">התחברות</button>
-    <button class="header-btn">עגלת קניות</button>
+    <% if (username == 'Guest'){ %>
+      <a class="btn" href="/login">התחברות</a>
+    <% } %>
+    <% if (username != 'Guest'){ %>
+      <a class="btn" href="/logout">התנתקות</a>
+      <a class="btn">עגלת קניות</a>
+    <% } %>
   </nav>
+
 </header>

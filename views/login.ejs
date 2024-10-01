@@ -1,102 +1,22 @@
 <!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <link rel="stylesheet" href="../public/css/products.css" type="text/css">
-    <link rel="stylesheet" href="../public/css/editProduct.css" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+<html lang="en">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+        <link rel="stylesheet" href="../public/css/login.css" type="text/css">
+    </head>
+
 <body>
-    <%- include("./header"); -%>
-    <main>
-        <div id="select">
-            <label for="orderby">פילטר</label>
-            <select name="orderby" id="sort" onchange="changeSortBy(this)">סינון לפי:
-              <option value="default">מיין לפי</option>
-              <option value="date">חדש ביותר</option>
-              <option value="price-low-to-high">מחיר, מהנמוך לגבוה</option>
-              <option value="price-high-to-low">מחיר, מהגבוה לנמוך</option>
-            </select>
-                <select name="genre" id="genre" onchange="changeGenre(this)">
-                    <option value="all">כל הז'אנרים</option>
-                    <%for (let i = 0; i < genres.length; i++) {%>
-                    <option value="<%=genres[i]%>"><%=genres[i]%></option>
-                    <%}%>
-                </select>
-        </div>
-    
-        <div id="products">
-            <%for (let i = 0; i < products.length; i++) {%>
-                <div class="product" id=<%=products[i].id%>>
-
-                    <div class="img-wrapper">
-                        <div id="update-product-container">
-                            <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i].id%>></button>
-                            <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i].id%>></button>
-                        </div>
-                        <img class="image" src="../public/images/record-logo.jpg"></img>
-                    </div>
-                        <p class="artist"><%=products[i].artist%></p>
-                        <p class="name"><%=products[i].name%></p>
-                    <p class="price"><%=products[i].price%>₪</p>
-                </div>     
-            <%}%>  
-            <script type="test/html" id="productTemplate">
-                    <div class="product" id={_id}>
-       
-                        <div class="img-wrapper">
-                            <div id="update-product-container">
-                                <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
-                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
-                            </div>
-                            <img class="image" src="../public/images/record-logo.jpg"></img>
-                        </div>
-                            <p class="artist">{artist}</p>
-                            <p class="name">{name}</p>
-                        <p class="price">{price}₪</p>
-                    </div> 
-            </script>  
-            </div>
-    </main>
-    <div id="form-popup">
-        <!-- <script type="test/html" id="editProductTemplate"> -->
-        <form id="form-container" product-id="" action="/product/">
-            <div id="update-form-title">
-                <h1>עדכון מוצר</h1>
-                <button class="fa fa-times fa-3x" id="exit-update-form" type="button"></button></button>
-            </div>
-            
-            <label for="name"><b>שם המוצר</b></label><br>
-            <input type="text" name="name" id="name"><br>
-
-            <label for="price"><b>מחיר</b></label><br>
-            <input type="number" name="price" id="price"><br>
-
-            <label for="artist"><b>שם אמן</b></label><br>
-            <input type="text" name="artist" id="artist"><br>
-
-            <label for="year"><b>שנת הוצאה</b></label><br>
-            <input type="number" name="year" id="year"><br>
-
-            <label for="genre"><b>ז'אנר</b></label><br>
-            <select name="genre" id="genre">
-                <%for (let i = 0; i < genres.length; i++) {%>
-                <option value="<%=genres[i]%>"><%=genres[i]%></option>
-                <%}%>
-            </select><br>
-
-            <label for="description"><b>תיאור</b></label><br>
-            <textarea type="text" id="description" name="description"></textarea><br>
-
-            <label for="image"><b>תמונה</b></label><br>
-            <input type="text" name="image" id="image"><br>
-            <input type='submit' value='אישור' id="submit">
+    <%- include("./header",{showRecordDiv: false}); -%>
+        <div class="signin-form">
+        <form action="/login" method="post">
+            <h1>התחברות</h1>
+            <input class="form" type="username" name="username" placeholder="Username"><br>
+            <input class="form" type="password" name="password" placeholder="Password"><br>
+            <input type="submit" value="כניסה">
         </form>
-    <!-- </script> -->
+        <a href="/register">אם עדיין אין לך משתמש באתר?</a>
     </div>
     <%- include("./footer"); -%>
 </body>
-<script src="../public/scripts/sortProducts.js"></script>
-<script src="../public/scripts/product.js"></script>
 </html>

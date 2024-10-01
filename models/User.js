@@ -14,9 +14,17 @@ const User = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phonenumber: {
+    type: Number,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
   isAdmin: {
     type: Boolean,
-    required: true,
+    default: false
   }
 });
 
@@ -27,4 +35,4 @@ User.pre('save', async function (next) {
   }
   next();
 })
-module.exports = mongoose.model("product", Product);
+module.exports = mongoose.model("user", User);

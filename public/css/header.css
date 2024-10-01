@@ -65,6 +65,8 @@ a{
     text-align:right;
     background-color: black;
     z-index: 2;
+    text-decoration: none;
+
 }
 
 .dropdown-content a:hover, .dropdown:hover .dropbtn{

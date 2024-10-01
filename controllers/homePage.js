@@ -1,6 +1,7 @@
-
 async function showHomePage(req, res) {
-    res.render('../views/homePage');
+    const username = req.session.username || 'Guest';
+    const isAdmin = req.session.isAdmin || false;
+    res.render('../views/homePage',{username,isAdmin});
 }
 
 module.exports = {

@@ -4,8 +4,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
 <body>
-    <%- include("./header"); -%>
+    <%- include("./header",{showRecordDiv: true}); -%>
     <main>
+        <div class="img">
+            <img id="image" src="<%=product.image%>"></img>
+        </div>
         <div id="info-section">
             <div id="info">
                 <p class="artist"><%=product.artist%></p>
