@@ -74,7 +74,7 @@ async function showProducts(req, res) {
           }));
           res.render('../views/products', {products:productsList, genres:genres, username,isAdmin, maxPriceProduct:maxPriceProduct});
       } catch (error) {
-        res.status(500).json({ message: error.message });
+            res.status(500).json({ message: error.message });
       }
 }
 
@@ -105,8 +105,8 @@ async function getProductById(req,res){
 async function showProductById(req,res){
     try {
         const product = await productService.getProductById(req.query.id);
-    const username = req.session.username || 'Guest';
-    const isAdmin = req.session.isAdmin || false;
+        const username = req.session.username || 'Guest';
+        const isAdmin = req.session.isAdmin || false;
 
         const productData  = {
             _id: product._id,
@@ -132,13 +132,15 @@ async function showProductById(req,res){
 async function addProductPage(req, res) {
     const username = req.session.username || 'Guest';
     const isAdmin = req.session.isAdmin || false;
-    try {
-        const genres = await productService.getListOfGenres();
-        res.render('../views/addProduct.ejs', {genres:genres,username,isAdmin});
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-    res.render('../views/addProduct.ejs', {genres:genres,username,isAdmin});
+    if(isAdmin)
+        try {
+            const genres = await productService.getListOfGenres();
+            res.render('../views/addProduct.ejs', {genres:genres,username,isAdmin});
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    else
+        res.status(403).render('../views/error', { message: "PERMISSION DENIED" ,isAdmin,username});
 }
 
 async function createProduct(req,res) {

@@ -6,9 +6,6 @@
 <body>
     <%- include("./header",{showRecordDiv: true}); -%>
     <main>
-        <div class="img">
-            <img id="image" src="<%=product.image%>"></img>
-        </div>
         <div id="info-section">
             <div id="info">
                 <p class="artist"><%=product.artist%></p>
@@ -27,7 +24,6 @@
         </div>
         <div id="image-wrapper">
             <img id="image" src="data:<%=product.image.contentType%>;base64,<%=product.image.data%>" >
-
         </div>
     </main>
     <%- include("./footer"); -%>

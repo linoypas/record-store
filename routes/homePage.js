@@ -1,8 +1,7 @@
-const express = require("express");
-const { home } = require("nodemon/lib/utils");
-const router = express.Router();
-const homeController = require("../controllers/homePage");
+const expres = require('express');
+const homePageController = require('../controllers/homePage');
 
-router.get('/', homeController.gethomepage);
+const router = expres.Router();
+router.get('/', homePageController.showHomePage);
 
 module.exports = router;
