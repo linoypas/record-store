@@ -1,17 +1,16 @@
 
-
-$(document).on('click', '#searchUser', function(event) {
+$(document).on('click', '.user', function(event) {
     event.stopPropagation();
-    const username = $(this).attr('username');
-    window.location.href = "/user/?username=" + username;
+    const id = $(this).attr('id');
+    window.location.href = "/profile" + id;
 });
 
-$(document).on('click', '#delete-product', function(event) {
+$(document).on('click', '#delete-user', function(event) {
     event.stopPropagation();
-    const id = $(this).attr('product-id')
+    const id = $(this).attr('id')
     $.ajax({
         type: "DELETE",
-        url: '/product/' + id,
+        url: '/user/' + id,
     }).done(function(data, textStatus, jqXHR) {
         $(`#${id}`).remove();
         alert(data);
@@ -21,12 +20,12 @@ $(document).on('click', '#delete-product', function(event) {
 });
 
 
-$(document).on('click', '#edit-product', function(event) {
+$(document).on('click', '#edit-user', function(event) {
     event.stopPropagation();
-    const id = $(this).attr('product-id')
+    const id = $(this).attr('id')
     $.ajax({
         type: "GET",
-        url: '/product/' + id,
+        url: '/user/' + id,
     }).done(function(res){
         showForm(res);
     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -35,12 +34,21 @@ $(document).on('click', '#edit-product', function(event) {
     
 });
 
+$("#form-inStock").on('change', function() {
+    if ($(this).is(':checked')) {
+      $(this).attr('value', 'true');
+    } else {
+      $(this).attr('value', 'false');
+    }
+  });
+  
+
 function showForm(res){
     for(const key in res){
         $(`input[name=${key}]`).val(res[key]);
     }
-    $('#description').html(res['description'])
-    $('#form-container').attr('product-id', res['_id']);
+    if($("#form-isAdmin").val() == 'true')
+        $("#form-isAdmin").prop("checked", true);
     $('#form-popup').css({"display": "block"});
     $('<div/>',{ id:"overlay"}).appendTo("body");
 }
@@ -50,79 +58,59 @@ $("#exit-update-form").on('click', function(event){
     $("#overlay").remove();
 });
 
-
 $("#form-container").validate({ 
     ignore: '',
     rules: {
         name:{
             required: true
         },
-        price: {
+        password: {
             required: true,
-            number: true
         },
-        artist:{
+        address:{
             required: true
         },
-        year:{
+        phonenumber:{
             number: true,
-            min: 1860,
             required: true
         },
-        description: {
-            required: true,
-        },
-        image: {
-            required: true
-        }
     },
     messages: {
         name:{
             required: "Name is required"  
         },
-        price: {
-            required: "Price is required",
-            number: "Price should be a number"
+        password: {
+            required: "Password is required",
         },
-        artist:{
-            required: "Artist is required"
+        address:{
+            required: "Address is required"
         },
-        year:{
-            number: "Year should be a number",
-            min: "Year should be greater than 1860",
-            required: "Year is required"
+        phonenumber:{
+            number: "phone nummber should be a number",
+            required: "phone number is required"
         },
-        description: {
-            required: "Description is required"
-        },
-        image: {
-            required: "Image is required"
-        }
     },
     submitHandler: function(a, e) {
         e.preventDefault();
-        const formData = $("#form-container").serialize();
-        console.log(formData);
+        const formData = new FormData(a);
         const URL = $("#form-container").attr("action")+ $("#form-container").attr("product-id");
-        console.log(URL)
         $.ajax({
           url: URL,
           type: "PUT",
           data: formData,
+          processData: false,
+          contentType: false,
         })
         .done(function() {
-            window.location.href = '/products/all'
+            window.location.href = '/users/'
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log('fail')
             alert(jqXHR.responseText);
         })
         .always(function(data, textStatus, jqXHR) {
             $('#form-container').each(function(){
                 this.reset();
             });
-            $('#description').html('');
         })
     }
 }); 
-

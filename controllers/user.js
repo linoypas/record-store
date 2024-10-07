@@ -1,19 +1,27 @@
-const userService = require("../services/user");
+const userService = require("../services/users");
 
-async function listUsers(req, res) {
+async function showUsers(req, res) {
     const users = await userService.getUsers();
+    const usersList = users.map(users => ({
+        _id: users._id,
+        username: users.username,
+        password: users.password,
+        address: users.address,
+        name: users.phonenumber,
+        isAdmin: users.isAdmin
+      }));
     if(!users){
         return res.status(404).json({errors: ['not found']})
     }
-    res.json(users);
+    res.render('../views/users', {users:usersList, username,isAdmin});
 }
-async function getUser(req,res){
-    const user = await userService.getUser(req.params.username);
-    if(!user) {
-        return res.status(404).json({errors: ['not found']})
-    }
-    res.json(user);
-}
+// async function getUser(req,res){
+//     const user = await userService.getUser(req.params.id);
+//     if(!user) {
+//         return res.status(404).json({errors: ['not found']})
+//     }
+//     res.json(user);
+// }
 
 async function updateUser(req,res) {
     const user = await userService.updateUser(
@@ -45,8 +53,7 @@ async function deleteUser(req,res){
 }
 
 module.exports = {
-    getUser,
     deleteUser,
     updateUser,
-    listUsers,
+    showUsers,
 }
