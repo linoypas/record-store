@@ -1,10 +1,13 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../public/css/header.css" type="text/css">
+<title>recore store</title>
+
 <script src="../public/scripts/header.js"></script>
 <header>
+  
   <nav id="options-nav">
-      <image id="logo" src="../public/images/logo.jpg"></image>
+      <a id="logo" href="/"><img id="logo" src="../public/images/logo.jpg"></a>
       <div class="dropdown">
           <button class="dropbtn">עלינו </button>
           <div class="dropdown-content">
@@ -12,6 +15,8 @@
             <a href="#">סניפים</a>
           </div>
         </div> 
+        <% if (showRecordDiv) { %>
+
         <div class="dropdown">
           <button class="dropbtn">תקליטים </button>
           <div class="dropdown-content">
@@ -19,20 +24,31 @@
             <a href="/products/new" >תקליטים חדשים</a>
           </div>
         </div> 
+        <% } %>
 
+        <% if (isAdmin) { %>
         <div class="dropdown">
           <button class="dropbtn">פעולות מנהל</button>
           <div class="dropdown-content">
               <a href="/statistics">סטטיסטיקה</a>
-              <a href="#">ניהול משתמשים</a>
+              <a href="/users">ניהול משתמשים</a>
               <a href="#">ניהול הזמנות</a>
               <a href="/products/add_product">הוספת מוצר</a>
               <a href="#">פרסם בפייסבוק</a>
             </div>
         </div>
+        <% } %>
+
   </nav>
+
   <nav id="left-nav">
-    <button class="header-btn">התחברות</button>
-    <button class="header-btn">עגלת קניות</button>
+    <% if (username == 'Guest'){ %>
+      <a class="btn" href="/login">התחברות</a>
+    <% } %>
+    <% if (username != 'Guest'){ %>
+      <a class="btn" href="/logout">התנתקות</a>
+      <a class="btn">עגלת קניות</a>
+    <% } %>
   </nav>
+
 </header>

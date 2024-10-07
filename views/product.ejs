@@ -4,7 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
 <body>
-    <%- include("./header"); -%>
+    <%- include("./header",{showRecordDiv: true}); -%>
     <main>
         <div id="info-section">
             <div id="info">
@@ -24,7 +24,6 @@
         </div>
         <div id="image-wrapper">
             <img id="image" src="data:<%=product.image.contentType%>;base64,<%=product.image.data%>" >
-
         </div>
     </main>
     <%- include("./footer"); -%>
