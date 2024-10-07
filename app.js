@@ -28,7 +28,6 @@ app.use('/', require('./routes/homePage'));
 app.use('/', require('./routes/product'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
-app.use('/', require('./routes/users'));
 app.use('/', require('./routes/graphs'))
 app.use('/', require('./routes/initDb'))
 
