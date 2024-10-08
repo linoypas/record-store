@@ -5,11 +5,6 @@ const alert = require("alert");
 
 
 async function login(username, password) {
-    if(!username|| !password){
-        alert("Please insert username and password")
-        console.log("Please insert username and password")
-        return null
-    }
     const user = await User.findOne({username: username});
     if (user) {
         const isValid = await bcrypt.compare(password, user.password)

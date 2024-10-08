@@ -45,3 +45,6 @@ form{
     align-items: center;
 
 }
+a{
+    direction: rtl;
+}

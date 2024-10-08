@@ -1,9 +1,10 @@
-const User = require('../models/user');
+const User = require('../models/User');
 const mongoose = require("mongoose");
+const alert = require("alert");
 
 async function getUsers() {
-    const getUsers = await User.find();
-    return getUsers;
+        const getUsers = await User.find();
+        return getUsers;
 }
 
 async function deleteUser(id){
@@ -11,8 +12,8 @@ async function deleteUser(id){
 }
 async function updateUser(id, username, password, address, phonenumber, isAdmin) {
     const updatedUser = await User.findById(id.trim());
-    if(!updatedProduct)
-        return null;
+    if(!updatedUser)
+        alert("user not found");
     updatedUser.username = username;
     updatedUser.password = password;
     updatedUser.address = address;
