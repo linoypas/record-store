@@ -57,14 +57,16 @@
                             <p class="price"><%=products[i].price%>₪</p>
                     </div>     
                 <%}%>  
-                <script type="test/html" id="productTemplate">
+                <script type="test/html"  id="productTemplate">
                         <div class="product" id={_id}>
-           
                             <div class="img-wrapper">
+                                <% if (isAdmin) { %>
+
                                 <div id="update-product-container">
                                     <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
                                     <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
                                 </div>
+                                <% } %>
                                 <img class="image" src="data:{imageContentType};base64,{imageData}">
                             </div>
                                 <p class="artist">{artist}</p>
