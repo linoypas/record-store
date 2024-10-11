@@ -49,6 +49,9 @@
                                 <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i]._id%>></button>
                             </div>
                             <% } %>
+                            <% if (!products[i].inStock) { %>
+                                <img class="sold-out" src="../public/images/sold-out.png">
+                            <% } %>
 
                             <img class="image" src="data:<%=products[i].image.contentType%>;base64,<%=products[i].image.data%>" >
                         </div>
@@ -67,6 +70,7 @@
                                     <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
                                 </div>
                                 <% } %>
+                                <img class="sold-out" src="../public/images/sold-out.png">
                                 <img class="image" src="data:{imageContentType};base64,{imageData}">
                             </div>
                                 <p class="artist">{artist}</p>

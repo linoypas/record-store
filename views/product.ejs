@@ -23,6 +23,10 @@
 
         </div>
         <div id="image-wrapper">
+            <% if (!product.inStock) { %>
+                <img class="sold-out" src="../public/images/sold-out.png">
+             <% } %>
+
             <img id="image" src="data:<%=product.image.contentType%>;base64,<%=product.image.data%>" >
         </div>
     </main>
