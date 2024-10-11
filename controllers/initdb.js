@@ -48,9 +48,9 @@ async function updateProductCollection(req,res){
         imagePath = path.join(__dirname, '../database/images/Kaveret_Sipori.jpg');
         await productService.createProduct("ישראליים",1973 ,"כוורת","סיפורי פוגי",90,"תכניסו כאן תיאור",{buffer: fs.readFileSync(imagePath),mimetype: path.extname(imagePath).slice(1)},true);
 
-        
-        
-        res.status(200).render('../views/homePage')
+        const username = req.session.username || 'Guest';
+        const isAdmin = req.session.isAdmin || false;
+        res.status(200).render('../views/homepage',{username,isAdmin});
     } catch (error) {
     res.status(500).json({ message: error.message });
   }
