@@ -8,9 +8,9 @@
     <main>
         <div id="info-section">
             <div id="info">
-                <p class="artist"><%=product.artist%></p>
                 <p class="name"><%=product.name%></p>
-                <p class="name">שנת הוצאה:<%=product.year%></p>
+                <p class="artist"><%=product.artist%></p>
+                <p class="year">שנת הוצאה: <%=product.year%></p>
             </div>
             <div id="add-to-cart">
                 <input type="number" id="quantity" min="1" max="10" placeholder="1" oninput="validity.valid||(value='');">
