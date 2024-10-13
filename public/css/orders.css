@@ -1,0 +1,112 @@
+
+html body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    height: 100%
+  }
+  
+  html {
+    height: 100%
+  }
+  
+body{
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 150px;
+  }
+main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 30px;
+  } 
+#orders{
+    width: 50%;
+  }
+.orders{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: 1px solid #ccc; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 30px;
+    height: 60px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+#update-order-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.update-order{
+    margin: 7px;
+}
+.custom-list {
+    list-style: none; 
+}
+
+.custom-list li {
+    padding-right: 20px; 
+    position: relative; 
+}
+
+.custom-list li i {
+    position: absolute;
+    right: 0; 
+}
+.details-section {
+    direction: ltr;
+    display: none;
+    position: absolute;
+    right: 100%; 
+    top: 0; 
+    width: 300px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ccc; 
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); 
+    z-index: 1; 
+    padding: 10px; 
+    border-radius: 5px; 
+    transition: all 0.3s; 
+    text-align: left;
+    font-weight: normal;
+}
+.update-section input[type="text"],
+.update-section button {
+    display: block; 
+    margin-bottom: 5px; 
+}
+.update-section{
+  display: none;
+  position: absolute;
+  right: 100%; 
+  top: 0; 
+  width: 300px; 
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc; 
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); 
+  z-index: 1; 
+  padding: 10px; 
+  border-radius: 5px; 
+  transition: all 0.3s; 
+  text-align: left;
+  direction: ltr;
+}
+
+#title{
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.order-info{
+  display: flex;
+  flex-direction: column;
+}

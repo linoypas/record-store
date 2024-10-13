@@ -25,6 +25,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', require('./routes/homePage'));
+app.use('/', require('./routes/orders'));
 app.use('/', require('./routes/product'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
