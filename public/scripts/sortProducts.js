@@ -80,12 +80,19 @@ function showProducts(){
 
 function updateProducts(res){
     $('.product').remove();
+    let productsHtml = '';
     for(let i=0; i< res.length; i++){
         const element = res[i];
         let product = document.getElementById('productTemplate').innerHTML;
         for(const key in element){
             product = product.replaceAll('{'+key+'}', element[key]);
         }
+        const soldout= !element.inStock 
+            ? '<img class="sold-out" src="../public/images/sold-out.png">' : ''; 
+
+        product = product.replace('{soldout}', soldout);
+
+        productsHtml += product;
         document.getElementById('products').innerHTML +=product;
     }
  }
