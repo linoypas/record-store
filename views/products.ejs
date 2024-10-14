@@ -51,7 +51,7 @@
                             <% } %>
                             <% if (!products[i].inStock) { %>
                                 <img class="sold-out" src="../public/images/sold-out.png">
-                            <% } %>
+                            <%}%>  
 
                             <img class="image" src="data:<%=products[i].image.contentType%>;base64,<%=products[i].image.data%>" >
                         </div>
@@ -64,13 +64,12 @@
                         <div class="product" id={_id}>
                             <div class="img-wrapper">
                                 <% if (isAdmin) { %>
-
                                 <div id="update-product-container">
                                     <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
                                     <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
                                 </div>
                                 <% } %>
-                                <img class="sold-out" src="../public/images/sold-out.png">
+                                {soldout}
                                 <img class="image" src="data:{imageContentType};base64,{imageData}">
                             </div>
                                 <p class="artist">{artist}</p>
