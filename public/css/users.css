@@ -21,6 +21,7 @@ main{
     flex-direction: column;
     width: 100%;
     margin-bottom: 30px;
+    min-height: 90%;
   } 
 #users{
     width: 50%;
@@ -75,12 +76,12 @@ main{
     text-align: left;
     font-weight: normal;
 }
-.update-section input[type="text"],
-.update-section button {
+.update input[type="text"],
+.update button {
     display: block; 
     margin-bottom: 5px; 
 }
-.update-section{
+.update{
   display: none;
   position: absolute;
   right: 100%; 
@@ -96,7 +97,13 @@ main{
   text-align: left;
   direction: ltr;
 }
-.username{
+
+.error {
+  color: red; 
+  font-style: italic; 
+  font-size: 10px; 
+}
+.username, #add-user{
     font-size: 15px;
     font-weight: bold ;
     width: 50%;           
@@ -114,4 +121,15 @@ main{
 }
 p{
   direction: ltr;
+}
+#add-user{
+  height: 50px;
+  width: 30%;
+}
+#head{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  margin-bottom: 30px;
 }

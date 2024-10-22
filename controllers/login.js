@@ -1,4 +1,6 @@
 const loginService = require("../services/login");
+const userService = require("../services/users");
+
 const alert = require("alert");
 
 function loginForm(req,res){   
@@ -21,6 +23,7 @@ async function login(req, res) {
     }
       req.session.username = username
       req.session.isAdmin = await loginService.isAdmin(username)
+      req.session._id = await loginService.getUserID(username)
       console.log(username + " logged-in")
       res.redirect('/products')
     }
@@ -40,7 +43,7 @@ function registerForm(req,res){
 }
 async function register(req, res) {
   const { username, password, phonenumber, address, isAdmin } = req.body
-  const result = await loginService.register(username, password, phonenumber, address, isAdmin)
+  const result = await userService.createUser(username, password, phonenumber, address, isAdmin)
   if (result != null) {
     res.redirect('/login')
   }

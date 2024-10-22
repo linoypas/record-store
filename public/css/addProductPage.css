@@ -5,7 +5,11 @@
     align-items: center;
     margin-bottom: 20px;;
   }
-
+.error {
+  color: red; 
+  font-style: italic; 
+  font-size: 15px; 
+}
 #form-container {
   min-height: 100%;
   margin-top: 20px;

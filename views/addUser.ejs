@@ -11,19 +11,18 @@
 <body>
     <%- include("./header",{showRecordDiv: false}); -%>
 
-    <div id="register" >
-        <form id="addUser-form" action="/register/" method="post">
-            <h1> הרשמה</h1>
+    <div id="addUser" >
+        <form id="addUser-form" action="/users/addUser" method="post">
+            <h1> יצירת משתמש חדש</h1>
             <input type="text" name="username" id="username" placeholder="שם משתמש" />
             <input type="password" name="password" id="password" placeholder="סיסמה" />
             <input type="text" name="address" id="address" placeholder="כתובת" />
             <input type="text" name="phonenumber" id="phonenumber" placeholder="טלפון"/>
-            <input type="checkbox" id="isAdmin" name="isAdmin" value="false" style="display: none;"/>
-            <input type="submit" value="להרשמה" id="submit"/>
+            <div class="isAdmin">
+                <input type="checkbox" id="isAdmin" name="isAdmin" value=""/> Is Admin?      
+            </div>
+            <input type="submit" value="Save" id="submit"/>
         </form>
-        <a> יש לך כבר משתמש באתר? </a>
-        <a href="/login">התחבר/י</a>
-
     </div>
 
     <%- include("./footer"); -%>
