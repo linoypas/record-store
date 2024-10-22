@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Basket</title>
+    <link rel="stylesheet" href="../public/css/cart.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Shopping Basket</h1>
+        <div id="cart-items">
+            <% if (cart.length > 0) { %>
+                <% cart.forEach(item => { %>
+                    <div class="cart-item">
+                        <span>Product ID: <%= item.productId %> (x<%= item.quantity %>)</span>
+                        <button onclick="removeItem('<%= item.productId %>')">Remove</button>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>Your cart is empty.</p>
+            <% } %>
+        </div>
+        <div class="total">
+            <strong>Total: $<span id="total-amount"><%= totalAmount.toFixed(2) %></span></strong>
+        </div>
+        <div class="add-item">
+            <h2>Add Item</h2>
+            <input type="text" id="product-id" placeholder="Product ID" required>
+            <input type="number" id="quantity" placeholder="Quantity" required>
+            <button id="add-button">Add to Cart</button>
+        </div>
+    </div>
+    <script src="../public/scripts/cart.js"></script>
+</body>
+</html>

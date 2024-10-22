@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const cartRoutes = require('./routes/cartRoutes');
 
 const env = require('dotenv').config();
 const mongoose = require("mongoose");
@@ -31,6 +32,7 @@ app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
 app.use('/', require('./routes/graphs'))
 app.use('/', require('./routes/initDb'))
+app.use('/cart', require('./routes/cartRoutes'));
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)

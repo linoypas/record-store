@@ -13,10 +13,10 @@ async function getorders() {
             path: 'items', 
             select: 'name' 
         });
-        console.log(order.items)
+        console.log(orders)
         return orders.map(order => ({
             ...order.toObject(),
-            username: order.username.username,
+            username: order.username ? order.username.username : 'Unknown',
             items: Array.isArray(order.items) ? order.items.map(item => item.name) : [],
             orderDate: moment(order.orderDate).tz('Asia/Jerusalem').format('ddd  DD/MM/YYYY')
         }));
