@@ -68,6 +68,7 @@ $("#image").on('change', function(event){
 
 
 $("#form-container").validate({ 
+    errorClass: "error",
     ignore: '',
     rules: {
         name:{

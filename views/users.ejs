@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="../public/css/users.css" type="text/css">
+</head>
+<body>
+    <%- include("./header",{showRecordDiv: true}); -%>
+<main>
+    <div id="head">
+        <p id="title">ניהול משתמשים</p>
+        <button id="add-user">הוספת משתמש חדש</button>
+    </div>
+    <div id="users">
+        <ul class="custom-list">
+        <%for (let i = 0; i < users.length; i++) {%>
+            <li>
+            <div class="users" user-id=<%=users[i]._id%>>
+                <i class="fa fa-user-circle"></i> 
+                <button class="username" user-id=<%=users[i]._id%>><%=users[i].username%></button>
+                <div id="update-user-container">
+                    <button class="fa fa-trash update-user" id="delete-user" user-id=<%=users[i]._id%>></button>
+                    <button class="fa fa-pencil update-user" id="edit-user"  user-id=<%=users[i]._id%>></button>
+                    <button class="fa fa-caret-square-o-down update-user" id="details-user" user-id=<%=users[i]._id%>></button>
+                    <div class="details-section">
+                        <h3>User Details</h3>
+                        <p><strong>User ID:</strong></br> <%=users[i]._id%></p>
+                        <p><strong>Phone Number: </strong></br> <%=users[i].phonenumber%></p>
+                        <p><strong>Address: </strong></br> <%=users[i].address%></p>
+                        <p><strong>Is Admim?:</strong>  <%=users[i].isAdmin%></p>
+                    </div>  
+                    <div class="update">
+                        <h3>Update User</h3>
+                        <form class="update-section" user-id="<%= users[i]._id %>">
+                            <label for="username"><b>Username: </b></label><br>
+                            <input type="text" placeholder="Username" value="<%= users[i].username %>" id="username" name="username" >
+                            <label for="password"><br><b>Password: </b></label><br>
+                            <input type="text" placeholder="Password" value="<%= users[i].password %>" id="password" name="password">
+                            <label for="phonenumber"><br><b>Phone Number: </b></label><br>
+                            <input type="text" placeholder="Phone Number" value="<%= users[i].phonenumber %>" id="phonenumber" name="phonenumber">
+                            <label for="address"><br><b>Address: </b></label><br>
+                            <input type="text" placeholder="Address" value="<%= users[i].address %>" id="address" name="address">
+                            <br><input type="checkbox" id="isAdmin" name="isAdmin" value="<%= users[i].isAdmin %>" <%= users[i].isAdmin ? 'checked': '' %>> Is Admin?
+                            <input type="submit" class="save-update" user-id="<%= users[i]._id %>" value="Save"/>
+                        </form>
+                </div>
+            </div>  
+            </li>  
+        <%}%>  
+        </ul>
+    </div>
+</main>
+<%- include("./footer"); -%>
+
+</body>
+<script src="../public/scripts/user.js"></script>
+
+
+</html>

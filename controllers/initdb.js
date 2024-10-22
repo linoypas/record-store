@@ -1,5 +1,9 @@
 const productService = require("../services/product");
+const userService = require("../services/users");
+
 const Product = require("../models/product");
+const User = require("../models/User");
+
 const fs = require('fs');
 const path = require('path');
 
@@ -56,7 +60,19 @@ async function updateProductCollection(req,res){
   }
 }
 
-
+async function updateUsersCollection(req,res){
+    try{
+        await User.deleteMany({})
+        await userService.createUser("Admin","Aa12345678",'0000000000',"none",true);
+        
+        const username = req.session.username || 'Guest';
+        const isAdmin = req.session.isAdmin || false;
+        res.status(200).render('../views/homepage',{username,isAdmin});
+    } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 module.exports = {
-    updateProductCollection
+    updateProductCollection,
+    updateUsersCollection
 }

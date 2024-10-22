@@ -1,13 +1,15 @@
 const loginService = require("../services/login");
+const userService = require("../services/users");
+
 const alert = require("alert");
 
 function loginForm(req,res){   
+  const username = req.session.username || 'Guest';
+  const isAdmin = req.session.isAdmin || false;
   if(req.session.username){
-    res.status(400).send("את/ה כבר מחובר/ת")
+        res.status(403).render('../views/error', { message: "את/ה כבר מחובר/ת" ,isAdmin,username});
   }
   else{
-    const username = req.session.username || 'Guest';
-    const isAdmin = req.session.isAdmin || false;
     res.render('../views/login',{username,isAdmin});
   }
 }
@@ -17,10 +19,11 @@ async function login(req, res) {
     const result = await loginService.login(username, password)
     if (result != null) {
       if (!username) {
-        return res.status(400).send('Username is required');
+        res.status(403).render('../views/error', { message: "את/ה כבר מחובר/ת" ,isAdmin,username});
     }
       req.session.username = username
       req.session.isAdmin = await loginService.isAdmin(username)
+      req.session._id = await loginService.getUserID(username)
       console.log(username + " logged-in")
       res.redirect('/products')
     }
@@ -29,32 +32,24 @@ async function login(req, res) {
   }
 
 function registerForm(req,res){   
+  const username = req.session.username || 'Guest';
+  const isAdmin = req.session.isAdmin || false;
   if(req.session.username ){
-    res.status(400).send("את/ה כבר רשום/ה")
+    res.status(403).render('../views/error', { message: "את/ה כבר רשום/ה" ,isAdmin,username});
   }
   else{
-    const username = req.session.username || 'Guest';
-    const isAdmin = req.session.isAdmin || false;
     res.render('../views/register',{username,isAdmin});
   }
 }
 async function register(req, res) {
   const { username, password, phonenumber, address, isAdmin } = req.body
-
-  if(!username || !password || !phonenumber || !address){
-    alert("some fields are empty")
-    console.log("חלק מהשדות ריקים")
-    res.redirect('/register')
+  const result = await userService.createUser(username, password, phonenumber, address, isAdmin)
+  if (result != null) {
+    res.redirect('/login')
   }
   else{
-    const result = await loginService.register(username, password, phonenumber, address, isAdmin)
-    if (result != null) {
-      res.redirect('/login')
-    }
-    else{
-      res.redirect('/register')
-    }
-   }
+    res.redirect('/register')
+  }
 }
 function logout(req, res) {
   req.session.destroy();   

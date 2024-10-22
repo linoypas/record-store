@@ -30,6 +30,8 @@ app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
 app.use('/', require('./routes/graphs'))
 app.use('/', require('./routes/initDb'))
+app.use('/', require('./routes/users'))
+
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)
