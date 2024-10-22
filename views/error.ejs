@@ -7,7 +7,11 @@
 </head>
 <body>
     <%- include("./header",{showRecordDiv: true}); -%>
-    <p><%= message %></p>
-    <a href="/">Go back home</a>
+    <main>
+      <p><%= message %></p>
+      <a href="/">Go back home</a>
+    </main>
+    <%- include("./footer"); -%>
+
 </body>
 </html>
