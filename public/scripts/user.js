@@ -1,9 +1,9 @@
 
-$(document).on('click', '.username', function(event) {
-    event.stopPropagation();
-    const id = $(this).attr('user-id');
-    window.location.href = "/profile?id=" + id;
-});
+// $(document).on('click', '.username', function(event) {
+//     event.stopPropagation();
+//     const id = $(this).attr('user-id');
+//     window.location.href = "/profile?id=" + id;
+// });
 
 $(document).on('click', '#add-user', function(event) {
     event.stopPropagation();
