@@ -58,6 +58,8 @@
                             <p class="name"><%=products[i].name%></p>
                             <p class="artist"><%=products[i].artist%></p>
                             <p class="price"><%=products[i].price%>₪</p>
+                            <button id="addtocart" product-id=<%=products[i]._id%>>add to cart</button>
+
                     </div>     
                 <%}%>  
                 <script type="test/html"  id="productTemplate">
@@ -75,7 +77,8 @@
                                 <p class="artist">{artist}</p>
                                 <p class="name">{name}</p>
                                 <p class="price">{price}₪</p>
-                        </div> 
+                                <button id="addtocart" product-id=<%=products[i]._id%>>add to cart</button>
+                            </div> 
                 </script>  
                 </div>
         </div>
