@@ -70,9 +70,38 @@ async function deleteorder(req,res){
         res.status(500).send("חלה שגיאה בעת מחיקת ההזמנה");
     }       
 }
+async function showcart(req,res){
+    try {
+        const username = req.session.username || 'Guest';
+        const isAdmin = req.session.isAdmin || false;
+        //const orderDate = new Date()
+       // const items = req.session.items;
+        //const totalAmount=orderService.getPrice(items)
+        const totalAmount=0;
+
+        res.render('../views/cart', {username,isAdmin,totalAmount });
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+
+}
 
 async function updatecart(req,res){
+    console.log(req.session.items)
+    const id = req.params.id;
+    const quantity = req.body.quantity;
+    if (!req.session.items) {
+        req.session.items = [];
+    }
+    const existingProductIndex = req.session.items.findIndex(item => item.id === id);
 
+    if (existingProductIndex !== -1) {
+        req.session.items[existingProductIndex].quantity += quantity;
+    } else {
+        req.session.items.push({ id, quantity });
+    }
+       console.log(req.session.items)
+       console.log(req.session)
 }
 
 module.exports = {
@@ -80,4 +109,6 @@ module.exports = {
     deleteorder,
     updateorder,
     showorders,
+    updatecart,
+    showcart
 }

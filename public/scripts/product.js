@@ -142,7 +142,7 @@ $(document).on('click', '#addtocart', function(event) {
     const quantity = $('#quantity').val() || 1;
     $.ajax({
         type: "PUT",
-        url: '/order/cart' + id,
+        url: '/order/cart/' + id,
         data: {
             quantity :quantity
         }

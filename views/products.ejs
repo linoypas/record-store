@@ -39,15 +39,14 @@
                 </select>
             </div>
             <div id="products">
-                <%for (let i = 0; i < products.length; i++) {%>
-                    <div class="product" id=<%=products[i]._id%>>
-
+                <% for (let i = 0; i < products.length; i++) { %>
+                    <div class="product" id="<%= products[i]._id %>">
                         <div class="img-wrapper">
-                        <% if (isAdmin) { %>
-                            <div id="update-product-container">
-                                <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i]._id%>></button>
-                                <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i]._id%>></button>
-                            </div>
+                            <% if (isAdmin) { %>
+                                <div id="update-product-container">
+                                    <button class="fa fa-trash update-product" id="delete-product" product-id="<%= products[i]._id %>"></button>
+                                    <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id="<%= products[i]._id %>"></button>
+                                </div>
                             <% } %>
                             <% if (!products[i].inStock) { %>
                                 <img class="sold-out" src="../public/images/sold-out.png">
@@ -77,7 +76,7 @@
                                 <p class="artist">{artist}</p>
                                 <p class="name">{name}</p>
                                 <p class="price">{price}₪</p>
-                                <button id="addtocart" product-id=<%=products[i]._id%>>add to cart</button>
+                                <button id="addtocart" product-id={_id}>add to cart</button>
                             </div> 
                 </script>  
                 </div>

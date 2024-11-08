@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<link rel="stylesheet" href="../public/css/product.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<body>
+    <%- include("./header",{showRecordDiv: true}); -%>
+    <main>
+        <div id="cart-info">
+            <div id="info">
+                <p class="username"><%=username%></p>
+                <p class="orderDate"><%=orderDate%></p>
+                <p class="totalAmount">שנת הוצאה:<%=totalAmount%></p>
+                <!-- %for (let i = 0; i < items.length; i++) {%>
+                    <div class="items">
+                        <p><strong>product:</strong> <%=items[i].name%>&nbsp&nbsp</p>
+                        <p><strong>quantity:</strong> <%=items[i].quantity%></p>
+                    </div>
+                <%}%>   -->
+            </div>
+            <div id="add-to-cart">
+                <button id="pay" >complete order</button>
+            </div>
+  
+    </main>
+    <%- include("./footer"); -%>
+</body>
+<!-- <script src="../public/scripts/cart.js"></script> -->
+</html>
