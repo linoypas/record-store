@@ -4,12 +4,10 @@ document.querySelectorAll('#details-order').forEach(button => {
         const details_section = button.nextElementSibling;
         const isVisible = details_section.style.display === 'block';
         
-        // Hide all other dropdowns
         document.querySelectorAll('.details-section').forEach(content => {
             content.style.display = 'none';
         });
 
-        // Toggle the current dropdown
         details_section.style.display = isVisible ? 'none' : 'block';
     });
 });
@@ -17,9 +15,8 @@ document.querySelectorAll('#details-order').forEach(button => {
 document.querySelectorAll('#edit-order').forEach(button => {
     button.addEventListener('click', () => {
         const orderId = button.getAttribute('order-id');
-        const updateSection = document.querySelector(`.update-section #username-input-${orderId}`).parentElement;
+        const updateSection = document.querySelector(`.update-section`).parentElement;
         
-        // Toggle visibility of the update section
         if (updateSection.style.display === 'none' || updateSection.style.display === '') {
             updateSection.style.display = 'block';
         } else {

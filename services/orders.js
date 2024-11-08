@@ -8,17 +8,17 @@ const alert = require("alert");
 
 async function getorders() {
         const orders = await order.find()
-        .populate('username', 'username') 
-        .populate({
-            path: 'items', 
-            select: 'name' 
-        });
-        console.log(orders)
+        .populate('items.name', 'name')
+        .populate('username', 'username')
+        .select('orderDate totalAmount items username');
         return orders.map(order => ({
             ...order.toObject(),
-            username: order.username ? order.username.username : 'Unknown',
-            items: Array.isArray(order.items) ? order.items.map(item => item.name) : [],
-            orderDate: moment(order.orderDate).tz('Asia/Jerusalem').format('ddd  DD/MM/YYYY')
+            username: order.username ? order.username.username : "Unknown",  
+            items: order.items.map(item => ({
+                name: item.name ? item.name.name : "Unnamed Product",  
+                quantity: item.quantity
+            })),
+            orderDate: moment(order.orderDate).tz('Asia/Jerusalem').format('ddd DD/MM/YYYY') 
         }));
     }
 

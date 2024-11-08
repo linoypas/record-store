@@ -110,3 +110,8 @@ main{
   display: flex;
   flex-direction: column;
 }
+
+.items{
+  display: flex;
+  flex-direction: row;
+}

@@ -12,9 +12,10 @@ async function showorders(req, res) {
         totalAmount: orders.totalAmount,
         orderDate: orders.orderDate,
       }));
+
     if(isAdmin){
-        if(!orders){
-            return res.status(404).json({errors: ['not found']})
+        if(orders.length === 0){
+            res.status(404).render('../views/error', { message: "לא קיימות הזמנות" ,isAdmin,username});
         }
         res.render('../views/orders', {orders:ordersList, username,isAdmin});
     }
@@ -39,7 +40,7 @@ async function updateorder(req,res) {
         
     if(!order){
         console.log('fail: update order')
-        res.status(500).send("חלה שגיאה בעת עדכון היוזר");
+        res.status(500).send("חלה שגיאה בעת עדכון ההזמנה");
     }
     console.log('done: update order');
     res.json(order);
@@ -49,10 +50,10 @@ async function deleteorder(req,res){
     try{
         const order = await orderService.deleteorder(req.params.id);
         console.log('done: delete order')
-        res.status(200).send('היוזר נמחק בהצלחה');
+        res.status(200).send('ההזמנה נמחקה בהצלחה');
     } catch(err){
         console.log('fail: delete order')
-        res.status(500).send("חלה שגיאה בעת מחיקת היוזר");
+        res.status(500).send("חלה שגיאה בעת מחיקת ההזמנה");
     }
        
 }
