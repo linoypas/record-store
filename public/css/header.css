@@ -11,6 +11,10 @@ header{
     
 }
 
+a{
+    font-size: 16px;
+}
+
 #left-nav{
     display: flex;
     flex-direction: row;
@@ -32,8 +36,9 @@ header{
     z-index: 2;
 }
 
-.btn:hover{
+.header-btn:hover{
     color: orange;
+    cursor: pointer;
 }
   
 
@@ -42,13 +47,17 @@ header{
     width: auto;
 }
 
+#logo:hover {
+    cursor: pointer;
+}
+
 .dropdown{
     position: relative;
     display: inline-block;
 }
   
-.dropdown .dropbtn , .btn{
-    font-size: 16px;  
+.dropdown .dropbtn , .header-btn, .btn{
+    font-size: 20px;  
     border: none;
     outline: none;
     color: white;
@@ -56,9 +65,11 @@ header{
     text-align:right;
     background-color: black;
     z-index: 2;
+    text-decoration: none;
+
 }
 
-a:hover, .dropdown:hover .dropbtn{
+.dropdown-content a:hover, .dropdown:hover .dropbtn{
     color:hsla(0,0%,40%,.85) ;
     cursor: pointer;
 }
@@ -87,3 +98,4 @@ a:hover, .dropdown:hover .dropbtn{
 .dropdown:hover .dropdown-content {
     display: block;
 }
+

@@ -1,4 +1,4 @@
-/* The popup form - hidden by default */
+
 #form-popup {
     display: none;
     position: fixed;
@@ -17,9 +17,23 @@
     padding-bottom: 50px;
     
   }
+
+  #in-stock-checkbox{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start ;
+    align-items: flex-start;
+  }
   
-  #form-container input, #form-container textarea, #form-container select{
+  #form-container input[type=text], input[type=number], input[type=submit], #form-container textarea, #form-container select{
     width: 90%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+  }
+
+  #form-container input[type=checkbox]{
     padding: 15px;
     margin: 5px 0 22px 0;
     border: none;
@@ -49,4 +63,3 @@
     justify-content: space-between;
 
 }
-

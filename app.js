@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+
 const env = require('dotenv').config();
 const mongoose = require("mongoose");
 
@@ -12,12 +14,27 @@ app.set("view engine", "ejs");
 app.use(express.json())
 app.use('/public', express.static('public'));
 
+app.use(session({
+    secret: 'your-secret-key', // Replace with your secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', require('./routes/homePage'));
 app.use('/', require('./routes/product'));
+app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
+app.use('/', require('./routes/graphs'))
+app.use('/', require('./routes/initDb'))
+app.use('/', require('./routes/users'))
+
+// this is for the exchange rate api
+app.use('/', require('./routes/exchangeRate'));
+
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)

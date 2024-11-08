@@ -5,7 +5,11 @@
     align-items: center;
     margin-bottom: 20px;;
   }
-
+.error {
+  color: red; 
+  font-style: italic; 
+  font-size: 15px; 
+}
 #form-container {
   min-height: 100%;
   margin-top: 20px;
@@ -13,23 +17,27 @@
   padding: 10px;
   width: 30%;
 }  
-
-.submit-button {
-  color: black;
-  background-color: #efeae6;
-  padding: 5px;
-  width: 100px;
-  margin: 5px;
-  border-color: gray;
-  border-radius: 5px;
-  text-shadow: 0.5px 0.5px gray;
+input, select, textarea{
+  margin-top: 5px;
 }
 
-h1, input, select {
-  margin-bottom: 10px;
+#in-stock-checkbox{
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start ;
+  align-items: flex-start;
+}
+h1{
+  display: flex;
+  align-items: center ;
+  justify-content: center;
 }
 
-input, textarea{
+#form-container h1, #form-container input, #form-container textarea, #form-container select {
+  margin-bottom: 20px;
+}
+
+#form-container input[type=text], input[type=number], #form-container textarea{
   width: 99%;
 }
 

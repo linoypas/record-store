@@ -1,0 +1,135 @@
+
+html body{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    height: 100%
+  }
+  
+  html {
+    height: 100%
+  }
+  
+body{
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 150px;
+  }
+main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 30px;
+    min-height: 90%;
+  } 
+#users{
+    width: 50%;
+  }
+.users{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border: 1px solid #ccc; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 15px;
+    height: 60px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+#update-user-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.update-user{
+    margin: 7px;
+}
+.custom-list {
+    list-style: none; 
+}
+
+.custom-list li {
+    padding-right: 20px; 
+    position: relative; 
+}
+
+.custom-list li i {
+    position: absolute;
+    right: 0; 
+}
+.details-section {
+    display: none;
+    position: absolute;
+    right: 100%; 
+    top: 0; 
+    width: 300px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ccc; 
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1); 
+    z-index: 1; 
+    padding: 10px; 
+    border-radius: 5px; 
+    transition: all 0.3s; 
+    text-align: left;
+    font-weight: normal;
+}
+.update input[type="text"],
+.update button {
+    display: block; 
+    margin-bottom: 5px; 
+}
+.update{
+  display: none;
+  position: absolute;
+  right: 100%; 
+  top: 0; 
+  width: 300px; 
+  background-color: #f9f9f9; 
+  border: 1px solid #ccc; 
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); 
+  z-index: 1; 
+  padding: 10px; 
+  border-radius: 5px; 
+  transition: all 0.3s; 
+  text-align: left;
+  direction: ltr;
+}
+
+.error {
+  color: red; 
+  font-style: italic; 
+  font-size: 10px; 
+}
+.username, #add-user{
+    font-size: 15px;
+    font-weight: bold ;
+    width: 50%;           
+    outline: none;   
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    height: 80%;
+     
+}
+#title{
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+p{
+  direction: ltr;
+}
+#add-user{
+  height: 50px;
+  width: 30%;
+}
+#head{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  margin-bottom: 30px;
+}

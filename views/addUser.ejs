@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="../public/css/addUser.css" type="text/css">
+
+</head>
+
+<body>
+    <%- include("./header",{showRecordDiv: false}); -%>
+
+    <div id="addUser" >
+        <form id="addUser-form" action="/users/addUser" method="post">
+            <h1> יצירת משתמש חדש</h1>
+            <input type="text" name="username" id="username" placeholder="שם משתמש" />
+            <input type="password" name="password" id="password" placeholder="סיסמה" />
+            <input type="text" name="address" id="address" placeholder="כתובת" />
+            <input type="text" name="phonenumber" id="phonenumber" placeholder="טלפון"/>
+            <div class="isAdmin">
+                <input type="checkbox" id="isAdmin" name="isAdmin" value=""/> Is Admin?      
+            </div>
+            <input type="submit" value="Save" id="submit"/>
+        </form>
+    </div>
+
+    <%- include("./footer"); -%>
+
+</body>
+<script src="../public/scripts/addUser.js"></script>
+</html>

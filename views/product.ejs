@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <link rel="stylesheet" href="../public/css/product.css" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
 <body>
-    <%- include("./header"); -%>
+    <%- include("./header",{showRecordDiv: true}); -%>
     <main>
         <div id="info-section">
             <div id="info">
-                <p class="artist"><%=product.artist%></p>
                 <p class="name"><%=product.name%></p>
-                <p class="name">שנת הוצאה:<%=product.year%></p>
+                <p class="artist"><%=product.artist%></p>
+                <p class="year">שנת הוצאה: <%=product.year%></p>
             </div>
             <div id="add-to-cart">
                 <input type="number" id="quantity" min="1" max="10" placeholder="1" oninput="validity.valid||(value='');">
@@ -20,7 +22,13 @@
             </section>
 
         </div>
-        <img id="image" src="../public/images/record-logo.jpg"></img>
+        <div id="image-wrapper">
+            <% if (!product.inStock) { %>
+                <img class="sold-out" src="../public/images/sold-out.png">
+             <% } %>
+
+            <img id="image" src="data:<%=product.image.contentType%>;base64,<%=product.image.data%>" >
+        </div>
     </main>
     <%- include("./footer"); -%>
 </body>

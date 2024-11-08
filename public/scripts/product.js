@@ -1,5 +1,4 @@
 
-
 $(document).on('click', '.product', function(event) {
     event.stopPropagation();
     const id = $(this).attr('id');
@@ -35,12 +34,25 @@ $(document).on('click', '#edit-product', function(event) {
     
 });
 
+$("#form-inStock").on('change', function() {
+    if ($(this).is(':checked')) {
+      $(this).attr('value', 'true');
+    } else {
+      $(this).attr('value', 'false');
+    }
+  });
+  
+
 function showForm(res){
     for(const key in res){
         $(`input[name=${key}]`).val(res[key]);
     }
     $('#description').html(res['description'])
     $('#form-container').attr('product-id', res['_id']);
+    $('image').attr('data', res['data']);
+    $('image').attr('contentType', res['contentType']);
+    if($("#form-inStock").val() == 'true')
+        $("#form-inStock").prop("checked", true);
     $('#form-popup').css({"display": "block"});
     $('<div/>',{ id:"overlay"}).appendTo("body");
 }
@@ -50,8 +62,13 @@ $("#exit-update-form").on('click', function(event){
     $("#overlay").remove();
 });
 
+$("#image").on('change', function(event){
+    $(this).css({"color": "black"});
+});
+
 
 $("#form-container").validate({ 
+    errorClass: "error",
     ignore: '',
     rules: {
         name:{
@@ -72,9 +89,6 @@ $("#form-container").validate({
         description: {
             required: true,
         },
-        image: {
-            required: true
-        }
     },
     messages: {
         name:{
@@ -95,26 +109,22 @@ $("#form-container").validate({
         description: {
             required: "Description is required"
         },
-        image: {
-            required: "Image is required"
-        }
     },
     submitHandler: function(a, e) {
         e.preventDefault();
-        const formData = $("#form-container").serialize();
-        console.log(formData);
+        const formData = new FormData(a);
         const URL = $("#form-container").attr("action")+ $("#form-container").attr("product-id");
-        console.log(URL)
         $.ajax({
           url: URL,
           type: "PUT",
           data: formData,
+          processData: false,
+          contentType: false,
         })
         .done(function() {
             window.location.href = '/products/all'
         })
         .fail(function(jqXHR, textStatus, errorThrown) {
-            console.log('fail')
             alert(jqXHR.responseText);
         })
         .always(function(data, textStatus, jqXHR) {
@@ -125,4 +135,5 @@ $("#form-container").validate({
         })
     }
 }); 
+
 
