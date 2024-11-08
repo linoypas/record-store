@@ -15,7 +15,7 @@ document.querySelectorAll('#details-order').forEach(button => {
 document.querySelectorAll('#edit-order').forEach(button => {
     button.addEventListener('click', () => {
         const orderId = button.getAttribute('order-id');
-        const updateSection = document.querySelector(`.update-section`).parentElement;
+        const updateSection = button.closest('.orders').querySelector('.update-section');
         
         if (updateSection.style.display === 'none' || updateSection.style.display === '') {
             updateSection.style.display = 'block';
@@ -28,21 +28,22 @@ document.querySelectorAll('#edit-order').forEach(button => {
 $(document).on('click', '.save-update', function(event) {
     event.stopPropagation();
     const id = $(this).attr('order-id')
-    const username = $('#username-input-' + id).val();
-    const password = $('#password-input-' + id).val();
-    const address = $('#address-input-' + id).val();
-    const phonenumber = $('#phone-input-' + id).val();
-    const isAdmin = $('#is-admin-input-' + id).is(':checked'); 
+    const itemsData = [];
+    $(`#update-order[order-id="${id}"]`).each(function() {
+        const itemName = $(this).find('input[type="text"]').val();  
+        const itemQuantity = $(this).find('input[type="number"]').val();  
+
+        itemsData.push({
+            name: itemName,
+            quantity: itemQuantity
+        });
+    });
     $.ajax({
         type: "PUT",
         url: '/order/' + id,
-    data: {
-        username: username,
-        password: password,
-        address: address,
-        phonenumber: phonenumber,
-        isAdmin: isAdmin
-    },
+        data: {
+            items: itemsData
+        },
     }).done(function(updatedorder){
         location.reload();
 
@@ -56,6 +57,7 @@ $(document).on('click', '#delete-order', function(event) {
     $.ajax({
         type: "DELETE",
         url: '/order/' + id,
+
     }).done(function(data, textStatus, jqXHR) {
         $(`#${id}`).remove();
         location.reload();

@@ -38,9 +38,9 @@
                     <div class="update-section">
                         <h3>Update order</h3>
                         <%for (let j = 0; j < orders[i].items.length; j++) {%>
-                            <div class="items">
-                                <input type="checkbox" value="<%=orders[i].items[j].name%>">
-                                <input type="checkbox" value="<%=orders[i].items[j].quantity%>">
+                            <div class="items" id="upate-order" order-id="<%= orders[i]._id %>" >
+                                <input type="text" value="<%=orders[i].items[j].name%>">
+                                <input type="number" value="<%=orders[i].items[j].quantity%>">
                             </div>
                         <%}%>                          
                         <button type="submit" class="save-update" order-id="<%= orders[i]._id %>">Save</button>

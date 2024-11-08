@@ -31,19 +31,17 @@ async function getorder(req,res){
 }
 
 async function updateorder(req,res) {
-    const order = await orderService.updateorder(
-        req.params.id,
-        req.body.username,
-        req.body.items,
-        req.body.totalAmount,
-        req.body.orderDate);
+    console.log(req.body.items)
+    // const order = await orderService.updateorder(
+    //     req.params.id,
+    //     req.body.items);
         
-    if(!order){
-        console.log('fail: update order')
-        res.status(500).send("חלה שגיאה בעת עדכון ההזמנה");
-    }
-    console.log('done: update order');
-    res.json(order);
+    // if(!order){
+    //     console.log('fail: update order')
+    //     res.status(500).send("חלה שגיאה בעת עדכון ההזמנה");
+    // }
+    // console.log('done: update order');
+    // res.json(order);
 }
 
 async function deleteorder(req,res){

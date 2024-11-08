@@ -25,14 +25,11 @@ async function getorders() {
 async function deleteorder(id){
     await order.findByIdAndDelete(id.trim());
 }
-async function updateorder(id, username, items, totalAmount, orderDate) {
+async function updateorder(id, items) {
     const updatedorder = await order.findById(id.trim());
     if(!updatedorder)
         alert("order not found");
-    updatedorder.username = username;
     updatedorder.items = items;
-    updatedorder.totalAmount = totalAmount;
-    updatedorder.orderDate = orderDate;
     await updatedorder.save();
     return updatedorder;
 }
