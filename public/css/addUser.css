@@ -36,7 +36,7 @@ form{
     padding: 10px;
     width: 30%;
 }
-.register-form{
+#register, #addUser{
     height: 90%;
     width: 100%;
     display: flex;
@@ -45,6 +45,17 @@ form{
     align-items: center;
 
 }
-a{
-    direction: rtl;
+.isAdmin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    direction: ltr;
+  }
+input[type=checkbox]{
+    transform: scale(5);
 }
+.error {
+    color: red; 
+    font-style: italic; 
+    font-size: 15px; 
+  }

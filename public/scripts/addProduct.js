@@ -1,5 +1,6 @@
 
 $("#form-container").validate({ 
+    errorClass: "error",
     ignore: '',
     rules: {
         name:{

@@ -112,6 +112,11 @@ p{
   height: 250px; 
   overflow: hidden; 
 }
+.error {
+  color: red; 
+  font-style: italic; 
+  font-size: 15px; 
+}
 
 .sold-out {
   position: absolute;

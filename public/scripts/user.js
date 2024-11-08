@@ -5,18 +5,18 @@ $(document).on('click', '.username', function(event) {
     window.location.href = "/profile?id=" + id;
 });
 
+$(document).on('click', '#add-user', function(event) {
+    event.stopPropagation();
+    window.location.href = "/users/addUser"
+});
 
 document.querySelectorAll('#details-user').forEach(button => {
     button.addEventListener('click', () => {
         const details_section = button.nextElementSibling;
         const isVisible = details_section.style.display === 'block';
-        
-        // Hide all other dropdowns
-        document.querySelectorAll('.details-section').forEach(content => {
+                document.querySelectorAll('.details-section').forEach(content => {
             content.style.display = 'none';
         });
-
-        // Toggle the current dropdown
         details_section.style.display = isVisible ? 'none' : 'block';
     });
 });
@@ -24,10 +24,8 @@ document.querySelectorAll('#details-user').forEach(button => {
 document.querySelectorAll('#edit-user').forEach(button => {
     button.addEventListener('click', () => {
         const userId = button.getAttribute('user-id');
-        const updateSection = document.querySelector(`.update-section #username-input-${userId}`).parentElement;
-        
-        // Toggle visibility of the update section
-        if (updateSection.style.display === 'none' || updateSection.style.display === '') {
+        const updateSection = button.closest('.users').querySelector('.update');
+                if (updateSection.style.display === 'none' || updateSection.style.display === '') {
             updateSection.style.display = 'block';
         } else {
             updateSection.style.display = 'none';
@@ -35,31 +33,7 @@ document.querySelectorAll('#edit-user').forEach(button => {
     });
 });
 
-$(document).on('click', '.save-update', function(event) {
-    event.stopPropagation();
-    const id = $(this).attr('user-id')
-    const username = $('#username-input-' + id).val();
-    const password = $('#password-input-' + id).val();
-    const address = $('#address-input-' + id).val();
-    const phonenumber = $('#phone-input-' + id).val();
-    const isAdmin = $('#is-admin-input-' + id).is(':checked'); 
-    $.ajax({
-        type: "PUT",
-        url: '/user/' + id,
-    data: {
-        username: username,
-        password: password,
-        address: address,
-        phonenumber: phonenumber,
-        isAdmin: isAdmin
-    },
-    }).done(function(updatedUser){
-        location.reload();
 
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert(jqXHR.responseText);
-    })
-});
 $(document).on('click', '#delete-user', function(event) {
     event.stopPropagation();
     const id = $(this).attr('user-id')
@@ -67,9 +41,77 @@ $(document).on('click', '#delete-user', function(event) {
         type: "DELETE",
         url: '/user/' + id,
     }).done(function(data, textStatus, jqXHR) {
-        $(`#${id}`).remove();
         location.reload();
     }).fail(function(jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText);
     })
+});
+
+
+$(document).ready(function() {
+    $.validator.addMethod("complexPassword", function(value) {
+        return /[A-Z]/.test(value) && /[0-9]/.test(value); 
+    }, "Password must contain at least one uppercase letter and one number.");
+    $.validator.addMethod("tenDigits", function(value) {
+        return /^\d{10}$/.test(value); 
+    }, "Phone number must contain exactly 10 digits.");
+
+    $(".update-section").each(function() {
+        const form = $(this);
+        form.validate({ 
+            errorClass: "error",
+            ignore: '',
+            rules: {
+                username: {
+                    required: true
+                },
+                password: {
+                    required: true,
+                    minlength: 8,
+                    complexPassword: true 
+                },
+                address: {
+                    required: true
+                },
+                phonenumber: {
+                    required: true,
+                    tenDigits: true 
+                }
+            },
+            messages: {
+                username: {
+                    required: "Username is required."
+                },
+                password: {
+                    required: "Password is required.",
+                    minlength: "Password must be at least 8 characters long."
+                },
+                address: {
+                    required: "Address is required."
+                },
+                phonenumber: {
+                    required: "Phone number is required.",
+                    tenDigits: "Phone number must contain exactly 10 digits."
+                }
+            },
+            submitHandler: function(form) {
+                const userId = $(form).attr("user-id");
+                const isChecked = $('#isAdmin').is(':checked');
+                $('input[name="isAdmin"]').val(isChecked ? 'true' : 'false');
+                const formData = $(form).serialize();
+                $.ajax({
+                    type: 'PUT',
+                    url: `/user/${userId}`,
+                    data: formData,
+                    success: function(data) {
+                        alert('User updated successfully!');
+                        location.reload();
+                    },
+                    error: function(jqXHR) {
+                        alert(jqXHR.responseText);
+                    }
+                });
+            }
+        });
+    });
 });

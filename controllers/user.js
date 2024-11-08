@@ -1,3 +1,4 @@
+const { rawListeners } = require("../models/product");
 const userService = require("../services/users");
 
 async function showUsers(req, res) {
@@ -22,11 +23,7 @@ async function showUsers(req, res) {
         res.status(403).render('../views/error', { message: "PERMISSION DENIED" ,isAdmin,username});
 }
 async function getUser(req,res){
-    const user = await userService.getUser(req.params.id);
-    if(!user) {
-        return res.status(404).json({errors: ['not found']})
-    }
-    res.json(user);
+
 }
 
 async function updateUser(req,res) {
@@ -46,11 +43,38 @@ async function updateUser(req,res) {
     res.json(user);
 }
 
+async function addUserPage(req, res) {
+    const username = req.session.username || 'Guest';
+    const isAdmin = req.session.isAdmin || false;
+    if(isAdmin)
+        try {
+            res.render('../views/addUser.ejs', {username,isAdmin});
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    else
+        res.status(403).render('../views/error', { message: "PERMISSION DENIED" ,isAdmin,username});
+}
+
+async function createUser(req, res) {
+    const { username, password, phonenumber, address, isAdmin } = req.body
+    const result = await userService.createUser(username, password, phonenumber, address, isAdmin)
+    if (result != null) {
+      res.redirect('/users');
+    }
+    else{
+      res.redirect('/users');
+    }
+  }
 async function deleteUser(req,res){
     try{
+        if (req.params.id === req.session._id){
+            req.session.destroy();   
+        }
         const user = await userService.deleteUser(req.params.id);
         console.log('done: delete user')
         res.status(200).send('היוזר נמחק בהצלחה');
+
     } catch(err){
         console.log('fail: delete user')
         res.status(500).send("חלה שגיאה בעת מחיקת היוזר");
@@ -63,4 +87,6 @@ module.exports = {
     deleteUser,
     updateUser,
     showUsers,
+    createUser,
+    addUserPage
 }
