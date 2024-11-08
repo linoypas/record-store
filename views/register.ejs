@@ -16,13 +16,14 @@
     <div class="register-form">
         <form  action="/register" method="post">
             <h1> הרשמה</h1>
-            <input type="username" name="username" placeholder="שם משתמש">
-            <input type="password" name="password" placeholder="סיסמה">
-            <input type="address" name="address" placeholder="כתובת">
-            <input type="number" name="phonenumber" placeholder="טלפון">
+            <input type="text" name="username" placeholder="שם משתמש" required>
+            <input type="password" name="password" placeholder="סיסמה" required>
+            <input type="text" name="address" placeholder="כתובת" required>
+            <input type="text" name="phonenumber" placeholder="טלפון" required>
             <input type="submit" value="להרשמה">
         </form>
-        יש לך כבר משתמש באתר? <a href="/login">התחבר/י</a>
+        <a> יש לך כבר משתמש באתר? </a>
+        <a href="/login">התחבר/י</a>
 
     </div>
 
