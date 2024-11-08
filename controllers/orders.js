@@ -1,6 +1,7 @@
 const orderService = require("../services/orders");
 const productService = require("../services/product");
 
+const Product = require("../models/product");
 
 async function showorders(req, res) {
     const username = req.session.username || 'Guest';
@@ -67,8 +68,11 @@ async function deleteorder(req,res){
     } catch(err){
         console.log('fail: delete order')
         res.status(500).send("חלה שגיאה בעת מחיקת ההזמנה");
-    }
-       
+    }       
+}
+
+async function updatecart(req,res){
+
 }
 
 module.exports = {
