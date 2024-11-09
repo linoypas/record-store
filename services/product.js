@@ -34,6 +34,8 @@ async function getProducts(params) {
 
 async function getProductIdByName(name){
     const product = await Product.findOne({ name: name });
+    if(!product)
+        return null
     return product._id;
 }
 
