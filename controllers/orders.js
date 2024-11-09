@@ -1,4 +1,6 @@
 const orderService = require("../services/orders");
+const productService = require("../services/product");
+
 
 async function showorders(req, res) {
     const username = req.session.username || 'Guest';
@@ -31,17 +33,30 @@ async function getorder(req,res){
 }
 
 async function updateorder(req,res) {
-    console.log(req.body.items)
-    // const order = await orderService.updateorder(
-    //     req.params.id,
-    //     req.body.items);
+    let items=req.body.items;
+    for (const item of items) {
+        const productId = await productService.getProductIdByName(item.name)        
+        if (!productId) {
+            return res.status(400).send('Product not found');
+        }
+        if (productId) {
+            item.name = productId;  
+        }
+        if(item.quantity <=0){
+            items = items.filter(i => i !== item);
+        }
+
+    }
+    const order = await orderService.updateorder(
+        req.params.id,
+        items);
         
-    // if(!order){
-    //     console.log('fail: update order')
-    //     res.status(500).send("חלה שגיאה בעת עדכון ההזמנה");
-    // }
-    // console.log('done: update order');
-    // res.json(order);
+    if(!order){
+        console.log('fail: update order')
+        res.status(500).send("חלה שגיאה בעת עדכון ההזמנה");
+    }
+    console.log('done: update order');
+    res.json(order);
 }
 
 async function deleteorder(req,res){

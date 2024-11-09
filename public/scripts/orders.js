@@ -29,21 +29,23 @@ $(document).on('click', '.save-update', function(event) {
     event.stopPropagation();
     const id = $(this).attr('order-id')
     const itemsData = [];
-    $(`#update-order[order-id="${id}"]`).each(function() {
-        const itemName = $(this).find('input[type="text"]').val();  
-        const itemQuantity = $(this).find('input[type="number"]').val();  
+    $(`.update-order[order-id="${id}"]`).each(function(index) {
+        const itemName = $(this).find(`input[type="text"]`).val();  
+        const itemQuantity = $(this).find(`input[type="number"]`).val();  
 
-        itemsData.push({
-            name: itemName,
-            quantity: itemQuantity
-        });
+        if (itemName && itemQuantity) {
+            itemsData.push({
+                name: itemName,
+                quantity: itemQuantity
+            });
+        }
     });
     $.ajax({
         type: "PUT",
         url: '/order/' + id,
-        data: {
-            items: itemsData
-        },
+        data: JSON.stringify({ items: itemsData }),
+        contentType: "application/json",  
+        processData: false,     
     }).done(function(updatedorder){
         location.reload();
 

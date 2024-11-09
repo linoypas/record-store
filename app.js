@@ -11,7 +11,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(express.json())
+app.use(express.json());
 app.use('/public', express.static('public'));
 
 app.use(session({

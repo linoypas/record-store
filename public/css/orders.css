@@ -111,7 +111,7 @@ main{
   flex-direction: column;
 }
 
-.items{
+.update-order{
   display: flex;
   flex-direction: row;
 }
