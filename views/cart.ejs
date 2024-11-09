@@ -14,8 +14,8 @@
                 <% if (items && items.length > 0) { %>
                     <% items.forEach(function(item) { %>
                         <div class="items">
-                            <p><strong>Product:</strong> <%= items.name %></p>
-                            <p><strong>Quantity:</strong> <%= items.quantity %></p>
+                            <p><strong>Product:</strong> <%= item.name %></p>
+                            <p><strong>Quantity:</strong> <%= item.quantity %></p>
                         </div>
                     <% }); %>
                 <% } else { %>

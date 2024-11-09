@@ -83,7 +83,7 @@ async function showcart(req,res){
             totalAmount  += product.price;
             item.name = product.name;
         }
-
+        console.log("Items passed to EJS: ", items);
         res.render('../views/cart', {username,isAdmin,totalAmount, orderDate, items });
       } catch (error) {
         res.status(500).json({ message: error.message });
