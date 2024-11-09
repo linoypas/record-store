@@ -1,12 +1,14 @@
 const order = require('../models/Order');
-const user = require('../models/User');
+const User = require('../models/User');
 const product = require('../models/product');
 const moment = require('moment-timezone'); 
 
 const mongoose = require("mongoose");
 const alert = require("alert");
 
-async function getorders() {
+console.log(order);
+
+async function getorder() {
         const orders = await order.find()
         .populate('items.name', 'name')
         .populate('username', 'username')
@@ -34,9 +36,29 @@ async function updateorder(id, items) {
     return updatedorder;
 }
 
+async function createorder(items,username, orderDate,totalAmount ) {
+    try {
+        const newUser = await User.findOne({ username: username })
+        const newOrder = new order({
+            items,
+            username: newUser._id,
+            orderDate: orderDate || Date.now(),
+            totalAmount: totalAmount
+        });
+        const savedOrder = await newOrder.save();
+        console.log("created order")
+        return savedOrder;  
+        }
+        catch (error) {
+        console.error('Error creating order:', error);
+        throw error;
+    }
+}
+
 
 module.exports = {
-    getorders,
+    getorder,
     deleteorder,
     updateorder,
+    createorder
 };

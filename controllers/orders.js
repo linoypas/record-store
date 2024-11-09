@@ -6,7 +6,7 @@ const Product = require("../models/product");
 async function showorders(req, res) {
     const username = req.session.username || 'Guest';
     const isAdmin = req.session.isAdmin || false;
-    const orders = await orderService.getorders();
+    const orders = await orderService.getorder();
 
      const ordersList = orders.map(orders =>({
         _id: orders._id,
@@ -70,6 +70,7 @@ async function deleteorder(req,res){
         res.status(500).send("חלה שגיאה בעת מחיקת ההזמנה");
     }       
 }
+
 async function showcart(req,res){
     try {
         const username = req.session.username || 'Guest';
@@ -112,11 +113,72 @@ async function updatecart(req,res){
         res.status(200).json({ message: 'Cart updated successfully', items: req.session.items });
     });
 }
+
+
+async function showPaymentForm(req, res) {
+    try {
+        const username = req.session.username || 'Guest'; 
+        const items = req.session.items || []; 
+        const isAdmin = req.session.isAdmin || false;
+        const totalAmount = items.reduce((total, item) => total + item.quantity * item.price, 0);
+
+        res.render('payment', { username, isAdmin, items, totalAmount });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+async function processPayment(req, res) {
+        try {
+            const { firstName, lastName, city, streetName, houseNumber, phoneNumber, cardNumber, expiryDate, cvv } = req.body;
+    
+            const items = req.session.items || [];
+            let totalAmount = 0;
+    
+            for (const item of items) {
+                const product = await productService.getProductById(item.id); 
+                if (product) {
+                    item.name = product._id;
+                    item.price = product.price;
+                    totalAmount += product.price * item.quantity;
+                }
+            }
+
+            const username = req.session.username || 'Guest';
+            const orderDate = new Date().toLocaleDateString()
+            const orderSummary = {
+                items: items,
+                totalAmount: totalAmount,
+                username: username,
+                orderDate: orderDate,
+                cardDetails: {
+                    cardNumber: cardNumber,   
+                    expiryDate: expiryDate,
+                    cvv: cvv
+                }
+            };
+            console.log(orderSummary)
+            const savedOrder = await orderService.createorder(items, username, orderDate,orderSummary.totalAmount, orderSummary.cardDetails, orderSummary.address, orderSummary.phoneNumber);
+            console.log(savedOrder);
+            res.render('order-success', {
+                orderSummary: savedOrder,
+                isAdmin: req.session.isAdmin || false,
+                username: username
+            });
+            
+        } catch (error) {
+            console.error("Error processing payment:", error);
+            res.status(500).send("An error occurred while processing the payment.");
+        }
+    };
+
 module.exports = {
     getorder,
     deleteorder,
     updateorder,
     showorders,
     updatecart,
-    showcart
+    showcart,
+    showPaymentForm,
+    processPayment
 }
