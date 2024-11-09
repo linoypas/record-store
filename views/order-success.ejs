@@ -11,7 +11,7 @@
 
     <main>
         <h2>ההזמנה בוצעה בהצלחה</h2>
-        <p>תודה לך על ההזמנה. פרטי ההזמה שלך:</p>
+        <p> פרטי ההזמה שלך:</p>
 
         <h3>Order Details</h3>
         <p><strong>תאריך הזמנה:</strong> <%= orderSummary.orderDate %></p>
@@ -20,13 +20,13 @@
         <h3>פריטים</h3>
         <ul>
             <% orderSummary.items.forEach(item => { %>
-                <li>
-                    <%= item.name %> - Quantity: <%= item.quantity %> - Price: $<%= item.price %>
-                </li>
+                <li><span>
+                    <%= item.name %> - Quantity: <%= item.quantity %>
+                </span></li>
             <% }) %>
         </ul>
 
-        <h3>סך הזמנה: $<%= orderSummary.totalAmount %></h3>     
+        <h3> סך ההזמנה: <%= totalAmount %>₪ </h3>     
     </main>
 </body>
 </html>

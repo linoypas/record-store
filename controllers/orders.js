@@ -158,12 +158,13 @@ async function processPayment(req, res) {
                 }
             };
             console.log(orderSummary)
-            const savedOrder = await orderService.createorder(items, username, orderDate,orderSummary.totalAmount, orderSummary.cardDetails, orderSummary.address, orderSummary.phoneNumber);
-            console.log(savedOrder);
+            const savedOrder = await orderService.createorder(items, username, orderDate, totalAmount);
+            req.session.items = [];
             res.render('order-success', {
                 orderSummary: savedOrder,
                 isAdmin: req.session.isAdmin || false,
-                username: username
+                username: username,
+                totalAmount: totalAmount
             });
             
         } catch (error) {
