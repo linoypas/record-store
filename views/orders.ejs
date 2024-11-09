@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../public/css/orders.css" type="text/css">
+</head>
+<body>
+    <%- include("./header",{showRecordDiv: true}); -%>
+<main>
+    <p id="title">ניהול הזמנות</p>
+    <div id="orders">
+        <ul class="custom-list">
+        <%for (let i = 0; i < orders.length; i++) {%>
+            <li>
+            <div class="orders" order-id=<%=orders[i]._id%>>
+                <i class="fa fa-order-circle"></i> 
+                <div class="order-info" order-id=<%=orders[i]._id%>>
+                    <p class="orderid" order-id=<%=orders[i]._id%>>Order Number: <%=orders[i]._id%></p>
+                    <p class="username" order-id=<%=orders[i]._id%>>User Name: <%=orders[i].username%></p>
+                </div>
+                <div id="update-order-container">
+                    <button class="fa fa-trash update-order" id="delete-order" order-id=<%=orders[i]._id%>></button>
+                    <button class="fa fa-pencil update-order" id="edit-order"  order-id=<%=orders[i]._id%>></button>
+                    <button class="fa fa-caret-square-o-down update-order" id="details-order" order-id=<%=orders[i]._id%>></button>
+                    <div class="details-section">
+                        <h3>Orders Details</h3>
+                        <p><strong>items: </strong></br></p>
+                        <%for (let j = 0; j < orders[i].items.length; j++) {%>
+                            <div class="items">
+                                <p><strong>product:</strong> <%=orders[i].items[j].name%>&nbsp&nbsp</p>
+                                <p><strong>quantity:</strong> <%=orders[i].items[j].quantity%></p>
+                            </div>
+                        <%}%>  
+                        <p><strong>total: </strong> <%=orders[i].totalAmount%></p>
+                        <p><strong>Date:</strong>  <%=orders[i].orderDate%></p>
+                    </div>  
+                    <div class="update-section">
+                        <h3>Update order</h3>
+                        <%for (let j = 0; j < orders[i].items.length; j++) {%>
+                            <div class="update-order" order-id="<%= orders[i]._id %>" >
+                                <input id="name-<%=orders[i]._id%>-<%= j %>" type="text" value="<%=orders[i].items[j].name%>">
+                                <input id="quantity-<%=orders[i]._id%>-<%= j %>" type="number" value="<%=orders[i].items[j].quantity%>">
+                            </div>
+                        <%}%>                          
+                        <button type="submit" class="save-update" order-id="<%= orders[i]._id %>">Save</button>
+                </div>
+            </div>  
+            </li>  
+        <%}%>  
+        </ul>
+    </div>
+</main>
+<%- include("./footer"); -%>
+
+</body>
+<script src="../public/scripts/orders.js"></script>
+
+</html>

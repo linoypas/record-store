@@ -77,7 +77,15 @@ async function showProducts(req, res) {
             res.status(500).json({ message: error.message });
       }
 }
+async function getProductIdByName(req,res){
 
+    try {
+        const product = await productService.getProductByName(req.params.name);    
+        res.json(product._id);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+}
 
 async function getProductById(req,res){
 
@@ -222,5 +230,6 @@ module.exports = {
     deleteProduct,
     updateProduct,
     getAllProducts,
-    addProductPage
+    addProductPage,
+    getProductIdByName
 }

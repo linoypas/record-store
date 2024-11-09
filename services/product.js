@@ -32,6 +32,11 @@ async function getProducts(params) {
     }
 }
 
+async function getProductIdByName(name){
+    const product = await Product.findOne({ name: name });
+    return product._id;
+}
+
 async function getProductById(id){
     if (!mongoose.isValidObjectId(id)){
         return null;
@@ -99,4 +104,5 @@ module.exports = {
     updateProduct,
     getListOfGenres,
     getMaxPriceProduct,
+    getProductIdByName
 };

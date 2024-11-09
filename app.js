@@ -11,7 +11,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(express.json())
+app.use(express.json());
 app.use('/public', express.static('public'));
 
 app.use(session({
@@ -25,6 +25,7 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/', require('./routes/homePage'));
+app.use('/', require('./routes/orders'));
 app.use('/', require('./routes/product'));
 app.use('/', require('./routes/login'));
 app.use('/', require('./routes/sortAndFilterProducts'));
