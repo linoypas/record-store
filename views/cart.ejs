@@ -10,8 +10,17 @@
             <div id="info">
                 <p class="username"><%=username%></p>
                 <p class="orderDate"><%=orderDate%></p>
-                <p class="totalAmount">שנת הוצאה:<%=totalAmount%></p>
-                <p> <%=items%></p>
+                <p class="totalAmount">סך הזמנה:<%=totalAmount%></p>
+                <% if (items && items.length > 0) { %>
+                    <% items.forEach(function(item) { %>
+                        <div class="items">
+                            <p><strong>Product:</strong> <%= item.id %></p>
+                            <p><strong>Quantity:</strong> <%= item.quantity %></p>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p>Your cart is empty.</p>
+                <% } %>
             </div>
             <div id="add-to-cart">
                 <button id="pay" >complete order</button>

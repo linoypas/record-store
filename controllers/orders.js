@@ -75,10 +75,27 @@ async function showcart(req,res){
         const username = req.session.username || 'Guest';
         const isAdmin = req.session.isAdmin || false;
         const orderDate = new Date()
-        const items = req.session.items;
+        const items = req.session.items || [];
         //const totalAmount=orderService.getPrice(items)
-        const totalAmount=0;
-        console.log(req.session)
+        const totalAmount = 0;
+        const detailedItems = [];
+
+        for (const item of items) {
+            const product = await Product.findById(item.id); // Query product by id
+            if (product) {
+                // Add the product name to the item
+                detailedItems.push({
+                    id: item.id,
+                    name: product.name, // Assume the Product model has a `name` field
+                    quantity: item.quantity,
+                    price: product.price, // Optional: include price if needed for totalAmount
+                });
+            }
+        }
+
+        // Log the detailed items
+        console.log(detailedItems);
+
         res.render('../views/cart', {username,isAdmin,totalAmount, orderDate, items });
       } catch (error) {
         res.status(500).json({ message: error.message });
