@@ -75,11 +75,11 @@ async function showcart(req,res){
         const username = req.session.username || 'Guest';
         const isAdmin = req.session.isAdmin || false;
         const orderDate = new Date()
-       // const items = req.session.items;
+        const items = req.session.items;
         //const totalAmount=orderService.getPrice(items)
         const totalAmount=0;
-
-        res.render('../views/cart', {username,isAdmin,totalAmount, orderDate });
+        console.log(req.session)
+        res.render('../views/cart', {username,isAdmin,totalAmount, orderDate, items });
       } catch (error) {
         res.status(500).json({ message: error.message });
       }
@@ -102,6 +102,12 @@ async function updatecart(req,res){
     }
        console.log(req.session.items)
        console.log(req.session)
+       req.session.save((err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Failed to save session' });
+        }
+        res.status(200).json({ message: 'Cart updated successfully', items: req.session.items });
+    });
 }
 
 module.exports = {
