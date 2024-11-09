@@ -1,4 +1,4 @@
-$(document).on('click', '#addtocart', function(event) {
+$(document).on('click', '.addtocart', function(event) {
     event.stopPropagation();
     const id = $(this).attr('product-id');
     const quantity = $('#quantity').val() || 1;
@@ -9,7 +9,6 @@ $(document).on('click', '#addtocart', function(event) {
             quantity :quantity
         }
     }).done(function(res){
-        showForm(res);
     }).fail(function(jqXHR, textStatus, errorThrown) {
         alert(jqXHR.responseText);
     })
