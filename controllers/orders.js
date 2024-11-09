@@ -74,12 +74,12 @@ async function showcart(req,res){
     try {
         const username = req.session.username || 'Guest';
         const isAdmin = req.session.isAdmin || false;
-        //const orderDate = new Date()
+        const orderDate = new Date()
        // const items = req.session.items;
         //const totalAmount=orderService.getPrice(items)
         const totalAmount=0;
 
-        res.render('../views/cart', {username,isAdmin,totalAmount });
+        res.render('../views/cart', {username,isAdmin,totalAmount, orderDate });
       } catch (error) {
         res.status(500).json({ message: error.message });
       }
