@@ -80,10 +80,10 @@ async function showcart(req,res){
         let totalAmount = 0;
         for (const item of items) {
             const product = await productService.getProductById(item.id); 
-            totalAmount  += product.price;
+            totalAmount  += product.price * item.quantity;
             item.name = product.name;
+            item.price = product.price;
         }
-        console.log("Items passed to EJS: ", items);
         res.render('../views/cart', {username,isAdmin,totalAmount, orderDate, items });
       } catch (error) {
         res.status(500).json({ message: error.message });
@@ -92,7 +92,6 @@ async function showcart(req,res){
 }
 
 async function updatecart(req,res){
-    console.log(req.session.items)
     const id = req.params.id;
     const quantity = parseInt(req.body.quantity, 10);
     if (!req.session.items) {
@@ -113,7 +112,6 @@ async function updatecart(req,res){
         res.status(200).json({ message: 'Cart updated successfully', items: req.session.items });
     });
 }
-
 module.exports = {
     getorder,
     deleteorder,

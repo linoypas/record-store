@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<link rel="stylesheet" href="../public/css/product.css" type="text/css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="../public/css/cart.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <title>Shopping Cart</title>
+</head>
 <body>
-    <%- include("./header",{showRecordDiv: true}); -%>
+    <%- include("./header", { showRecordDiv: true }); -%>
     <main>
         <div id="cart-info">
             <div id="info">
-                <p class="username"><%=username%></p>
-                <p class="orderDate"><%=orderDate%></p>
-                <p class="totalAmount">סך הזמנה:<%=totalAmount%></p>
+                <p class="username"><%= username %></p>
+                <p class="orderDate"><%= orderDate %></p>
+                <p class="totalAmount">סך הזמנה: <%= totalAmount.toFixed(2) %></p>
                 <% if (items && items.length > 0) { %>
                     <% items.forEach(function(item) { %>
                         <div class="items">
-                            <p><strong>Product:</strong> <%= item.name %></p>
-                            <p><strong>Quantity:</strong> <%= item.quantity %></p>
+                            <div>
+                                <p><strong>Product:</strong> <%= item.name %></p>
+                                <p><strong>Quantity:</strong> <%= item.quantity %></p>
+                            </div>
+                            <div>
+                                <p><strong>Price:</strong> ₪ <%= (item.price * item.quantity).toFixed(2) %></p>
+                            </div>
                         </div>
                     <% }); %>
                 <% } else { %>
-                    <p>Your cart is empty.</p>
+                    <p class="empty-cart">Your cart is empty.</p>
                 <% } %>
             </div>
-            <div id="add-to-cart">
-                <button id="pay" >complete order</button>
-            </div>
+            <% if (items && items.length > 0) { %>
+                <div id="add-to-cart">
+                    <button id="pay">Complete Order</button>
+                </div>
+            <% } %>
         </div>
     </main>
     <%- include("./footer"); -%>
 </body>
-<!-- <script src="../public/scripts/cart.js"></script> -->
 </html>
