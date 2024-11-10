@@ -118,6 +118,29 @@ async function updatecart(req,res){
     });
 }
 
+async function deletecartitem(req, res) {
+    const itemId = req.params.id;
+    
+    if (!req.session.items || req.session.items.length === 0) {
+        return res.status(400).json({ message: 'Cart is empty' });
+    }
+
+    const itemIndex = req.session.items.findIndex(item => item.id === itemId);
+
+    if (itemIndex === -1) {
+        return res.status(404).json({ message: 'Item not found in cart' });
+    }
+
+    req.session.items.splice(itemIndex, 1);
+    req.session.save((err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Failed to save session' });
+        }
+        res.status(200).json({ message: 'Item removed from cart', items: req.session.items });
+    });
+}
+
+
 
 async function showPaymentForm(req, res) {
     try {
@@ -185,5 +208,6 @@ module.exports = {
     updatecart,
     showcart,
     showPaymentForm,
-    processPayment
+    processPayment,
+    deletecartitem
 }

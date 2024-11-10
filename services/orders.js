@@ -14,7 +14,6 @@ async function getOrdersByUsername(username) {
         if (!user) {
             throw new Error("User not found");
         }
-        // Find orders by the username, assuming the username field is stored in the order model as a reference to the user
         const orders = await order.find({ username: user._id })
             .populate('items.name', 'name')
             .populate('username', 'username')
