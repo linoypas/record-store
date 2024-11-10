@@ -17,6 +17,7 @@ async function showorders(req, res) {
       }));
 
     if(isAdmin){
+        console.log(orders.length)
         if(orders.length === 0){
             res.status(404).render('../views/error', { message: "לא קיימות הזמנות" ,isAdmin,username});
         }
