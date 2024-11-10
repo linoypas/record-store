@@ -1,0 +1,95 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+body {
+    display: flex;           
+    flex-direction: column;    
+    min-height: 90%;          
+}
+main {
+    flex: 1; 
+}
+
+#cart-info {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#info {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#info p {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.orderDate {
+    color: #888;
+    font-size: 14px;
+}
+
+.totalAmount {
+    font-size: 20px;
+    color: #1a73e8;
+    font-weight: bold;
+}
+
+.items {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.items p {
+    margin: 0;
+}
+
+.items p strong {
+    font-weight: bold;
+}
+
+.empty-cart {
+    font-size: 18px;
+    color: #f44336;
+    text-align: center;
+    font-weight: bold;
+}
+
+#pay {
+    background-color: #1a73e8;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#pay:hover {
+    background-color: #0c5db1;
+}
+
+#payment {
+    text-align: center;
+    margin-top: 30px;
+}

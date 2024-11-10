@@ -1,27 +1,24 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  display: flex;           
+  flex-direction: column;    
+  min-height: 90%;          
+}
+main {
+  flex: 1; 
+}
 
-html body{
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    direction: rtl;
-    height: 100%
-  }
-  
-  html {
-    height: 100%
-  }
-  
-body{
-    min-height: 100%;
-    position: relative;
-    padding-bottom: 150px;
-  }
-main{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 30px;
-  } 
+#cart-info {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
 #orders{
     width: 50%;
   }

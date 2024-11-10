@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="../public/css/payment.css" type="text/css">
+    <script src="../public/scripts/paymentValidation.js" defer></script>
+</head>
+<body>
+    <%- include("./header", { showRecordDiv: true, isAdmin: isAdmin }); %>
+
+    <main>
+        <h2>Payment Details</h2>
+
+        <!-- Personal Details Form -->
+        <h3>Personal Details</h3>
+        <form action="/orders/payment" method="POST" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="streetName">Street Name</label>
+                <input type="text" id="streetName" name="streetName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="houseNumber">House Number</label>
+                <input type="text" id="houseNumber" name="houseNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" required>
+            </div>
+
+            <!-- Order Summary -->
+            <h3>Order Summary</h3>
+            <ul>
+                <% items.forEach(function(item) { %>
+                    <li><span><%= item.name %></span> - <span>Quantity: <%= item.quantity %></span> - <span>Price: <%= item.price %> ₪</span></li>
+                <% }); %>
+            </ul>
+
+            <h4>Total Amount: <%= totalAmount %> ₪</h4>
+
+            <!-- Payment Card Details -->
+            <h3>Payment Information</h3>
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="cardNumber" required>
+            </div>
+
+            <div class="form-group">
+                <label for="expiryDate">Expiry Date (MM/YY)</label>
+                <input type="text" id="expiryDate" name="expiryDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" required>
+            </div>
+            <button type="submit">Submit Payment</button>
+        </form>
+
+        <div class="total-amount">
+            <p><strong>Total to Pay:</strong> <%= totalAmount %> ₪</p>
+        </div>
+    </main>
+</body>
+</html>

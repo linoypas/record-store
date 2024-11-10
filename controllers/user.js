@@ -1,3 +1,4 @@
+const { rawListeners } = require("../models/product");
 const userService = require("../services/users");
 
 async function showUsers(req, res) {

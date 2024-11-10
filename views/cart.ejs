@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="../public/css/cart.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <%- include("./header", { showRecordDiv: true }); -%>
+    <main>
+        <div id="cart-info">
+            <div id="info">
+                <p class="username"><%= username %></p>
+                <p class="orderDate"><%= orderDate %></p>
+                <p class="totalAmount">סך הזמנה: <%= totalAmount.toFixed(2) %></p>
+                <% if (items && items.length > 0) { %>
+                    <% items.forEach(function(item) { %>
+                        <div class="items">
+                            <div>
+                                <p><strong>Product:</strong> <%= item.name %></p>
+                                <p><strong>Quantity:</strong> <%= item.quantity %></p>
+                            </div>
+                            <div>
+                                <p><strong>Price:</strong> ₪ <%= (item.price * item.quantity).toFixed(2) %></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p class="empty-cart">Your cart is empty.</p>
+                <% } %>
+            </div>
+            <% if (items && items.length > 0) { %>
+                <div id="payment">
+                    <a href="/orders/payment">
+                        <button>לתשלום</button>
+                    </a>
+                </div>
+            <% } %>
+        </div>
+    </main>
+    <%- include("./footer"); -%>
+</body>
+</html>

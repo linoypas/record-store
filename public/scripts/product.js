@@ -1,3 +1,19 @@
+$(document).on('click', '.addtocart', function(event) {
+    event.stopPropagation();
+    const id = $(this).attr('product-id');
+    const quantity = $('#quantity').val() || 1;
+    $.ajax({
+        type: "PUT",
+        url: '/order/cart/' + id,
+        data: {
+            quantity :quantity
+        }
+    }).done(function(res){
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        alert(jqXHR.responseText);
+    })
+    
+});
 
 $(document).on('click', '.product', function(event) {
     event.stopPropagation();
@@ -135,5 +151,3 @@ $("#form-container").validate({
         })
     }
 }); 
-
-
