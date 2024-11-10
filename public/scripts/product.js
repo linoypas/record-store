@@ -8,9 +8,14 @@ $(document).on('click', '.addtocart', function(event) {
         data: {
             quantity :quantity
         }
-    }).done(function(res){
+    }).done(function(res) {
+        alert("המוצר נוסף לעגלת הקניות");
     }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert(jqXHR.responseText);
+        if (jqXHR.status === 400 && jqXHR.responseJSON && jqXHR.responseJSON.message) {
+            alert(jqXHR.responseJSON.message);
+        } else {
+            alert("An error occurred while adding to cart.");
+        }
     })
     
 });

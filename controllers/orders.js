@@ -95,6 +95,10 @@ async function showcart(req,res){
 async function updatecart(req,res){
     const id = req.params.id;
     const quantity = parseInt(req.body.quantity, 10);
+    const product = await productService.getProductById(id);
+    if (!product.inStock) {
+        return res.status(400).json({ message: 'המוצר לא במלאי' });
+    }
     if (!req.session.items) {
         req.session.items = [];
     }
