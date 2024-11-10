@@ -1,0 +1,98 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+}
+
+#store-list {
+    flex: 1; 
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.store-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;  
+    border-radius: 8px;       
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s ease, box-shadow 0.3s ease; 
+}
+
+.store-item:last-child {
+    border-bottom: none;
+}
+
+.store-item:hover {
+    transform: translateY(-5px);  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  
+    cursor: pointer;
+}
+
+.store-item strong {
+    font-size: 1.4em;  
+    color: #333;     
+    display: block;
+    margin-bottom: 10px;  
+    font-weight: 600;  
+}
+
+.store-item p {
+    font-size: 1em;  
+    color: #555;     
+    margin: 5px 0;   
+    line-height: 1.4;  
+}
+
+.store-item .icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    display: inline-block;
+    background-image: url('https://image.shutterstock.com/image-vector/location-icon-map-marker-sign-260nw-604374984.jpg'); 
+    background-size: cover;
+    vertical-align: middle;
+}
+
+.store-item-content {
+    display: flex;
+    align-items: center;
+}
+
+#map {
+    flex: 1;
+    width: 98%;
+    height: 80%; 
+    padding: 10px;  
+    box-sizing: border-box;  
+    margin: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design for map and store items */
+@media screen and (max-width: 768px) {
+    #store-list {
+        padding: 15px; 
+    }
+    
+    .store-item {
+        padding: 12px;  
+    }
+    
+    .store-item strong {
+        font-size: 1.2em;  
+    }
+
+    #map {
+        height: 70%; 
+        margin: 10px;
+    }
+}

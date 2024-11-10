@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-
+const StoreLocation = require('./models/storeLocation');  
 const env = require('dotenv').config();
 const mongoose = require("mongoose");
 
@@ -32,7 +32,23 @@ app.use('/', require('./routes/sortAndFilterProducts'));
 app.use('/', require('./routes/graphs'))
 app.use('/', require('./routes/initDb'))
 app.use('/', require('./routes/users'))
+app.use('/', require('./routes/storeLocation'));
 
+app.get('/maps', async (req, res) => {
+    try {
+        const username = req.session.username || 'Guest'; 
+        const isAdmin = req.session.isAdmin || false;
+        console.log("Fetching store locations...");
+        const storeLocations = await StoreLocation.find();  
+        res.render('maps', { 
+            storeLocations,
+            username,
+            isAdmin
+         });  
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
 
 app.listen(process.env.PORT, (error) =>{
     if(!error)
