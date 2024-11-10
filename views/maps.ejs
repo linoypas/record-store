@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Page</title>
+    <style>
+        /* Ensure the map container takes up the full height */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100%;  /* Full height of the page */
+            width: 100%;   /* Full width of the page */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Google Map container -->
+    <div id="map"></div>
+
+    <!-- Google Maps API script -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdkOG49PULjxtz0gs8Pgm5NIYaWUZybM0&callback=initMap" async defer></script>
+    
+    <script>
+        // Make sure storeLocations is available globally
+        window.storeLocations = <%- JSON.stringify(storeLocations) %>;
+        console.log(window.storeLocations);
+        // Define initMap globally, as the callback needs to find it
+        function initMap() {
+            if (!window.storeLocations || window.storeLocations.length === 0) {
+                console.log("No store locations found.");
+                return;
+            }
+
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 37.7749, lng: -122.4194 },  // Default to San Francisco
+                zoom: 12
+            });
+
+            // Create markers for each store location
+            window.storeLocations.forEach(store => {
+                if (store.latitude && store.longitude) {
+                    new google.maps.Marker({
+                        position: { lat: store.latitude, lng: store.longitude },
+                        map: map,
+                        title: store.name || "Store"
+                    });
+                }
+            });
+        }
+    </script>
+
+    <!-- External JavaScript file -->
+    <script src="../public/scripts/maps.js"></script>
+
+</body>
+</html>
