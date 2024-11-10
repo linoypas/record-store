@@ -11,18 +11,18 @@ html {
 }
 
 body {
-  display: flex;           /* Apply flexbox layout to the body */
-  flex-direction: column;  /* Stack the children elements vertically */
-  min-height: 100%;        /* Ensure body takes up at least 100% of the height */
+  display: flex;           
+  flex-direction: column;  
+  min-height: 100%;        
   position: relative;
-  padding-bottom: 150px;   /* Add space for the footer */
+  padding-bottom: 150px;   /
 }
 
 main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  flex: 1;                  /* This ensures main takes up remaining space */
+  flex: 1;                  
   margin-bottom: 30px;
 }
 
@@ -135,5 +135,5 @@ footer {
   padding: 10px;
   position: relative;
   bottom: 0;
-  width: 80%;
+  width: 100%;
 }
