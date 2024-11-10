@@ -22,7 +22,9 @@
                         <div class="items">
                             <div>
                                 <p><strong>Product:</strong> <%= item.name %></p>
-                                <p><strong>Quantity:</strong> <%= item.quantity %></p>
+                                <p><strong>Quantity:</strong> <%= item.quantity %>
+                                    <input type="number" class="item-quantity" data-id="<%= item.id %>" value="<%= item.quantity %>" min="1">
+                                </p>
                             </div>
                             <div>
                                 <p><strong>Price:</strong> ₪ <%= (item.price * item.quantity).toFixed(2) %></p>
@@ -44,4 +46,6 @@
     </main>
     <%- include("./footer"); -%>
 </body>
+<script src="../public/scripts/cart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </html>

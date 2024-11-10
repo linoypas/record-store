@@ -99,15 +99,20 @@ async function updatecart(req,res){
     if (!product.inStock) {
         return res.status(400).json({ message: 'המוצר לא במלאי' });
     }
+
+    if (isNaN(quantity) || quantity < 1) {
+        return res.status(400).json({ message: 'Invalid quantity' });
+    }
+
     if (!req.session.items) {
         req.session.items = [];
     }
     const existingProductIndex = req.session.items.findIndex(item => item.id === id);
 
     if (existingProductIndex !== -1) {
-        req.session.items[existingProductIndex].quantity += quantity;
+        req.session.items[existingProductIndex].quantity += 1;
     } else {
-        req.session.items.push({ id, quantity });
+        req.session.items.push({ id, quantity: 1 });
     }
 
        req.session.save((err) => {

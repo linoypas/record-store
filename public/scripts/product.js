@@ -1,7 +1,7 @@
 $(document).on('click', '.addtocart', function(event) {
     event.stopPropagation();
     const id = $(this).attr('product-id');
-    const quantity = $('#quantity').val() || 1;
+    const quantity = ($('#quantity').val(), 10) || 1;
     $.ajax({
         type: "PUT",
         url: '/order/cart/' + id,
