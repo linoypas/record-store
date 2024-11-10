@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="../public/css/cart.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Shopping Cart</title>
 </head>
 <body>
@@ -27,6 +27,9 @@
                             <div>
                                 <p><strong>Price:</strong> ₪ <%= (item.price * item.quantity).toFixed(2) %></p>
                             </div>
+                            <button class="delete-item" data-id="<%= item.id %>">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
                         </div>
                     <% }); %>
                 <% } else { %>
@@ -36,12 +39,13 @@
             <% if (items && items.length > 0) { %>
                 <div id="payment">
                     <a href="/orders/payment">
-                        <button>לתשלום</button>
+                        <button><i class="fas fa-credit-card"></i> לתשלום</button>
                     </a>
                 </div>
             <% } %>
         </div>
     </main>
     <%- include("./footer"); -%>
+    <script src="../public/scripts/cart.js"></script>
 </body>
 </html>

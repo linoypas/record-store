@@ -67,29 +67,52 @@ main {
     font-weight: bold;
 }
 
-.empty-cart {
-    font-size: 18px;
-    color: #f44336;
-    text-align: center;
-    font-weight: bold;
-}
-
-#pay {
-    background-color: #1a73e8;
-    color: white;
-    font-size: 16px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#pay:hover {
-    background-color: #0c5db1;
-}
-
 #payment {
     text-align: center;
     margin-top: 30px;
+}
+.payment-btn i {
+    margin-right: 10px;  /* Space between the icon and the text */
+    font-size: 18px;  /* Adjust icon size */
+}
+
+.delete-item {
+    background-color: #000000;  
+    color: white;
+    font-size: 14px; 
+    padding: 6px 12px;  
+    border: none;
+    border-radius: 50px;  
+    display: inline-flex;
+    align-items: center; 
+    cursor: pointer;
+    transition: all 0.3s ease; 
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.delete-item i {
+    margin-right: 10px; 
+    font-size: 18px; 
+}
+
+.delete-item:hover {
+    background-color: #231f1e;  
+    transform: translateY(-4px);  
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
+.delete-item:hover {
+    animation: pulsate 0.8s ease-out infinite;
+}
+
+@keyframes pulsate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
 }

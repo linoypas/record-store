@@ -7,12 +7,11 @@ async function showProfile(req, res) {
     const isAdmin = req.session.isAdmin || false;
 
     if (username === 'Guest') {
-        return res.redirect('/login'); // Redirect to login if the user is not logged in
+        return res.redirect('/login'); 
     }
 
-    // Fetch the orders for the logged-in user
     try {
-        const orders = await orderService.getOrdersByUsername(username); // Using the new function
+        const orders = await orderService.getOrdersByUsername(username);
         const ordersList = orders.map(order => ({
             _id: order._id,
             orderDate: order.orderDate,

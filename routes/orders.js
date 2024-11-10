@@ -11,6 +11,7 @@ router.delete('/order/:id', orderController.deleteorder)
 router.get('/orders/cart',orderController.showcart);
 router.put('/order/cart/:id', orderController.updatecart);
 //router.post('/order/:id', orderController.createorder)
+router.delete('/orders/cart/:id', orderController.deletecartitem);
 
 router.get('/orders/payment', orderController.showPaymentForm);
 router.post('/orders/payment', orderController.processPayment);
