@@ -1,5 +1,35 @@
 const { rawListeners } = require("../models/product");
 const userService = require("../services/users");
+const orderService = require("../services/orders");
+
+async function showProfile(req, res) {
+    const username = req.session.username || 'Guest';
+    const isAdmin = req.session.isAdmin || false;
+
+    if (username === 'Guest') {
+        return res.redirect('/login'); // Redirect to login if the user is not logged in
+    }
+
+    // Fetch the orders for the logged-in user
+    try {
+        const orders = await orderService.getOrdersByUsername(username); // Using the new function
+        const ordersList = orders.map(order => ({
+            _id: order._id,
+            orderDate: order.orderDate,
+            totalAmount: order.totalAmount,
+            items: order.items,
+        }));
+
+        res.render('profile', {
+            username,
+            isAdmin,
+            orders: ordersList,
+        });
+    } catch (error) {
+        console.error("Error fetching user orders:", error);
+        res.status(500).send("An error occurred while fetching your orders.");
+    }
+}
 
 async function showUsers(req, res) {
     const username = req.session.username || 'Guest';
@@ -88,5 +118,6 @@ module.exports = {
     updateUser,
     showUsers,
     createUser,
-    addUserPage
+    addUserPage,
+    showProfile
 }
