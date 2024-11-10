@@ -1,0 +1,142 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    background-color: #000000;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+    border-radius: 12px 12px 0 0;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.profile-info {
+    background-color: #fafbfc;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info h2 {
+    font-size: 32px;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.profile-info p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.orders-section {
+    margin-top: 50px;
+}
+
+.orders-section h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.order-container {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.order-container h3 {
+    font-size: 24px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.order-container p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.order-items {
+    margin-top: 15px;
+}
+
+.order-items ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-items li {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 5px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.order-items li::before {
+    content: "●";
+    color: #4e73df;
+    position: absolute;
+    left: 0;
+    top: 3px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 95%;
+    }
+
+    .header h1 {
+        font-size: 30px;
+    }
+
+    .profile-info h2 {
+        font-size: 28px;
+    }
+
+    .order-container {
+        padding: 15px;
+    }
+
+    .order-container h3 {
+        font-size: 20px;
+    }
+
+    .order-items li {
+        font-size: 12px;
+    }
+
+    button {
+        width: 100%;
+    }
+}

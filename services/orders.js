@@ -8,6 +8,33 @@ const alert = require("alert");
 
 console.log(order);
 
+async function getOrdersByUsername(username) {
+    try {
+        const user = await User.findOne({ username: username });
+        if (!user) {
+            throw new Error("User not found");
+        }
+        // Find orders by the username, assuming the username field is stored in the order model as a reference to the user
+        const orders = await order.find({ username: user._id })
+            .populate('items.name', 'name')
+            .populate('username', 'username')
+            .select('orderDate totalAmount items username');
+        
+        return orders.map(order => ({
+            ...order.toObject(),
+            username: order.username ? order.username.username : "Unknown",  
+            items: order.items.map(item => ({
+                name: item.name ? item.name.name : "Unnamed Product",  
+                quantity: item.quantity
+            })),
+            orderDate: moment(order.orderDate).tz('Asia/Jerusalem').format('ddd DD/MM/YYYY') 
+        }));
+    } catch (error) {
+        console.error("Error fetching orders for username:", error);
+        throw error;
+    }
+}
+
 async function getorder() {
         const orders = await order.find()
         .populate('items.name', 'name')
@@ -60,5 +87,6 @@ module.exports = {
     getorder,
     deleteorder,
     updateorder,
-    createorder
+    createorder,
+    getOrdersByUsername
 };
