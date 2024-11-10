@@ -7,7 +7,6 @@ const storeLocationSchema = new mongoose.Schema({
     longitude: { type: Number, required: true }
 });
 
-// Explicitly specify the collection name as 'storeLocation'
 const StoreLocation = mongoose.model('StoreLocation', storeLocationSchema, 'storeLocation');
 
 module.exports = StoreLocation;

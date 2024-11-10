@@ -1,6 +1,5 @@
 const StoreLocation = require('../models/storeLocation');
 
-// Get all store locations
 exports.getAllStoreLocations = async (req, res) => {
     try {
         const storeLocations = await StoreLocation.find();
@@ -10,7 +9,6 @@ exports.getAllStoreLocations = async (req, res) => {
     }
 };
 
-// Add a new store location
 exports.addStoreLocation = async (req, res) => {
     const { name, address, latitude, longitude } = req.body;
 

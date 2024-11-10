@@ -37,11 +37,9 @@ app.use('/', require('./routes/storeLocation'));
 app.get('/maps', async (req, res) => {
     try {
         console.log("Fetching store locations...");
-        const storeLocations = await StoreLocation.find();  // Query DB
-        console.log("Fetched data:", storeLocations);  // Log the result
-        res.render('maps', { storeLocations });  // Pass data to EJS template
+        const storeLocations = await StoreLocation.find();  
+        res.render('maps', { storeLocations });  
     } catch (err) {
-        console.error("Error fetching store locations:", err.message);  // Error handling
         res.status(500).json({ message: err.message });
     }
 });
