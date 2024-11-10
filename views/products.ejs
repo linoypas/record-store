@@ -4,129 +4,142 @@
     <link rel="stylesheet" href="../public/css/products.css" type="text/css">
     <link rel="stylesheet" href="../public/css/editProduct.css" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <%- include("./header",{showRecordDiv: true}); -%>
-    <main>
-        <div id="filter-nav">
-            <div id="filter-title">
-                <p>פילטר</p>
-                <a href="">נקה הכל</a>
-            </div><hr>
-            <label for="genre">זאנר</label><br>
-            <select name="genre" id="genre" onchange="changeGenre(this)">
-                <option value="all">כל הז'אנרים</option>
-                <%for (let i = 0; i < genres.length; i++) {%>
-                <option value="<%=genres[i]%>"><%=genres[i]%></option>
-                <%}%>
-            </select><br><hr>
-            <div id="rangeValue">מחיר מקסימלי:</div>
-            <input type="range" id="maxPriceRange" min="0" max=<%=maxPriceProduct%> value=<%=maxPriceProduct%>><br><hr>
-            <input type="checkbox" id="inStock" name="inStock" value="false"  onchange="changeShowOnlyinStock(this)">
-            <label for="inStock">הצג רק מוצרים במלאי</label><br>
-        </div>
-        
-        <div id="content">
-            <div id="upper-nav">
-                <p>התקליטים שלנו</p>
-                <select name="orderby" id="sort" onchange="changeSortBy(this)">סינון לפי:
-                  <option value="default">מיין לפי</option>
-                  <option value="date">חדש ביותר</option>
-                  <option value="price-low-to-high">מחיר, מהנמוך לגבוה</option>
-                  <option value="price-high-to-low">מחיר, מהגבוה לנמוך</option>
-                </select>
-            </div>
-            <div id="products">
-                <% for (let i = 0; i < products.length; i++) { %>
-                    <div class="product" id="<%= products[i]._id %>">
-                        <div class="img-wrapper">
-                            <% if (isAdmin) { %>
-                                <div id="update-product-container">
-                                    <button class="fa fa-trash update-product" id="delete-product" product-id="<%= products[i]._id %>"></button>
-                                    <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id="<%= products[i]._id %>"></button>
-                                </div>
-                            <% } %>
-                            <% if (!products[i].inStock) { %>
-                                <img class="sold-out" src="../public/images/sold-out.png">
-                            <%}%>  
-
-                            <img class="image" src="data:<%=products[i].image.contentType%>;base64,<%=products[i].image.data%>" >
-                        </div>
-                            <p class="name"><%=products[i].name%></p>
-                            <p class="artist"><%=products[i].artist%></p>
-                            <p class="price"><%=products[i].price%>₪</p>
-                            <button class="addtocart" product-id=<%=products[i]._id%>>add to cart</button>
-
-                    </div>     
-                <%}%>  
-                <script type="test/html"  id="productTemplate">
-                        <div class="product" id={_id}>
-                            <div class="img-wrapper">
-                                <% if (isAdmin) { %>
-                                <div id="update-product-container">
-                                    <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
-                                    <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
-                                </div>
-                                <% } %>
-                                {soldout}
-                                <img class="image" src="data:{imageContentType};base64,{imageData}">
-                            </div>
-                                <p class="artist">{artist}</p>
-                                <p class="name">{name}</p>
-                                <p class="price">{price}₪</p>
-                                <button class="addtocart" product-id={_id}>add to cart</button>
-                            </div> 
-                </script>  
-                </div>
-        </div>
-        
-    </main>
-    <div id="form-popup">
-        <form id="form-container" product-id="" action="/product/">
-            <div id="update-form-title">
-                <h1>עדכון מוצר</h1>
-                <button class="fa fa-times fa-3x" id="exit-update-form" type="button"></button></button>
-            </div>
-            
-            <label for="name"><b>שם המוצר</b></label><br>
-            <input type="text" name="name" id="name"><br>
-
-            <label for="price"><b>מחיר</b></label><br>
-            <input type="number" name="price" id="price"><br>
-
-            <label for="artist"><b>שם אמן</b></label><br>
-            <input type="text" name="artist" id="artist"><br>
-
-            <label for="year"><b>שנת הוצאה</b></label><br>
-            <input type="number" name="year" id="year"><br>
-
-            <label for="genre"><b>ז'אנר</b></label><br>
-            <select name="genre" id="genre">
-                <%for (let i = 0; i < genres.length; i++) {%>
-                <option value="<%=genres[i]%>"><%=genres[i]%></option>
-                <%}%>
-            </select><br>
-
-            <label for="description"><b>תיאור</b></label><br>
-            <textarea type="text" id="description" name="description"></textarea><br>
-
-            <label for="image"><b>תמונה</b></label><br>
-            <input type="file" accept=".png,.jpg,.jpeg,.webp" id="image" name="image" style="color:transparent;"/>
-
-            <div id="in-stock-checkbox">
-                <input type="checkbox" id="form-inStock" name="inStock">
-                <label for="inStock">המוצר במלאי</label>
-            </div>
-            
-
-
-            <input type='submit' value='אישור' id="submit">
-        </form>
+<%- include("./header",{showRecordDiv: true}); -%>
+<main>
+    <div id="filter-nav">
+        <div id="filter-title">
+            <p>פילטר</p>
+            <a href="">נקה הכל</a>
+        </div><hr>
+        <label for="genre">זאנר</label><br>
+        <select name="genre" id="genre" onchange="changeGenre(this)">
+            <option value="all">כל הז'אנרים</option>
+            <%for (let i = 0; i < genres.length; i++) {%>
+            <option value="<%=genres[i]%>"><%=genres[i]%></option>
+            <%}%>
+        </select><br><hr>
+        <div id="rangeValue">מחיר מקסימלי:</div>
+        <input type="range" id="maxPriceRange" min="0" max=<%=maxPriceProduct%> value=<%=maxPriceProduct%>><br><hr>
+        <input type="checkbox" id="inStock" name="inStock" value="false" onchange="changeShowOnlyinStock(this)">
+        <label for="inStock">הצג רק מוצרים במלאי</label><br>
     </div>
-    <%- include("./footer"); -%>
+
+    <div id="content">
+        <div id="upper-nav">
+            <p>התקליטים שלנו</p>
+            <label for="currency">Select Currency:</label>
+            <select id="currency" onchange="convertPrices()">
+                <option value="NIS">₪ NIS</option>
+                <option value="USD">$ USD</option>
+            </select>
+            <select name="orderby" id="sort" onchange="changeSortBy(this)">סינון לפי:
+                <option value="default">מיין לפי</option>
+                <option value="date">חדש ביותר</option>
+                <option value="price-low-to-high">מחיר, מהנמוך לגבוה</option>
+                <option value="price-high-to-low">מחיר, מהגבוה לנמוך</option>
+            </select>
+        </div>
+        <div id="products">
+            <%for (let i = 0; i < products.length; i++) {%>
+            <div class="product" id=<%=products[i]._id%>>
+                <div class="img-wrapper">
+                    <% if (isAdmin) { %>
+                    <div id="update-product-container">
+                        <button class="fa fa-trash update-product" id="delete-product" product-id=<%=products[i]._id%>></button>
+                        <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id=<%=products[i]._id%>></button>
+                    </div>
+                    <% } %>
+                    <% if (!products[i].inStock) { %>
+                        <img class="sold-out" src="../public/images/sold-out.png">
+                    <%}%>
+                    <img class="image" src="data:<%=products[i].image.contentType%>;base64,<%=products[i].image.data%>" >
+                </div>
+                <p class="name"><%=products[i].name%></p>
+                <p class="artist"><%=products[i].artist%></p>
+                <p class="price" data-nis-price="<%=products[i].price%>"><%=products[i].price%>₪</p>
+            </div>
+            <%}%>
+            <script type="test/html" id="productTemplate">
+                <div class="product" id={_id}>
+                    <div class="img-wrapper">
+                <% if (isAdmin) { %>
+                    <div id="update-product-container">
+                        <button class="fa fa-trash update-product" id="delete-product" product-id={_id}></button>
+                        <button class="fa fa-pencil update-product" id="edit-product" aria-hidden="true" product-id={_id}></button>
+                    </div>
+                <% } %>
+                {soldout}
+                <img class="image" src="data:{imageContentType};base64,{imageData}">
+            </div>
+                <p class="artist">{artist}</p>
+                <p class="name">{name}</p>
+                <p class="price" data-nis-price="{price}">{price}₪</p>
+        </div>
+            </script>
+        </div>
+    </div>
+
+</main>
+<div id="form-popup">
+    <form id="form-container" product-id="" action="/product/">
+        <div id="update-form-title">
+            <h1>עדכון מוצר</h1>
+            <button class="fa fa-times fa-3x" id="exit-update-form" type="button"></button></button>
+        </div>
+
+        <label for="name"><b>שם המוצר</b></label><br>
+        <input type="text" name="name" id="name"><br>
+
+        <label for="price"><b>מחיר</b></label><br>
+        <input type="number" name="price" id="price"><br>
+
+        <label for="artist"><b>שם אמן</b></label><br>
+        <input type="text" name="artist" id="artist"><br>
+
+        <label for="year"><b>שנת הוצאה</b></label><br>
+        <input type="number" name="year" id="year"><br>
+
+        <label for="genre"><b>ז'אנר</b></label><br>
+        <select name="genre" id="genre">
+            <%for (let i = 0; i < genres.length; i++) {%>
+            <option value="<%=genres[i]%>"><%=genres[i]%></option>
+            <%}%>
+        </select><br>
+
+        <label for="description"><b>תיאור</b></label><br>
+        <textarea type="text" id="description" name="description"></textarea><br>
+
+        <label for="image"><b>תמונה</b></label><br>
+        <input type="file" accept=".png,.jpg,.jpeg,.webp" id="image" name="image" style="color:transparent;"/>
+
+        <div id="in-stock-checkbox">
+            <input type="checkbox" id="form-inStock" name="inStock">
+            <label for="inStock">המוצר במלאי</label>
+        </div>
+
+        <input type='submit' value='אישור' id="submit">
+    </form>
+</div>
+<%- include("./footer"); -%>
 </body>
 <script src="../public/scripts/sortProducts.js"></script>
 <script src="../public/scripts/product.js"></script>
+
+<script>
+    // Fetch the conversion rate from NIS to USD
+    async function fetchConversionRate() {
+        try {
+            const response = await fetch('http://localhost:3002/api/exchange-rate'); // Adjust the port if needed
+            const data = await response.json();
+            return data.USD; // Use the USD conversion rate from the response
+        } catch (error) {
+            console.error("Error fetching conversion rate:", error);
+        }
+    }
+</script>
+<script src="../public/scripts/convertPrices.js"></script>
 </html>
