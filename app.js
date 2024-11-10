@@ -34,6 +34,7 @@ app.use('/', require('./routes/initDb'))
 app.use('/', require('./routes/users'))
 app.use('/', require('./routes/storeLocation'));
 
+app.locals.GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
 app.get('/maps', async (req, res) => {
     try {
         const username = req.session.username || 'Guest'; 
