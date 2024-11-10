@@ -16,7 +16,7 @@
             <div id="info">
                 <p class="username"><%= username %></p>
                 <p class="orderDate"><%= orderDate %></p>
-                <p class="totalAmount">סך הזמנה: <%= totalAmount.toFixed(2) %></p>
+                <p class="totalAmount">Total: <%= totalAmount.toFixed(2) %>₪</p>
                 <% if (items && items.length > 0) { %>
                     <% items.forEach(function(item) { %>
                         <div class="items">

@@ -1,7 +1,7 @@
 const orderService = require("../services/orders");
 const productService = require("../services/product");
 
-const Product = require("../models/product");
+const moment = require('moment');
 
 async function showorders(req, res) {
     const username = req.session.username || 'Guest';
@@ -75,7 +75,7 @@ async function showcart(req,res){
     try {
         const username = req.session.username || 'Guest';
         const isAdmin = req.session.isAdmin || false;
-        const orderDate = new Date()
+        const orderDate = moment().format('dddd, MMMM D, YYYY, HH:mm');
         const items = req.session.items || [];
         //const totalAmount=orderService.getPrice(items)
         let totalAmount = 0;
